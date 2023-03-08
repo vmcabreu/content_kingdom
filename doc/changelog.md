@@ -1,3 +1,8 @@
+## 08/03/2023
+- Creado estructura de carpetas del proyecto
+- Editado anteproyecto.md y cambiado el prototipo
+- Editado el README.md del inicio
+
 ## 04/03/2023
 - Editado anteproyecto.md
 

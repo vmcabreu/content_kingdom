@@ -1,4 +1,6 @@
-# Content Kingdom (título provisional)
+<div style="text-align: justify">
+
+# Content Kingdom
 ## Problema y Objetivo
 Dado que estos últimos años, muchas personas han querido ser creadores de contenido, famosos en internet, pero no han tenido la visibilidad suficiente en las redes. Este proyecto va enfocado a esas personas que quiere triunfar en este mundo, darles una oportunidad de lograr ese sueño.
 
@@ -10,4 +12,6 @@ Se crearán su perfil, añadirán sus principales plataformas de contenido, la o
 Estás publicaciones tendrán varias etiquetas donde los usuarios puedan encontrar lo que desean como por ejemplo: Guía,Meme,Ilustración... 
 
 ## Prototipo
-![](https://i.imgur.com/bYeap1q.png)
+![](../img/prototipo.png)
+
+</div>
