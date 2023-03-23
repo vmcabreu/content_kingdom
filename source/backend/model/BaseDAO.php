@@ -2,40 +2,68 @@
 class BaseDAO
 {
     private static $lastAffectedRows;
+    protected $connection = null;
+
     /**
-     * Crea un nuevo objeto MySQLi, que es una clase de PHP que representa una conexión a una base de
-     * datos MySQL
-     * 
-     * @return La conexión a la base de datos.
+     * Crea una nueva conexión a la base de datos usando las credenciales definidas en el archivo
+     * `config.php`
      */
-    public static function getConexion()
-    {
-        $conexion = new MySQLi('localhost', 'productos', 'productos2021', 'productos');
-        
-        if ($conexion->errno != null) {
-            throw new Exception("Error conectando a la base de datos de productos: ", $conexion->error);
-        }
-    
-        return $conexion;
-    }
-    
-    /**
-     * Se conecta a la base de datos y ejecuta la consulta.
-     * 
-     * @param string sql La consulta SQL a ejecutar.
-     * 
-     * @return bool | mysqli_result El resultado de la consulta.
-     */
-    public static function consulta(string $sql):bool | mysqli_result
+    public function __construct()
     {
         try {
-            $conexion = self::getConexion();
-            $resultado = $conexion->query($sql);
-            //self::$lastAffectedRows = $conexion->affected_rows;
-            $conexion->close();
-            return $resultado;
-        } catch (Exception $ex) {
-            exit("Error en consulta");
+            $this->connection = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE_NAME);
+
+            if (mysqli_connect_errno()) {
+                throw new Exception("Could not connect to database.");
+            }
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    /**
+     * Toma una consulta y una matriz de parámetros, ejecuta la consulta y devuelve el resultado
+     * 
+     * @param query La consulta a ejecutar.
+     * @param params 
+     * 
+     * @return bool|mysqli_result Una matriz de matrices asociativas.
+     */
+    public function consulta($query = "", $params = [])
+    {
+        try {
+            $stmt = $this->executeStatement($query, $params);
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            $stmt->close();
+            return $result;
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+        return false;
+    }
+
+    /**
+     * Esta función toma una consulta y una matriz de parámetros y devuelve un objeto de declaración
+     * 
+     * @param query La consulta a ejecutar.
+     * @param params 
+     * 
+     * @return El resultado de la consulta.
+     */
+    private function executeStatement($query = "", $params = [])
+    {
+        try {
+            $stmt = $this->connection->prepare($query);
+            if ($stmt === false) {
+                throw new Exception("No se puede realizar la consulta: " . $query);
+            }
+            if ($params) {
+                $stmt->bind_param($params[0], $params[1]);
+            }
+            $stmt->execute();
+            return $stmt;
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
         }
     }
 

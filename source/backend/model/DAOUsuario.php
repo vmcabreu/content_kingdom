@@ -1,9 +1,7 @@
 <?php
+require_once PROJECT_ROOT_PATH . "/model/BaseDAO.php";
 
-require_once(__DIR__ . "/BaseDAO.php");
-require_once(__DIR__ . "/Usuario.php");
-
-class DAOUsuario
+class DAOUsuario extends BaseDAO
 {
     /**
      * Comprueba si existe un usuario en la base de datos.
@@ -11,7 +9,7 @@ class DAOUsuario
      * @param {string} email - La dirección de correo electrónico del usuario.
      * @returns el número de filas que coinciden con la consulta.
      */
-    public static function comprobarUsuario(string $nombre, string $email): bool
+    public static function comprobarUsuario(string $nombre, string $email): bool|array
     {
         return BaseDAO::consulta("SELECT * FROM usuarios WHERE usuario='$nombre' OR email='$email'");
     }
@@ -36,7 +34,7 @@ class DAOUsuario
      * @param {Usuario} usuario - El nombre de usuario
      * @returns un valor booleano.
      */
-    public static function aniadirUsuario(Usuario $usuario): bool
+    public static function aniadirUsuario(Usuario $usuario): bool|mysqli_result
     {
         if (self::comprobarUsuario($usuario->usuario, $usuario->email)) {
             $sql = "INSERT INTO usuarios VALUES (null,'$usuario->usuario','$usuario->passwd',
@@ -52,7 +50,7 @@ class DAOUsuario
      * @param {Usuario} usuario - El nombre de usuario
      * @returns Un valor booleano.
      */
-    public static function modificarUsuario(Usuario $usuario): bool
+    public static function modificarUsuario(Usuario $usuario): bool|mysqli_result
     {
         $sql = "UPDATE usuarios SET usuario = '$usuario->usuario',passwd = '$usuario->passwd',
         email = $usuario->email  WHERE id = $usuario->id";
