@@ -12,6 +12,5 @@ export class UsuarioService {
   constructor(private http: HttpClient) { }
 
   getUser() {
-    return this.http.get(`${this.urltest}/usuario/index.php`);
   }
 }

@@ -12,7 +12,7 @@ export class UserComponent {
   success: String = "";
   error: String = "";
   constructor(private userService: UsuarioService){}
-
+/*
   ngOnInit(){
     this.getUsuario;
   }
@@ -29,5 +29,5 @@ export class UserComponent {
       }
     );
   }
-
+*/
 }
