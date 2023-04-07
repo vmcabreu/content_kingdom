@@ -8,7 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
       //Mostrar un post
       header("Content-Type: application/json");
       echo json_encode(DAOUsuario::buscarUsuario(intval($_GET['id'])));
-      exit();
 	  }
     /** 
     else {

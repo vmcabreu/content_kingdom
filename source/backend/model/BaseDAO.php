@@ -8,13 +8,13 @@ class BaseDAO
      * Crea una nueva conexión a la base de datos usando las credenciales definidas en el archivo
      * `config.php`
      */
-    public function getConexion()
+    public static function getConexion()
     {
         try {
-            $this->connection  = new PDO("mysql:host=".DB_HOST.";dbname=".DB_DATABASE_NAME.";charset=utf8", DB_USERNAME, DB_PASSWORD);
+            $connection  = new PDO("mysql:host=".DB_HOST.";dbname=".DB_DATABASE_NAME.";charset=utf8", DB_USERNAME, DB_PASSWORD);
             // set the PDO error mode to exception
-            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $this->connection;
+            $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $connection;
         } catch (Exception $e) {
             exit($e->getMessage());
         }
