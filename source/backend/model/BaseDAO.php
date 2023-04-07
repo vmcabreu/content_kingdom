@@ -1,4 +1,5 @@
 <?php
+require_once "../inc/config.php";
 class BaseDAO
 {
     private static $lastAffectedRows;
@@ -8,16 +9,16 @@ class BaseDAO
      * Crea una nueva conexión a la base de datos usando las credenciales definidas en el archivo
      * `config.php`
      */
-    public static function getConexion()
+    public static function getConexion():PDO
     {
         try {
-            $connection  = new PDO("mysql:host=".DB_HOST.";dbname=".DB_DATABASE_NAME.";charset=utf8", DB_USERNAME, DB_PASSWORD);
+            $connection  = new PDO("mysql:host=".DB_HOST.";charset=utf8;dbname=".DB_DATABASE_NAME,DB_USERNAME,DB_PASSWORD);
             // set the PDO error mode to exception
             $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $connection;
         } catch (Exception $e) {
             exit($e->getMessage());
         }
+        return $connection;
     }
 
 /**
