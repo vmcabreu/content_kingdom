@@ -24,7 +24,7 @@ class DAOUsuario extends BaseDAO
      * 
      * @return bool Un valor booleano.
      */
-    public static function validLogUsuario(string $nombre, string $passwd): bool
+    public static function validLogUsuario(string $nombre, string $passwd): PDOStatement
     {
         return BaseDAO::consulta("SELECT * FROM usuarios WHERE usuario='$nombre' OR passwd='$passwd'");
     }
@@ -34,7 +34,7 @@ class DAOUsuario extends BaseDAO
      * @param {Usuario} usuario - El nombre de usuario
      * @returns un valor booleano.
      */
-    public static function aniadirUsuario(Usuario $usuario): bool|mysqli_result
+    public static function aniadirUsuario(Usuario $usuario): int
     {
         if (self::comprobarUsuario($usuario->usuario, $usuario->email)) {
             $sql = "INSERT INTO usuarios VALUES (null,'$usuario->usuario','$usuario->passwd',
@@ -50,7 +50,7 @@ class DAOUsuario extends BaseDAO
      * @param {Usuario} usuario - El nombre de usuario
      * @returns Un valor booleano.
      */
-    public static function modificarUsuario(Usuario $usuario): bool|mysqli_result
+    public static function modificarUsuario(Usuario $usuario): int
     {
         $sql = "UPDATE usuarios SET usuario = '$usuario->usuario',passwd = '$usuario->passwd',
         email = $usuario->email  WHERE id = $usuario->id";
@@ -65,10 +65,10 @@ class DAOUsuario extends BaseDAO
     public static function buscarUsuario(int $id): ?Usuario
     {
         $resultado = BaseDAO::consulta("SELECT * FROM usuarios WHERE id='$id'");
-        if ($resultado->num_rows == 0) {
+        if ($resultado->rowCount() == 0) {
             return null;
         }
-        return Usuario::crearUsuario($resultado->fetch_assoc());
+        return Usuario::crearUsuario($resultado->fetch(PDO::FETCH_ASSOC));
     }
 
 
@@ -77,7 +77,7 @@ class DAOUsuario extends BaseDAO
      * @param {int} id - El id del usuario a eliminar.
      * @returns Un valor booleano.
      */
-    public static function borrarUsuario(int $id): bool
+    public static function borrarUsuario(int $id): int
     {
         $sql = "DELETE FROM usuarios WHERE id = '$id'";
         return BaseDAO::consulta($sql);
@@ -85,7 +85,7 @@ class DAOUsuario extends BaseDAO
 
     public static function loginUsuario(string $nombre, string $passwd)
     {
-        if (self::validLogUsuario($nombre, $passwd)) {
+        if (self::validLogUsuario($nombre, $passwd) != null) {
             $_SESSION['logged'] = [$nombre, $passwd, true];
         } else {
             $_SESSION['logged'] = [$nombre, $passwd, false];

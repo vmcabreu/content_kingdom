@@ -8,62 +8,48 @@ class BaseDAO
      * Crea una nueva conexión a la base de datos usando las credenciales definidas en el archivo
      * `config.php`
      */
-    public function __construct()
+    public function getConexion()
     {
         try {
-            $this->connection = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE_NAME);
-
-            if (mysqli_connect_errno()) {
-                throw new Exception("Could not connect to database.");
-            }
+            $this->connection  = new PDO("mysql:host=".DB_HOST.";dbname=".DB_DATABASE_NAME.";charset=utf8", DB_USERNAME, DB_PASSWORD);
+            // set the PDO error mode to exception
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $this->connection;
         } catch (Exception $e) {
-            throw new Exception($e->getMessage());
+            exit($e->getMessage());
         }
     }
 
-    /**
-     * Toma una consulta y una matriz de parámetros, ejecuta la consulta y devuelve el resultado
-     * 
-     * @param query La consulta a ejecutar.
-     * @param params 
-     * 
-     * @return bool|mysqli_result Una matriz de matrices asociativas.
-     */
-    public function consulta($query = "", $params = [])
-    {
-        try {
-            $stmt = $this->executeStatement($query, $params);
-            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-            $stmt->close();
-            return $result;
-        } catch (Exception $e) {
-            throw new Exception($e->getMessage());
-        }
-        return false;
-    }
+/**
+ * Esta función PHP ejecuta una consulta SQL y devuelve un objeto PDOStatement o un número entero
+ * dependiendo de si la consulta es una declaración SELECT o no, respectivamente.
+ * 
+ * @param string sql La consulta SQL a ejecutar. Puede ser una instrucción SELECCIONAR, INSERTAR,
+ * ACTUALIZAR o ELIMINAR.
+ * 
+ * @return PDOStatement|int ya sea un objeto PDOStatement o un valor entero dependiendo de si la
+ * consulta SQL pasada como parámetro comienza con la palabra "SELECT" o no. Si comienza con "SELECT",
+ * la función ejecuta una consulta y devuelve un objeto PDOStatement. De lo contrario, ejecuta un exec
+ * y devuelve un valor entero.
+ */
+    public static function consulta(string $sql) : PDOStatement | int {
+        // Para evitar el error de "duplicate entry", generamos un try-catch
+        try {                
+            //Comprobamos si la sql pasada por parametro contiene la palabra "SELECT"
+            $conexion = self::getConexion();
 
-    /**
-     * Esta función toma una consulta y una matriz de parámetros y devuelve un objeto de declaración
-     * 
-     * @param query La consulta a ejecutar.
-     * @param params 
-     * 
-     * @return El resultado de la consulta.
-     */
-    private function executeStatement($query = "", $params = [])
-    {
-        try {
-            $stmt = $this->connection->prepare($query);
-            if ($stmt === false) {
-                throw new Exception("No se puede realizar la consulta: " . $query);
+            if (str_starts_with(strtolower(trim($sql)), "select")) {
+                $resultado = $conexion->query($sql);      
+            } else {
+                // En caso contrario, ejecutamos un exec
+                $resultado = $conexion->exec($sql);
             }
-            if ($params) {
-                $stmt->bind_param($params[0], $params[1]);
-            }
-            $stmt->execute();
-            return $stmt;
-        } catch (Exception $e) {
-            throw new Exception($e->getMessage());
+            // Cerramos la conexión y devolvemos
+            unset($conexion); // Cerrar la conexion
+            return $resultado;
+        } catch (Exception $ex) {
+            // throw new Exception("Error en la consulta.");
+            die("Error en la consulta. ".$ex->getMessage());
         }
     }
 
