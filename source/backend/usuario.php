@@ -1,5 +1,5 @@
 <?php 
-require_once "./inc/bootstrap.php";
+require_once __DIR__."/inc/bootstrap.php";
 if ($_SERVER['REQUEST_METHOD'] == 'GET')
 {
     if (isset($_GET['id']))
