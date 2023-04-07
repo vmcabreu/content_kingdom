@@ -12,6 +12,6 @@ export class UsuarioService {
   constructor(private http: HttpClient) { }
 
   getUser() {
-    return this.http.get(`${this.url}/api/usuario.php?id=1`);
+    return this.http.get('api/usuario.php?id=1');
   }
 }

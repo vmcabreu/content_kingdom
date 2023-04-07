@@ -20,6 +20,7 @@ export class UserComponent {
   getUsuario():void{
     this.userService.getUser().subscribe(
       (data: Usuario) => {
+        console.log(data);
         this.usuario = data;
         this.success = 'successful retrieval of the list';
       },
