@@ -1,6 +1,6 @@
 <?php 
-require_once __DIR__."/inc/bootstrap.php";
-require_once "./model/DAOUsuario.php";
+require_once(__DIR__."/inc/bootstrap.php");
+require_once("./model/DAOUsuario.php");
 if ($_SERVER['REQUEST_METHOD'] == 'GET')
 {
     if (isset($_GET['id']))
