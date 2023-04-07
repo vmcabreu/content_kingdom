@@ -7,7 +7,7 @@ import { UsuarioService } from 'src/app/service/usuario.service';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-export class UserComponent {
+export class UserComponent implements OnInit{
   usuario: Usuario;
   success: String = "";
   error: String = "";
