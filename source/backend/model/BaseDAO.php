@@ -38,7 +38,7 @@ class BaseDAO
         try {                
             //Comprobamos si la sql pasada por parametro contiene la palabra "SELECT"
             $conexion = self::getConexion();
-
+            
             if (str_starts_with(strtolower(trim($sql)), "select")) {
                 $resultado = $conexion->query($sql);      
             } else {
