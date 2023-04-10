@@ -8,11 +8,11 @@ import { Usuario } from '../model/usuario.model';
 })
 export class UsuarioService {
   url: String = "contentkingdom.alu6618.arkania.es";
-  urltest: String = "http://localhost:4200";
+  urltest: String = "http://localhost/backend/";
 
   constructor(private http: HttpClient) { }
 
   getUser():Observable<Usuario> {
-    return this.http.get<Usuario>(this.url+'/api/usuario.php?id=1');
+    return this.http.get<Usuario>(this.urltest+'usuario.php?id=1');
   }
 }

@@ -1,5 +1,5 @@
 <?php
-require_once("./../inc/config.php");
+require_once(__DIR__."/../inc/config.php");
 class BaseDAO
 {
     private static $lastAffectedRows;
@@ -15,6 +15,7 @@ class BaseDAO
             $connection  = new PDO("mysql:host=".DB_HOST.";charset=utf8;dbname=".DB_DATABASE_NAME,DB_USERNAME,DB_PASSWORD);
             // set the PDO error mode to exception
             $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         } catch (Exception $e) {
             exit($e->getMessage());
         }

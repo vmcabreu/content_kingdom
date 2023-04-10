@@ -62,14 +62,23 @@ class DAOUsuario extends BaseDAO
      * @param {int} id - El id del usuario que desea buscar.
      * @returns un objeto Usuario.
      */
-    public static function buscarUsuario(int $id): ?Usuario
+    public static function buscarUsuario(int $id, int $limite = 100, int $offset = 0): ?array
     {
-        $resultado = BaseDAO::consulta("SELECT * FROM usuarios WHERE id='$id'");
-        if ($resultado->rowCount() == 0) {
-            return null;
-        }
-        return Usuario::crearUsuario($resultado->fetch(PDO::FETCH_ASSOC));
+        $respuesta = array();
+        do {
+            $resultado = BaseDAO::consulta("SELECT * FROM usuarios WHERE id='$id' LIMIT $limite OFFSET $offset");
+            $filas = $resultado->fetchAll(PDO::FETCH_ASSOC);
+            $respuesta = array_merge($respuesta, $filas);
+            $offset += $limite;
+        } while (!empty($filas));
+        return empty($respuesta) ? null : $respuesta;
     }
+    
+    
+    
+    
+    
+    
 
 
     /**
