@@ -16,3 +16,5 @@ CREATE TABLE usuarios (
 INSERT INTO usuarios VALUES
 (null,'admin','$2y$10$q8OBTcr1mWsu9rPg2OimqOSvUtjptKVyf9WM4rAGuAz5HXF32d6Nm','contentkingdom@support.com');
 
+-- Tabla Megusta
+-- Tabla comentarios

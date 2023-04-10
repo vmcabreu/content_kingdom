@@ -1,4 +1,9 @@
 .bodySize {
   height: 82.5vh;
 }
-
+.background
+{
+  overflow-x: fixed;
+  max-width: 100vw;
+  background-image: url("/assets/imgs/background.jpg");
+}
