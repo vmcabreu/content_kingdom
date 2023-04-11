@@ -13,6 +13,6 @@ export class UsuarioService {
   constructor(private http: HttpClient) { }
 
   getUser():Observable<Usuario> {
-    return this.http.get<Usuario>(this.urltest+'usuario.php?id=1');
+    return this.http.get<Usuario>(this.url+'usuario.php?id=1');
   }
 }
