@@ -7,7 +7,7 @@ import { Usuario } from '../model/usuario.model';
   providedIn: 'root'
 })
 export class UsuarioService {
-  url: String = "contentkingdom.alu6618.arkania.es";
+  url: String = "http://contentkingdom.alu6618.arkania.es/api/";
   urltest: String = "http://localhost/backend/";
 
   constructor(private http: HttpClient) { }
