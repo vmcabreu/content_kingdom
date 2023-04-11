@@ -1,4 +1,11 @@
+.post-background{
+  background-color: aliceblue;
+  border-radius: 0.8rem;
+}
 
+.description{
+  color: aliceblue;
+}
 .post-card {
   width: 100%;
   background: lightgrey;

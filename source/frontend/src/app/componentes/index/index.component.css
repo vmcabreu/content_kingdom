@@ -1,9 +1,17 @@
-.bodySize {
-  height: 82.5vh;
+
+.header-zone{
+  margin: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
-.background
-{
-  overflow-x: fixed;
-  max-width: 100vw;
-  background-image: url("/assets/imgs/background.jpg");
+
+.post-zone{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer-zone{
+  margin: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }

@@ -1,17 +1,20 @@
 <div class="background">
-<app-header></app-header>
-<div class="bodySize">
-  <div class="container">
-    <div class="row">
-      <div class="col-8 w-75">
-        <app-posts></app-posts>
+  <div class="bodySize">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 header-zone mb-0">
+          <app-header></app-header>
+        </div>
+        <div class="col-8 offset-2 post-zone">
+          <app-posts></app-posts>
+        </div>
+        <div class="col-2">
+          <a routerLink="/usuario">Usuario</a>
       </div>
-<div class="col-4 w-25">
-  <a routerLink="/usuario">Usuario</a>
-</div>
-
+        <div class="col-12 footer-zone">
+          <app-footer></app-footer>
+        </div>
+      </div>
+    </div>
   </div>
-  </div>
-</div>
-<app-footer></app-footer>
 </div>
