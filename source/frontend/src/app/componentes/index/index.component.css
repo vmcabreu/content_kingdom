@@ -1,17 +1,37 @@
-
-.header-zone{
-  margin: 0 !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+:host {
+  height: 100%;
+  width: 100%;
 }
 
-.post-zone{
-  margin-left: auto;
-  margin-right: auto;
+.container-index {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 70px 1fr 40px;
+  grid-template-columns: 2fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "header-zone header-zone"
+    "post-zone recommend-zone"
+    "footer-zone footer-zone";
 }
 
-.footer-zone{
-  margin: 0 !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+.header-zone {
+  grid-area: header-zone;
+}
+
+.post-zone {
+  grid-area: post-zone;
+  padding-inline: 80px;
+
+
+}
+
+.recommend-zone {
+  grid-area: recommend-zone;
+  padding-inline: 50px;
+}
+
+.footer-zone {
+  grid-area: footer-zone;
 }
