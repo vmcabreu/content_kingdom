@@ -16,10 +16,7 @@ export class LoginComponent {
   login() {
     this.http.post(this.url+'login/login.php', {nombre: this.nombre, passwd: this.passwd}).subscribe(
       response => {
-        localStorage.setItem('token', response['token']); // Guardar el token JWT en el almacenamiento local.
-      },
-      error => {
-        console.log('Error en el inicio de sesión:', error);
+        localStorage.setItem('token', response['token']);
       }
     );
   }
