@@ -19,9 +19,6 @@ export class LoginComponent {
     this.auth.login(this.nombre, this.passwd).subscribe(
       (data:any )=> {
         console.log(data.token);
-
-        localStorage.setItem('token', JSON.stringify(data.token)); // Almacenar el token JWT en el almacenamiento local del navegador.
-        this.router.navigate(['']); // Redireccionar al componente de inicio.
       }
     );
   }
