@@ -18,7 +18,7 @@ export class LoginComponent {
   login() {
     this.auth.login(this.nombre, this.passwd).subscribe(
       (data:any )=> {
-        console.log(data.token);
+        console.log(JSON.parse(data.token));
       }
     );
   }
