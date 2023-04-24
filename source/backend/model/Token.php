@@ -13,8 +13,7 @@ class Token
             "iat" => time(), 
             "id" => $usuario->id,
             "nombre" => $usuario->usuario,
-            "email" => $usuario->email,
-            "rol" => $usuario->rol
+            "email" => $usuario->email
         );
         return JWT::encode($payload, AUTHKEY, "HS256");
     }
