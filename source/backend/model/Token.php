@@ -5,15 +5,17 @@ use Firebase\JWT\JWT;
 
 class Token
 {
-    public static function generarToken(Usuario $usuario): void
+    public static function generarTokenLog(Usuario $usuario): string
     {
         $payload = array(
-            "iss" => "http://contentkingdom.alu6618.arkania.es/api/login.php",
+            "iss" => "http://contentkingdom.alu6618.arkania.es/api/controller/login/login.php",
             "aud" => "http://contentkingdom.alu6618.arkania.es/login",
-            "iat" => time(),
-            "user" => $usuario
+            "iat" => time(), 
+            "id" => $usuario->id,
+            "nombre" => $usuario->usuario,
+            "email" => $usuario->email,
+            "rol" => $usuario->rol
         );
-        $token = JWT::encode($payload, AUTHKEY, "HS256");
-        echo $token;
+        return JWT::encode($payload, AUTHKEY, "HS256");
     }
 }

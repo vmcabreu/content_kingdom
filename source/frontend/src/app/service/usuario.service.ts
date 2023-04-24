@@ -14,12 +14,12 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class UsuarioService {
-  url: String = "http://contentkingdom.alu6618.arkania.es/api/";
+  url: String = "http://contentkingdom.alu6618.arkania.es/api/controller/";
   urltest: String = "http://localhost/backend/";
 
   constructor(private http: HttpClient) { }
 
   getUser():Observable<Usuario> {
-    return this.http.get<Usuario>(this.url+'controller/usuario/list.php?id=1');
+    return this.http.get<Usuario>(this.url+'usuario/list.php?id=1');
   }
 }

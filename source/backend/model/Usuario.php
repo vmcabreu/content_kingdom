@@ -13,7 +13,7 @@
          * @param {string} passwd - La contraseña del usuario.
          * @param {string} email - La dirección de correo electrónico del usuario.
          */
-        public function __construct(int $id=null, string $usuario="", string $passwd="", string $email="")
+        public function __construct(int $id = null, string $usuario = "", string $passwd = "", string $email = "")
         {
             $this->id = $id;
             $this->usuario = $usuario;

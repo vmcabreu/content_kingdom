@@ -11,6 +11,7 @@ import { RegisterComponent } from './componentes/register/register.component';
 import { GamesComponent } from './componentes/games/games.component';
 import { UserComponent } from './componentes/user/user.component';
 import { PostsComponent } from './componentes/posts/posts.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { PostsComponent } from './componentes/posts/posts.component';
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     AppRoutingModule
   ],
   providers: [],

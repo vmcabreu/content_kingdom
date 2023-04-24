@@ -1,4 +1,7 @@
 <?php
+
+use Firebase\JWT\JWT;
+
 require_once PROJECT_ROOT_PATH . "/model/BaseDAO.php";
 require_once __DIR__ . "/Token.php";
 
@@ -12,25 +15,36 @@ class DAOUsuario extends BaseDAO
      */
     public static function comprobarUsuario(string $nombre, string $email): array
     {
-            $stmt = BaseDAO::consulta("SELECT * FROM usuarios WHERE usuario='$nombre' OR email='$email'");
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
+        $stmt = BaseDAO::consulta("SELECT * FROM usuarios WHERE usuario='$nombre' OR email='$email'");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
 
     /**
-     * Devuelve verdadero si el usuario existe en la base de datos, falso en caso contrario
+     * Esta función de PHP comprueba si una combinación determinada de nombre de usuario y contraseña es
+     * válida consultando una tabla de base de datos y devuelve un objeto Usuario si es válido, o nulo si
+     * no lo es.
      * 
-     * @param string nombre cadena
-     * @param string passwd ' O 1=1 -- -
+     * @param string nombre Una cadena que representa el nombre de usuario del usuario que intenta iniciar
+     * sesión.
+     * @param string passwd El parámetro `` es una variable de cadena que representa la contraseña
+     * de un usuario. Se utiliza en una consulta SQL para verificar si la contraseña coincide con la
+     * almacenada en la base de datos para un usuario en particular.
      * 
-     * @return bool Un valor booleano.
+     * @return ? Usuario ya sea un objeto Usuario o nulo. Si la consulta devuelve una fila, crea un objeto
+     * Usuario utilizando los datos obtenidos y lo devuelve. Si la consulta no devuelve filas, devuelve
+     * nulo.
      */
-    public static function validLogUsuario(string $nombre, string $passwd): bool
+
+    public static function validLogUsuario(string $nombre, string $passwd): ?Usuario
     {
         $stmt = BaseDAO::consulta("SELECT * FROM usuarios WHERE usuario='$nombre' AND passwd='$passwd'");
-        return $stmt->rowCount() > 0;
+        if ($stmt->rowCount() > 0) {
+            return $usuario = Usuario::crearUsuario($stmt->fetch(PDO::FETCH_ASSOC));
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -90,7 +104,8 @@ class DAOUsuario extends BaseDAO
         return empty($respuesta) ? null : $respuesta;
     }
 
-    public static function buscarUsuarioID(int $id){
+    public static function buscarUsuarioID(int $id)
+    {
 
         try {
             $stmt = BaseDAO::consulta("SELECT * FROM usuarios WHERE id='$id' LIMIT 1");
@@ -102,7 +117,7 @@ class DAOUsuario extends BaseDAO
                 return null;
             }
         } catch (Exception $ex) {
-            die("Error en la consulta. ".$ex->getMessage());
+            die("Error en la consulta. " . $ex->getMessage());
         }
     }
 
@@ -117,12 +132,5 @@ class DAOUsuario extends BaseDAO
         return BaseDAO::consulta($sql);
     }
 
-    public static function loginUsuario(int $id, string $nombre, string $passwd)
-    {
-        if (self::validLogUsuario($nombre, $passwd) != null) {
-            Token::generarToken(self::buscarUsuarioID($id));
-        } else {
 
-        }
-    }
 }
