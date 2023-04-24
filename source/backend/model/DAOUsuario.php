@@ -22,36 +22,18 @@ class DAOUsuario extends BaseDAO
 
 
     /**
-     * Esta función de PHP comprueba si una combinación determinada de nombre de usuario y contraseña es
-     * válida consultando una tabla de base de datos y devuelve un objeto Usuario si es válido, o nulo si
-     * no lo es.
+     * Esta función de PHP valida las credenciales de inicio de sesión de un usuario comprobando si el
+     * nombre de usuario y la contraseña coinciden con los almacenados en una base de datos.
      * 
-     * @param string nombre Una cadena que representa el nombre de usuario del usuario que intenta iniciar
-     * sesión.
-     * @param string passwd El parámetro `` es una variable de cadena que representa la contraseña
-     * de un usuario. Se utiliza en una consulta SQL para verificar si la contraseña coincide con la
-     * almacenada en la base de datos para un usuario en particular.
+     * @param string nombre El nombre de usuario del usuario que intenta iniciar sesión.
+     * @param string passwd La cadena de contraseña que debe verificarse con la contraseña hash almacenada
+     * en la base de datos para el usuario dado.
      * 
-     * @return ? Usuario ya sea un objeto Usuario o nulo. Si la consulta devuelve una fila, crea un objeto
-     * Usuario utilizando los datos obtenidos y lo devuelve. Si la consulta no devuelve filas, devuelve
-     * nulo.
+     * @return ?Usuario una instancia de la clase `Usuario` si el nombre de usuario y la contraseña
+     * proporcionados coinciden con un registro en la tabla `usuarios` de la base de datos. Si no hay
+     * ninguna coincidencia, devuelve `null`.
      */
 
-    public static function validLogUsuario(string $nombre, string $passwd): ?Usuario
-    {
-        $stmt = BaseDAO::consulta("SELECT * FROM usuarios WHERE usuario='$nombre' LIMIT 1");
-        if ($stmt->rowCount() > 0) {
-            $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-            if (password_verify($passwd, $usuario["passwd"])) {
-                // La contraseña coincide, se autentica al usuario
-                return new Usuario($usuario['id'], $usuario['usuario'], $usuario['passwd'], $usuario['email']);
-            } else {
-                return null;
-            }
-        } else {
-            return null;
-        }
-    }
 
     /**
      * Agrega un usuario a la base de datos.
