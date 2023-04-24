@@ -55,7 +55,12 @@
 
             $usuario = new Usuario();
             foreach ($datosUsuario as $atributo => $valor) {
-                $usuario->$atributo = $valor;
+                if ($atributo == "passwd") {
+                    $usuario->$atributo = password_hash($valor,PASSWORD_DEFAULT);
+                }else{
+                    $usuario->$atributo = $valor;
+                }
+                
             }
             return $usuario;
         }

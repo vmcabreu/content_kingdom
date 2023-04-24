@@ -1,4 +1,5 @@
-.container {  display: grid;
+.container {
+  display: grid;
   grid-template-columns: 0.3fr 2.4fr 0.3fr;
   grid-template-rows: 1.1fr 1.1fr 0.8fr;
   gap: 0px 0px;
@@ -9,7 +10,8 @@
     ". . .";
 }
 
-.loginInput {  display: grid;
+.loginInput {
+  display: grid;
   grid-template-columns: 0.6fr 1.8fr 0.6fr;
   grid-template-rows: 0.1fr 3.7fr 0.1fr;
   gap: 0px 0px;
@@ -30,7 +32,7 @@
   transform: translate(-50%, -50%);
   background: rgba(34, 34, 34, 0.987);
   box-sizing: border-box;
-  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
   border-radius: 10px;
 }
 
@@ -61,8 +63,8 @@
   transition: .5s;
 }
 
-.login-box .user-box input:focus ~ label,
-.login-box .user-box input:valid ~ label {
+.login-box .user-box input:focus~label,
+.login-box .user-box input:valid~label {
   top: -20px;
   left: 0;
   color: #bdb8b8;
@@ -82,7 +84,8 @@
   margin-top: 40px;
   letter-spacing: 4px
 }
-.login-box button{
+
+.login-box button {
   background-color: #ffffff00;
   border: 0px;
 }
@@ -92,9 +95,9 @@
   color: #fff;
   border-radius: 5px;
   box-shadow: 0 0 5px #0380f4,
-              0 0 10px #0380f4,
-              0 0 15px #779cb4,
-              0 0 25px #779cb4;
+    0 0 10px #0380f4,
+    0 0 15px #779cb4,
+    0 0 25px #779cb4;
 }
 
 .login-box button span {
@@ -107,7 +110,8 @@
     left: -100%;
   }
 
-  50%,100% {
+  50%,
+  100% {
     left: 100%;
   }
 }
@@ -121,6 +125,6 @@
   animation: btn-anim1 2s linear infinite;
 }
 
-h3{
+h3 {
   color: aliceblue;
 }

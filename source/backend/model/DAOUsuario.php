@@ -39,9 +39,13 @@ class DAOUsuario extends BaseDAO
 
     public static function validLogUsuario(string $nombre, string $passwd): ?Usuario
     {
-        $stmt = BaseDAO::consulta("SELECT * FROM usuarios WHERE usuario='$nombre' AND passwd='$passwd'");
+        $stmt = BaseDAO::consulta("SELECT * FROM usuarios WHERE usuario='$nombre'");
         if ($stmt->rowCount() > 0) {
-            return $usuario = Usuario::crearUsuario($stmt->fetch(PDO::FETCH_ASSOC));
+            $usuario = Usuario::crearUsuario($stmt->fetch(PDO::FETCH_ASSOC));
+            if ($usuario->passwd ) {
+                # code...
+            }
+            
         } else {
             return null;
         }

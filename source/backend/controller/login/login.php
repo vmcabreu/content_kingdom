@@ -6,10 +6,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user = $_POST['usuario'];
         $passwd = $_POST['passwd'];
         $usuario = DAOUsuario::validLogUsuario($user,$passwd);
-        if ($usuarioById != null) {
-            $jwt = Token::generarTokenLog($usuario);
+        if ($usuario != null && password_verify($passwd,$usuario->passwd)) {
             header('Content-Type: application/json');
-            echo json_encode(array("token" => $jwt)); 
+            echo json_encode(array("token" => Token::generarTokenLog($usuario))); 
           } else {
             header('HTTP/1.0 401 Unauthorized');
           }
