@@ -41,7 +41,13 @@ class DAOUsuario extends BaseDAO
     {
         $stmt = BaseDAO::consulta("SELECT * FROM usuarios WHERE usuario='$nombre' LIMIT 1");
         if ($stmt->rowCount() > 0) {
-            return Usuario::crearUsuario($stmt->fetch(PDO::FETCH_ASSOC));
+            $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (password_verify($passwd, $usuario["passwd"])) {
+                // La contraseña coincide, se autentica al usuario
+                return new Usuario($usuario['id'], $usuario['usuario'], $usuario['passwd'], $usuario['email']);
+            } else {
+                return null;
+            }
         } else {
             return null;
         }
@@ -131,6 +137,4 @@ class DAOUsuario extends BaseDAO
         $sql = "DELETE FROM usuarios WHERE id = '$id'";
         return BaseDAO::consulta($sql);
     }
-
-
 }
