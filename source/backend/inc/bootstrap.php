@@ -4,3 +4,4 @@ require_once PROJECT_ROOT_PATH . "/inc/config.php";
 require_once PROJECT_ROOT_PATH . "/model/DAOUsuario.php";
 require_once PROJECT_ROOT_PATH . "/model/Token.php";
 require_once PROJECT_ROOT_PATH . "/model/Usuario.php";
+require_once PROJECT_ROOT_PATH . "/vendor/autoload.php";
