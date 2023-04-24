@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthServiceService } from 'src/app/service/auth-service.service';
 
 @Component({
   selector: 'app-login',
@@ -9,14 +11,18 @@ import { Component } from '@angular/core';
 export class LoginComponent {
   nombre: string;
   passwd: string;
-  url: String = "http://contentkingdom.alu6618.arkania.es/api/controller/";
+  error: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private auth: AuthServiceService, private router: Router) {}
 
   login() {
-    this.http.post(this.url+'login/login.php', {nombre: this.nombre, passwd: this.passwd}).subscribe(
-      response => {
-        localStorage.setItem('token', response['token']);
+    this.auth.login(this.nombre, this.passwd).subscribe(
+      data => {
+        localStorage.setItem('token', data.token); // Almacenar el token JWT en el almacenamiento local del navegador.
+        this.router.navigate(['']); // Redireccionar al componente de inicio.
+      },
+      error => {
+        this.error = 'Usuario o contraseña incorrectos';
       }
     );
   }
