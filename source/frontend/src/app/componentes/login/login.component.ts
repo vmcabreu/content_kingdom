@@ -20,7 +20,7 @@ export class LoginComponent {
       (data:any )=> {
         console.log(data);
 
-        localStorage.setItem('token', data['token']); // Almacenar el token JWT en el almacenamiento local del navegador.
+        localStorage.setItem('token', JSON.stringify(data['token'])); // Almacenar el token JWT en el almacenamiento local del navegador.
         this.router.navigate(['']); // Redireccionar al componente de inicio.
       }
     );
