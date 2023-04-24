@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthServiceService {
-  private url: String = "http://contentkingdom.alu6618.arkania.es/api/controller";
+  private url: String = "http://contentkingdom.alu6618.arkania.es/api/controller/login";
 
   constructor(private http: HttpClient) { }
 
