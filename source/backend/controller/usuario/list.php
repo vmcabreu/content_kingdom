@@ -1,14 +1,12 @@
 <?php 
-require_once(__DIR__."/inc/bootstrap.php");
-require_once(__DIR__."/model/DAOUsuario.php");
+require_once(__DIR__."../../../inc/bootstrap.php");
 header("Access-Control-Allow-Origin: *");
 if ($_SERVER['REQUEST_METHOD'] == 'GET')
 {
-    echo $_SERVER['REQUEST_URI'];
     if (isset($_GET['id']))
     {
       $id = intval($_GET['id']);
-      $usuarioById = DAOUsuario::buscarUsuarioID($id);
+      $usuarioById = DAOUsuario::buscarUsuario($id);
       if ($usuarioById != null) {
           echo json_encode($usuarioById);
       }

@@ -6,7 +6,7 @@ import { Usuario } from '../model/usuario.model';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
-    'Authorization': 'Bearer ' 
+    'Authorization': 'Bearer '
   })
 };
 
@@ -20,6 +20,6 @@ export class UsuarioService {
   constructor(private http: HttpClient) { }
 
   getUser():Observable<Usuario> {
-    return this.http.get<Usuario>(this.url+'usuario.php?id=1');
+    return this.http.get<Usuario>(this.url+'controller/usuario/list.php?id=1');
   }
 }
