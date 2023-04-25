@@ -3,6 +3,10 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/service/auth-service.service';
 
+interface Token {
+  token: string;
+}
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,7 +22,7 @@ export class LoginComponent {
   login() {
     this.auth.login(this.nombre, this.passwd).subscribe(
       (data:any )=> {
-        console.log(JSON.parse(data.token));
+        console.log(data.token);
       }
     );
   }
