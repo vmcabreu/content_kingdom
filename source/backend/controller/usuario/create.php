@@ -8,7 +8,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $postdata = file_get_contents("php://input");
     if (isset($postdata) && !empty($postdata)) {
         $request = json_decode($postdata);
-        echo Usuario::crearUsuario($request);
+        $newuser = new Usuario(null,$request->usuario,password_hash($request->passwd,PASSWORD_DEFAULT),$request->email);
+        echo $newuser;
         if (trim($request->usuario) === '' || $request->passwd === '') {
             return http_response_code(400);
         }
