@@ -5,7 +5,6 @@ header('Access-Control-Request-Headers', '*');
 header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['usuario']) && isset($_POST['passwd'])) {
-        echo file_get_contents("php://input");
         $user = $_POST['usuario'];
         $passwd = $_POST['passwd'];
         $stmt = BaseDAO::consulta("SELECT * FROM usuarios WHERE usuario='$user' LIMIT 1");
