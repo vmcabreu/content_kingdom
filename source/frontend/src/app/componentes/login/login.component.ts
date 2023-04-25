@@ -19,11 +19,13 @@ export class LoginComponent {
 
   constructor(private auth: AuthServiceService, private router: Router) {}
 
-  login() {
-    this.auth.login(this.nombre, this.passwd).subscribe(
-      (data:any )=> {
-        console.log(data.token);
-      }
-    );
-  }
+    login() {
+      this.auth.login(this.nombre, this.passwd).subscribe(
+        (data:any )=> {
+          const token = data.token;
+          console.log(token);
+          localStorage.setItem('jwtToken', token);
+        }
+      );
+    }
 }
