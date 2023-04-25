@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Usuario } from '../model/usuario.model';
 
 interface Token {
   token: string;
@@ -14,8 +15,8 @@ export class AuthServiceService {
 
   constructor(private http: HttpClient) { }
 
-  login(nombre: string, passwd: string):Observable<Token> {
-    return this.http.post<Token>(`${this.url}/login.php`, { nombre, passwd });
+  login(nombre: string, passwd: string):Observable<Usuario> {
+    return this.http.post<Usuario>(`${this.url}/login.php`, { nombre, passwd });
   }
 
 

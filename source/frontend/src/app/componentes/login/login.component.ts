@@ -22,9 +22,8 @@ export class LoginComponent {
     login() {
       this.auth.login(this.nombre, this.passwd).subscribe(
         (data:any )=> {
-          const token = JSON.parse(data.token);
+          const token = JSON.parse(data);
           console.log(token);
-
           localStorage.setItem('jwtToken', token);
         }
       );
