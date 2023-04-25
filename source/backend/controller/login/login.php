@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__ . "../../../inc/bootstrap.php");
 header("Access-Control-Allow-Origin: *");
+header('Content-Type: application/json');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['usuario']) && isset($_POST['passwd'])) {
         $user = $_POST['usuario'];
@@ -10,7 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
             if (password_verify($passwd, $usuario["passwd"])) {
                 $usertoken =  new Usuario($usuario['id'], $usuario['usuario'], $usuario['passwd'], $usuario['email']);
-                header('Content-Type: application/json');
                 echo json_encode(array("token" => Token::generarTokenLog($usertoken)));
             } else {
                 header('HTTP/1.0 401 Unauthorized');
