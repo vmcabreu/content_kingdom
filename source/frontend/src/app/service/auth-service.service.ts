@@ -3,10 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Usuario } from '../model/usuario.model';
 
-interface Token {
-  token: string;
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -16,10 +12,7 @@ export class AuthServiceService {
   constructor(private http: HttpClient) { }
 
   login(nombre: string, passwd: string):Observable<Usuario> {
-    return this.http.post<Usuario>(`${this.url}/login.php`, { nombre, passwd });
+    return this.http.post<Usuario>(`${this.url}/login.php`, { nombre, passwd},{responseType:"json"});
   }
-
-
-
 
 }

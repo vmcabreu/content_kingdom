@@ -1,11 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Usuario } from 'src/app/model/usuario.model';
 import { AuthServiceService } from 'src/app/service/auth-service.service';
-
-interface Token {
-  token: string;
-}
 
 @Component({
   selector: 'app-login',
@@ -21,11 +18,8 @@ export class LoginComponent {
 
     login() {
       this.auth.login(this.nombre, this.passwd).subscribe(
-        (data:any )=> {
-          const token = JSON.parse(data);
-          console.log(token);
-          localStorage.setItem('jwtToken', token);
-        }
-      );
+        (response: Usuario)  => console.log(response)
+
+      )
     }
 }
