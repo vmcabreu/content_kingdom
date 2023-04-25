@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
             if (password_verify($passwd, $usuario["passwd"])) {
                 $usertoken =  new Usuario($usuario['id'], $usuario['usuario'], $usuario['passwd'], $usuario['email']);
-                echo json_encode($usertoken);
+                echo $usertoken;
             } else {
                 header('HTTP/1.0 401 Unauthorized');
             }
