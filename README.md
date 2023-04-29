@@ -2,9 +2,9 @@
 
 # Content Kingdom
 
-<div style="align: center">
+<div align="center">
 
-<img  src="img/CKLogo.png" alt="Logo">
+<img  src="img/CKLogo.png" alt="Logo" width="300">
 
 </div>   
 
@@ -20,6 +20,14 @@ Un lugar donde los pequeños creadores de contenido se puedan dar a conocer en l
 
 - [Documentación](doc/README.md)
 
+- [Despliegue](despliegue/README.md)
+
 ### English
+
+- [Preliminary Design](doc/anteproyecto.md)
+
+- [Documentation](doc/README.md)
+
+- [Deployment](despliegue/README.md)
 
 </div>   
