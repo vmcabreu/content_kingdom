@@ -18,7 +18,7 @@ Un lugar donde los pequeños creadores de contenido se puedan dar a conocer en l
 
 - [Anteproyecto](doc/anteproyecto.md)
 
-- [Documentación](doc/diagrama_caso_uso.md)
+- [Documentación](doc/README.md)
 
 ### English
 
