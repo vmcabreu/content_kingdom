@@ -14,38 +14,43 @@ export class RegisterComponent {
   repeatpasswd: string;
   email: string;
   error: string = "";
+  valid: boolean = false;
 
   constructor(private auth: AuthServiceService, private router: Router) {
 
   }
 
   register() {
-    if (this.validParams) {
+    if (this.valid) {
       this.auth.register(this.nombre, this.passwd, this.email).subscribe();
+      this.valid = false;
     }
 
   }
 
-
-  validParams(): boolean {
+  validParams() {
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/;
+    let valido = true;
     if (this.nombre == "") {
-      this.error += "Nombre de usuario no válido"
-      return false;
+      this.error += "Nombre de usuario no válido";
+      valido = false;
     }
     if (passwordRegex.test(this.passwd)) {
-      this.error += "\n La contraseña debe de tener al menos un mayúscula, un número y un carácter especial [@$!%*?&]"
-      return false;
+      this.error += "\n La contraseña debe de tener al menos un mayúscula, un número y un carácter especial [@$!%*?&]";
+      valido = false;
     }
     if (this.passwd != this.repeatpasswd) {
-      this.error += " \n Las contraseñas no coinciden"
-      return false;
+      this.error += " \n Las contraseñas no coinciden";
+      valido = false;
     }
     if (emailRegex.test(this.email)) {
-      this.error += "\nEmail no válido"
-      return false;
+      this.error += "\nEmail no válido";
+      valido = false;
     }
-    return true;
+    if (valido) {
+      this.error = "";
+      this.valid = true;
+    }
   }
 }

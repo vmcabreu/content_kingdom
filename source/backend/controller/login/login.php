@@ -1,8 +1,5 @@
 <?php
 require_once(__DIR__ . "../../../inc/bootstrap.php");
-header("Access-Control-Allow-Origin: *");
-header('Access-Control-Request-Headers: *');
-header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['usuario']) && isset($_POST['passwd'])) {
         $user = $_POST['usuario'];
@@ -13,8 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (password_verify($passwd, $usuario["passwd"])) {
                 ob_clean();
                 $usertoken =  new Usuario($usuario['id'], $usuario['usuario'], $usuario['passwd'], $usuario['email']);
-                header('Content-Type: application/json; charset=utf-8');
-                echo $usertoken;
+                echo http_response_code(204);
             } else {
                 header('HTTP/1.0 401 Unauthorized');
             }
