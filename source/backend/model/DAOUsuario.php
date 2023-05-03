@@ -14,11 +14,13 @@ class DAOUsuario
         return false;
     }
 
-    public static function validarLoginOk(string $passwd, string $user){
-        $stmt = BaseDAO::consulta("SELECT * FROM usuarios WHERE usuario='$user' AND passwd='$passwd'");
+    public static function loginGetUser(string $passwd, string $user){
+        $stmt = BaseDAO::consulta("SELECT * FROM usuarios WHERE usuario='$user' LIMIT 1");
         if ($stmt->rowCount() > 0) {
             $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $usuario;
+            if (password_verify($passwd, $usuario["passwd"])) {
+                return $usuario;
+            }
         }
     }
 
