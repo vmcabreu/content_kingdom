@@ -17,6 +17,8 @@ export class LoginComponent {
   constructor(private loginService: LoginService, private router: Router) {}
 
     login() {
-      this.loginService.loginUser(this.nombre, this.passwd).subscribe()
+      this.loginService.loginUser(this.nombre, this.passwd).subscribe(
+        (response: any)  => console.log(JSON.parse(response))
+      )
     }
 }
