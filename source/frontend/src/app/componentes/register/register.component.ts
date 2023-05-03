@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthServiceService } from 'src/app/service/auth-service.service';
 
 @Component({
   selector: 'app-register',
@@ -16,10 +15,10 @@ export class RegisterComponent {
   error: string = "";
   valid: boolean = false;
 
-  constructor(private auth: AuthServiceService, private router: Router) {
+  constructor( private router: Router) {
 
   }
-
+/*
   register() {
     if (this.valid) {
       this.auth.register(this.nombre, this.passwd, this.email).subscribe();
@@ -53,4 +52,5 @@ export class RegisterComponent {
       this.valid = true;
     }
   }
+  */
 }
