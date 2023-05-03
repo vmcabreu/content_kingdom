@@ -18,7 +18,7 @@ export class LoginComponent {
 
     login() {
       this.loginService.loginUser(this.nombre, this.passwd).subscribe(
-        (response: any)  => console.log(JSON.parse(response))
+        (response: any)  => response.json().catch(this.error)
       )
     }
 }
