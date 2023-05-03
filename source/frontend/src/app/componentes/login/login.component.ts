@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/model/usuario.model';
-import { AuthServiceService } from 'src/app/service/auth-service.service';
+import { LoginService } from 'src/app/service/login.service';
 
 @Component({
   selector: 'app-login',
@@ -14,12 +14,9 @@ export class LoginComponent {
   passwd: string;
   error: string;
 
-  constructor(private auth: AuthServiceService, private router: Router) {}
+  constructor(private loginService: LoginService, private router: Router) {}
 
     login() {
-      this.auth.login(this.nombre, this.passwd).subscribe(
-        (response: Usuario)  => console.log(response)
-
-      )
+      this.loginService.loginUser(this.nombre, this.passwd).subscribe()
     }
 }
