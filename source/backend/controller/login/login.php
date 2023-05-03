@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user = $_POST['usuario'];
         $passwd = $_POST['passwd'];
         if (DAOUsuario::validarLogin($passwd,$user)) {
-            echo http_response_code(204);
+            echo "Done";
         }else{
             header('HTTP/1.0 401 Unauthorized');
         }
