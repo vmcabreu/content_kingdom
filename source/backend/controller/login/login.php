@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user = $_POST['usuario'];
         $passwd = $_POST['passwd'];
         if (DAOUsuario::validarLogin($passwd,$user)) {
-            echo DAOUsuario::loginGetUser($passwd,$user);
+            echo json_encode(DAOUsuario::loginGetUser($passwd,$user), JSON_UNESCAPED_UNICODE);
         }else{
             header('HTTP/1.0 401 Unauthorized');
         }
