@@ -13,7 +13,7 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  loginUser(nombre: string, passwd: string): Observable<Usuario> {
-    return this.http.post<Usuario>(`${this.url}/login/login.php`, { nombre, passwd },{responseType: 'json'});
+  loginUser(nombre: string, passwd: string) {
+    return this.http.post(`${this.url}/login/login.php`, { nombre, passwd });
   }
 }
