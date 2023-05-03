@@ -5,6 +5,15 @@ require_once(__DIR__ . "/../inc/bootstrap.php");
 class DAOUsuario
 {
 
+    public static function validarLogin(string $passwd, string $user){
+        $stmt = BaseDAO::consulta("SELECT * FROM usuarios WHERE usuario='$user' LIMIT 1");
+        if ($stmt->rowCount() > 0) {
+            $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+            return password_verify($passwd, $usuario["passwd"]);
+        }
+        return false;
+    }
+
     public static function comprobarUsuario(string $nombre, string $email): array
     {
         $stmt = BaseDAO::consulta("SELECT * FROM usuarios WHERE usuario='$nombre' OR email='$email'");
