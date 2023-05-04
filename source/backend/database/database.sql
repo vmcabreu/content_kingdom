@@ -69,8 +69,7 @@ CREATE TABLE IF NOT EXISTS amigos_usuarios (
   FOREIGN KEY (amigo_id) REFERENCES usuarios(id)
 ) ENGINE=InnoDB;
   
---INSERT INTO usuarios VALUES
---(null,'admin','$2y$10$q8OBTcr1mWsu9rPg2OimqOSvUtjptKVyf9WM4rAGuAz5HXF32d6Nm','contentkingdom@support.com');
+
 
 
 INSERT INTO videojuegos (nombre, genero, fecha_lanzamiento, plataforma, desarrolladores) VALUES
