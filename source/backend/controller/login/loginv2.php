@@ -18,8 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $jsonInput = file_get_contents('php://input');
     $jsonObject = json_decode($jsonInput, true);
-    $user = $jsonObject->username;
-    $passwd = $jsonObject->passwd;
+    $user = $jsonObject['username'];
+    $passwd = $jsonObject['passwd'];
     if (DAOUsuario::validarLogin($passwd, $user)) {
         $bdUser = DAOUsuario::loginGetUser($passwd, $user);
         header('Content-Type: application/json');
