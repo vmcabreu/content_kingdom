@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS megusta (
 CREATE TABLE IF NOT EXISTS amigos_usuarios (
   usuario_id INT NOT NULL,
   amigo_id INT NOT NULL,
-  fecha_amistad DATE auto_increment,
+  fecha_amistad DATE NOT NULL,
   FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
   FOREIGN KEY (amigo_id) REFERENCES usuarios(id)
 ) ENGINE=InnoDB;
