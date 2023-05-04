@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Usuario } from 'src/app/model/usuario.model';
 import { Auth } from 'src/app/model/auth.model';
 import { LoginService } from 'src/app/service/login.service';
-import { map } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -34,7 +34,16 @@ export class LoginComponent {
     }
 
     onSubmit(){
-      this.loginGenToken();
-      this.loginGetToken();
+      let order = 0;
+      do {
+        if (order == 0) {
+          this.loginGenToken();
+          order++;
+        }else if(order == 1){
+          this.loginGetToken();
+          order++;
+        }
+      } while (order >= 2);
+
     }
 }
