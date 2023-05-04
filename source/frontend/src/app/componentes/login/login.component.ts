@@ -28,13 +28,12 @@ export class LoginComponent {
     loginGetToken() {
       this.loginService.loginGetUser(this.nombre, this.passwd)
       .subscribe((data:any) => {
-        console.log(data.token);
+        localStorage.setItem("token",data.token);
 
       });
     }
 
-    onSubmit(){
-      let order = 0;
+    orderToken(order: number){
       if (order == 0) {
         this.loginGenToken();
         order++;
@@ -43,6 +42,16 @@ export class LoginComponent {
         this.loginGetToken();
         order++;
       }
+    }
+
+    onSubmit(){
+      this.orderToken(0);
+      if (this.loginService.checkToken()) {
+        this.router.navigateByUrl("/");
+      }
+
 
     }
+
 }
+

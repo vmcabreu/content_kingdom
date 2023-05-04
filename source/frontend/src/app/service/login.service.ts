@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, isEmpty, map } from 'rxjs';
 import { Usuario } from '../model/usuario.model';
 import { Auth } from '../model/auth.model';
 
@@ -24,5 +24,14 @@ export class LoginService {
     .set('username', username)
     .set('passwd', passwd);
     return this.http.get<Auth>(`${this.url}login/loginv2.php`, { params:params });
+  }
+
+  checkToken(){
+    let token =localStorage.getItem("token");
+    if (token!="") {
+      return true;
+    }else{
+      return false;
+    }
   }
 }
