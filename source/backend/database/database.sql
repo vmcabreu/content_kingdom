@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
 
 CREATE TABLE IF NOT EXISTS videojuegos (
   id INT auto_increment,
-  nombre varchar(100) NOT NULL UNIQUE,
+  nombre varchar(100) NOT NULL,
   genero varchar(50) NOT NULL,
   fecha_lanzamiento DATE NOT NULL,
   plataforma varchar(50) NOT NULL,
