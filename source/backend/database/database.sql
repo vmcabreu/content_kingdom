@@ -244,11 +244,11 @@ INSERT INTO videojuegos (nombre, genero, fecha_lanzamiento, plataforma, desarrol
 ("1080° Snowboarding","Deportes","1998-02-28","Nintendo 64","Nintendo EAD"),
 ("Bomberman 64","Estrategia","1997-12-20","Nintendo 64","Hudson Soft"),
 ("Turok: Dinosaur Hunter","Shooter en primera persona","1997-03-04","Nintendo 64","Iguana Entertainment"),
-("Pokemon Snap","Simulación",1999-03-21,"Nintendo64","HAL Laboratory"),
-("Pokemon Stadium","Estrategia",2000-04-30,"Nintendo64","Nintendo EAD"),
-("Pokemon Stadium 2","Estrategia",2000-12-14,"Nintendo64","Nintendo EAD"),
-("Hey You, Pikachu!","Simulación",2000-12-12,"Nintendo64","Nintendo"),
-("Pokemon Puzzle League","Puzzle",2000-09-25,"Nintendo64","Nintendo Software Technology");
+("Pokemon Snap","Simulación","1999-03-21","Nintendo64","HAL Laboratory"),
+("Pokemon Stadium","Estrategia","2000-04-30","Nintendo64","Nintendo EAD"),
+("Pokemon Stadium 2","Estrategia","2000-12-14","Nintendo64","Nintendo EAD"),
+("Hey You, Pikachu!","Simulación","2000-12-12","Nintendo64","Nintendo"),
+("Pokemon Puzzle League","Puzzle","2000-09-25","Nintendo64","Nintendo Software Technology");
 
 
 
