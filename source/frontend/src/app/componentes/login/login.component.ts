@@ -17,8 +17,6 @@ export class LoginComponent {
   constructor(private loginService: LoginService, private router: Router) {}
 
     login() {
-      this.loginService.loginUser(this.nombre, this.passwd).subscribe(
-        (response: any)  => response.json().catch(this.error)
-      )
+      this.loginService.loginUser(this.nombre, this.passwd).subscribe();
     }
 }

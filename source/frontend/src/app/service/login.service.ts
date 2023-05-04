@@ -16,4 +16,14 @@ export class LoginService {
   loginUser(nombre: string, passwd: string) {
     return this.http.post(`${this.url}/login/login.php`, { nombre, passwd });
   }
+
+  login(username: string, password: string) {
+    return this.http.post<any>(`${this.url}/login/login.php`, { username, password }).pipe(
+      map(data => {
+        // Almacena el token en localStorage si la autenticación ha sido exitosa
+        localStorage.setItem('token', data.token);
+        return data.token;
+      })
+    );
+  }
 }
