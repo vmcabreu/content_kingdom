@@ -1,5 +1,4 @@
 export class Usuario {
-  [x: string]: any;
   public id: number;
   public usuario: string;
   public passwd: string;
