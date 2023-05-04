@@ -35,15 +35,14 @@ export class LoginComponent {
 
     onSubmit(){
       let order = 0;
-      do {
-        if (order == 0) {
-          this.loginGenToken();
-          order++;
-        }else if(order == 1){
-          this.loginGetToken();
-          order++;
-        }
-      } while (order >= 2);
+      if (order == 0) {
+        this.loginGenToken();
+        order++;
+      }
+      if(order == 1){
+        this.loginGetToken();
+        order++;
+      }
 
     }
 }

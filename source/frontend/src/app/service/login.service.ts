@@ -17,7 +17,7 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   loginPostUser(nombre: string, passwd: string){
-    return this.http.post(`${this.url}login/loginv2.php`, { nombre, passwd });
+    return this.http.post(`${this.url}login/loginv2.php`, { nombre, passwd },{responseType : "text"});
   }
   loginGetUser(username: string, passwd: string): Observable<Auth>{
     const params = new HttpParams()

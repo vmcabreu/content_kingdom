@@ -3,17 +3,9 @@
     /* Es una clase que representa a un usuario. */
     class Usuario
     {
-        private $atributos = ['id' => null, 'usuario' => "", 'passwd' => "", 'email' => "",'token' => ""];
+        private $atributos = ['id' => null, 'usuario' => "", 'passwd' => "", 'email' => "",'token' => null];
 
-        /**
-         * Esta función es un constructor de la clase Usuario. Toma cuatro parámetros, un número entero, dos
-         * cadenas y un correo electrónico. Luego establece las variables de clase a los parámetros.
-         * @param {int} id - La identificación del usuario.
-         * @param {string} usuario - El nombre de usuario del usuario.
-         * @param {string} passwd - La contraseña del usuario.
-         * @param {string} email - La dirección de correo electrónico del usuario.
-         */
-        public function __construct(int $id = null, string $usuario = "", string $passwd = "", string $email = "", string $token = "")
+        public function __construct(int $id = null, string $usuario = "", string $passwd = "", string $email = "", string $token = null)
         {
             $this->id = $id;
             $this->usuario = $usuario;
