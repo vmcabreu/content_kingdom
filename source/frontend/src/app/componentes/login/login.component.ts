@@ -18,6 +18,9 @@ export class LoginComponent {
 
   constructor(private loginService: LoginService, private router: Router) {}
 
+  ngOnInit(): void {
+  }
+
     login() {
       this.loginService.loginUser(this.nombre, this.passwd)
       .subscribe(data =>  {
