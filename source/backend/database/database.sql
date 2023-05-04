@@ -14,6 +14,23 @@ CREATE TABLE IF NOT EXISTS usuarios (
   PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
+CREATE TABLE IF NOT EXISTS videojuegos (
+  id INT auto_increment,
+  nombre varchar(100) NOT NULL UNIQUE,
+  genero varchar(50) NOT NULL,
+  fecha_lanzamiento DATE NOT NULL,
+  plataforma varchar(50) NOT NULL,
+  desarrolladores varchar(100) NOT NULL,
+  PRIMARY KEY(id)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS plataforma (
+  id INT auto_increment,
+  nombre varchar(50) NOT NULL,
+  enlace varchar(255) NOT NULL,
+  PRIMARY KEY(id)
+) ENGINE=InnoDB;
+
 CREATE TABLE IF NOT EXISTS publicaciones (
   id INT auto_increment,
   id_usuario INT NOT NULL,
@@ -44,23 +61,6 @@ CREATE TABLE IF NOT EXISTS megusta (
   FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS videojuegos (
-  id INT auto_increment,
-  nombre varchar(100) NOT NULL UNIQUE,
-  genero varchar(50) NOT NULL,
-  fecha_lanzamiento DATE NOT NULL,
-  plataforma varchar(50) NOT NULL,
-  desarrolladores varchar(100) NOT NULL,
-  PRIMARY KEY(id)
-) ENGINE=InnoDB;
-
-CREATE TABLE IF NOT EXISTS plataforma (
-  id INT auto_increment,
-  nombre varchar(50) NOT NULL,
-  enlace varchar(255) NOT NULL,
-  PRIMARY KEY(id)
-) ENGINE=InnoDB;
-
 CREATE TABLE IF NOT EXISTS amigos_usuarios (
   usuario_id INT NOT NULL,
   amigo_id INT NOT NULL,
@@ -72,8 +72,6 @@ CREATE TABLE IF NOT EXISTS amigos_usuarios (
 --INSERT INTO usuarios VALUES
 --(null,'admin','$2y$10$q8OBTcr1mWsu9rPg2OimqOSvUtjptKVyf9WM4rAGuAz5HXF32d6Nm','contentkingdom@support.com');
 
--- Tabla Megusta
--- Tabla comentarios
 
 INSERT INTO videojuegos (nombre, genero, fecha_lanzamiento, plataforma, desarrolladores) VALUES
 ('The Legend of Zelda: Breath of the Wild', 'acción-aventura', '2017-03-03', 'Switch', 'Nintendo EPD'),
