@@ -19,7 +19,7 @@ class DAOUsuario
         if ($stmt->rowCount() > 0) {
             $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
             if (password_verify($passwd, $usuario["passwd"])) {
-                return new Usuario($usuario['id'], $usuario['usuario'], $usuario['passwd'], $usuario['email']);;
+                return new Usuario($usuario['id'], $usuario['usuario'], $usuario['passwd'], $usuario['email'],$usuario['token']);;
             }
         }
     }

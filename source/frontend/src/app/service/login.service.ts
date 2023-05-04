@@ -16,7 +16,10 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  loginUser(nombre: string, passwd: string){
-    return this.http.post(`${this.url}/login/loginv2.php`, { nombre, passwd },{responseType: 'text'});
+  loginPostUser(nombre: string, passwd: string){
+    return this.http.post(`${this.url}/login/loginv2.php`, { nombre, passwd });
+  }
+  loginGetUser(nombre: string, passwd: string){
+    return this.http.post(`${this.url}/login/loginv2.php`, { nombre, passwd });
   }
 }

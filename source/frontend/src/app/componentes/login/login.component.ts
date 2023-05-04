@@ -21,10 +21,20 @@ export class LoginComponent {
   ngOnInit(): void {
   }
 
-    login() {
-      this.loginService.loginUser(this.nombre, this.passwd)
-      .subscribe(data =>  {
-          console.log(data);
+    loginGenToken() {
+      this.loginService.loginPostUser(this.nombre, this.passwd)
+      .subscribe();
+    }
+    loginGetToken() {
+      this.loginService.loginGetUser(this.nombre, this.passwd)
+      .subscribe((data:any) => {
+        console.log(data.token);
+
       });
+    }
+
+    onSubmit(){
+      this.loginGenToken();
+      this.loginGetToken();
     }
 }
