@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Usuario } from 'src/app/model/usuario.model';
 import { Auth } from 'src/app/model/auth.model';
 import { LoginService } from 'src/app/service/login.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -11,15 +12,16 @@ import { LoginService } from 'src/app/service/login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  nombre: string;
-  passwd: string;
+  nombre: string = "";
+  passwd: string = "";
   error: string;
 
   constructor(private loginService: LoginService, private router: Router) {}
 
     login() {
-      this.loginService.loginUser(this.nombre, this.passwd).subscribe((data: Auth) =>
-      console.log(data.token)
-      );
+      this.loginService.loginUser(this.nombre, this.passwd)
+      .subscribe(data =>  {
+          console.log(data);
+      });
     }
 }

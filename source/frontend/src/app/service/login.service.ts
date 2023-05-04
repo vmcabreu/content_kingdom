@@ -7,6 +7,8 @@ import { Auth } from '../model/auth.model';
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class LoginService {
 
   url: String = "http://contentkingdom.alu6618.arkania.es/api/controller/";
@@ -14,7 +16,7 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  loginUser(nombre: string, passwd: string): Observable<Auth> {
-    return this.http.post<Auth>(`${this.url}/login/loginv2.php`, { nombre, passwd });
+  loginUser(nombre: string, passwd: string){
+    return this.http.post(`${this.url}/login/loginv2.php`, { nombre, passwd },{responseType: 'text'});
   }
 }
