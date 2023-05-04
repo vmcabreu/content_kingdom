@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user = $_POST['usuario'];
         $passwd = $_POST['passwd'];
         if (DAOUsuario::validarLogin($passwd,$user)) {
-            echo Token::generarTokenLog(DAOUsuario::loginGetUser($passwd,$user));
+            echo json_encode(array( 'token' => Token::generarTokenLog(DAOUsuario::loginGetUser($passwd,$user))));
         }else{
             http_response_code(422);
         }
