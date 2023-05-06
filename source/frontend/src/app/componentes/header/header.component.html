@@ -1,24 +1,23 @@
+<!--
 <nav class="navbar navbar-expand-lg w-100 header-background">
   <div class="container-fluid ">
     <div>
       <a routerLink="/"><img src="./../../../assets/imgs/CKLogo.png" class="logo"></a>
     </div>
-    <div class="order-lg-4 order-0" >
-      <a routerLink="/login" class="headerButton d-lg-block d-none ">Iniciar Sesión</a>
-      <button class="navbar-toggler d-lg-none d-flex justify-content-end" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <input type="checkbox" id="checkbox">
-        <label for="checkbox" class="toggle">
-            <div class="bars" id="bar1"></div>
-            <div class="bars" id="bar2"></div>
-            <div class="bars" id="bar3"></div>
-        </label>
-      </button>
-    </div>
-      <div class="collapse navbar-collapse p-3" id="navbarSupportedContent">
+    <div class="order-lg-4 order-0">
+      <div *ngIf="usuario != null;then logged else guest"></div>
+      <ng-template #guest>
         <a routerLink="/login" class="headerButton d-lg-none">Iniciar Sesión</a>
+      </ng-template>
+      <ng-template #logged>
+        <a routerLink="/login" class="headerButton d-lg-none">Iniciar Sesión</a>
+      </ng-template>
+    </div>
+    <div class="collapse navbar-collapse p-3" id="navbarSupportedContent">
+      <ng-template #logged>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 navbarList">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Tus perfil</a>
+            <a class="nav-link active" aria-current="page" href="#">Tu perfil</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Publicaciones</a>
@@ -27,7 +26,59 @@
             <a class="nav-link" href="#">Lista de amigos</a>
           </li>
         </ul>
-
+      </ng-template>
     </div>
+  </div>
+</nav>
+-->
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex align-items-center" routerLink="/"><img src="./../../../assets/imgs/CKLogo.png" class="logo"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div *ngIf="usuario != null;then isLogged else isGuest"></div>
+    <ng-template #isLogged>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled">Disabled</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+          <button (click)="logOut()">Log Out</button>
+        </form>
+      </div>
+    </ng-template>
+    <ng-template #isGuest>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <h2>Content Kingdom</h2>
+        </li>
+      </ul>
+        <a routerLink="/login" class="headerButton">Iniciar Sesión</a>
+    </div>
+  </ng-template>
+
   </div>
 </nav>

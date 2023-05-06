@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 }
-
+/*
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $queries = array();
     parse_str($_SERVER['QUERY_STRING'], $queries);
@@ -27,4 +27,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     } else {
         http_response_code(422);
     }
-}
+}*/

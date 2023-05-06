@@ -10,7 +10,6 @@ CREATE TABLE IF NOT EXISTS usuarios (
   usuario varchar(30) NOT NULL UNIQUE,
   passwd varchar(120) NOT NULL,
   email varchar(40) NOT NULL UNIQUE,
-  token TEXT NULL,
   PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 

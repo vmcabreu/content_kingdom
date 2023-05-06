@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/model/usuario.model';
-import { Auth } from 'src/app/model/auth.model';
 import { LoginService } from 'src/app/service/login.service';
-import { first, map } from 'rxjs/operators';
+import Swal from 'sweetalert2';
+
+
 
 @Component({
   selector: 'app-login',
@@ -16,42 +17,43 @@ export class LoginComponent {
   passwd: string = "";
   error: string;
 
-  constructor(private loginService: LoginService, private router: Router) {}
+  constructor(private loginService: LoginService, private router: Router) { }
 
-  ngOnInit(): void {
+  login() {
+    this.loginService.loginPostUser(this.nombre, this.passwd)
+      .subscribe({
+        next: (v) => {
+          localStorage.setItem("token", v)
+          this.loginSuccess();
+        },
+        error: (e) => console.error(e),
+      });
   }
 
-    loginGenToken() {
-      this.loginService.loginPostUser(this.nombre, this.passwd)
-      .subscribe();
-    }
-    loginGetToken() {
-      this.loginService.loginGetUser(this.nombre, this.passwd)
-      .subscribe((data:any) => {
-        localStorage.setItem("token",data.token);
+  loginSuccess() {
+    if (this.loginService.checkToken()) {
+      Swal.fire({
+        title: '¡Inicio sesión correcto!',
+        icon: 'success',
+        timer: 2000,
+        timerProgressBar: true,
 
-      });
-    }
+      }).then((result) => {
 
-    orderToken(order: number){
-      if (order == 0) {
-        this.loginGenToken();
-        order++;
-      }
-      if(order == 1){
-        this.loginGetToken();
-        order++;
-      }
-    }
-
-    onSubmit(){
-      this.orderToken(0);
-      if (this.loginService.checkToken()) {
         this.router.navigateByUrl("/");
-      }
 
-
+        if (result.dismiss === Swal.DismissReason.timer) {
+          this.router.navigateByUrl("/");
+          window.location.reload();
+        }
+      })
     }
+  }
+
+
+
+
+
 
 }
 

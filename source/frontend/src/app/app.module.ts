@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -12,7 +13,6 @@ import { GamesComponent } from './componentes/games/games.component';
 import { UserComponent } from './componentes/user/user.component';
 import { PostsComponent } from './componentes/posts/posts.component';
 import { FormsModule } from '@angular/forms';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +29,7 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    CommonModule,
     AppRoutingModule
   ],
   providers: [],
