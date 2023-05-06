@@ -62,7 +62,7 @@ ___
 | ------------- | ------------- |
 | Fuentes | --- | 
 | Actor | Administrador |
-| Descripción | Modifica un usuario |
+| Descripción | Elimina un usuario |
 | Flujo Básico | --- |
 | Pre-Condiciones | --- |
 | Post-Condiciones | --- |
