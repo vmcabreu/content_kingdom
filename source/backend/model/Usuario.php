@@ -5,13 +5,12 @@
     {
         private $atributos = ['id' => null, 'usuario' => "", 'passwd' => "", 'email' => "",'token' => null];
 
-        public function __construct(int $id = null, string $usuario = "", string $passwd = "", string $email = "", string $token = null)
+        public function __construct(int $id = null, string $usuario = "", string $passwd = "", string $email = "")
         {
             $this->id = $id;
             $this->usuario = $usuario;
             $this->passwd = $passwd;
             $this->email = $email;
-            $this->token = $token;
         }
 
 

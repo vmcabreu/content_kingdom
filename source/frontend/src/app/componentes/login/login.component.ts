@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/model/usuario.model';
+import { Auth } from 'src/app/model/auth.model';
 import { LoginService } from 'src/app/service/login.service';
+import { first, map } from 'rxjs/operators';
 import Swal from 'sweetalert2';
-
-
 
 @Component({
   selector: 'app-login',
@@ -17,43 +17,49 @@ export class LoginComponent {
   passwd: string = "";
   error: string;
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router) {}
 
-  login() {
-    this.loginService.loginPostUser(this.nombre, this.passwd)
+  ngOnInit(): void {
+  }
+
+    loginGenToken() {
+      this.loginService.loginPostUser(this.nombre, this.passwd)
       .subscribe({
-        next: (v) => {
-          localStorage.setItem("token", v)
-          this.loginSuccess();
-        },
-        error: (e) => console.error(e),
-      });
-  }
-
-  loginSuccess() {
-    if (this.loginService.checkToken()) {
-      Swal.fire({
-        title: '¡Inicio sesión correcto!',
-        icon: 'success',
-        timer: 2000,
-        timerProgressBar: true,
-
-      }).then((result) => {
-
-        this.router.navigateByUrl("/");
-
-        if (result.dismiss === Swal.DismissReason.timer) {
-          this.router.navigateByUrl("/");
-          window.location.reload();
-        }
-      })
+        next: (v) => localStorage.setItem("token",v),
+        error: (e) => console.error(e),});
     }
-  }
+    loginGetToken() {
+      this.loginService.loginGetUser(this.nombre, this.passwd)
+      .subscribe((data:any) => {
+        localStorage.setItem("token",data.token);
+
+      });
+    }
+
+    loginSuccess() {
+      if (this.loginService.checkToken()) {
+        Swal.fire({
+          title: '¡Inicio sesión correcto!',
+          icon: 'success',
+          timerProgressBar: true,
+
+        }).then((result) => {
+          if (result.dismiss === Swal.DismissReason.timer) {
+            this.router.navigateByUrl("/");
+            window.location.reload();
+          }
+        })
+      }
+    }
+
+    login(){
+      this.loginGenToken();
+      if (this.loginService.checkToken()) {
+        this.router.navigateByUrl("/");
+      }
 
 
-
-
-
+    }
 
 }
 

@@ -6,15 +6,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user = $_POST['usuario'];
         $passwd = $_POST['passwd'];
         if (DAOUsuario::validarLogin($passwd, $user)) {
-            $bdUser = DAOUsuario::loginGetUser($passwd, $user);
-            echo Token::generarTokenLog($bdUser);
-            
+            http_response_code(200);
         } else {
             http_response_code(422);
         }
     }
 }
-/*
+
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $queries = array();
     parse_str($_SERVER['QUERY_STRING'], $queries);
@@ -23,8 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (DAOUsuario::validarLogin($passwd, $user)) {
         $bdUser = DAOUsuario::loginGetUser($passwd, $user);
         header('Content-Type: application/json');
-        echo json_encode(array('token' => $bdUser->token));
+        echo json_encode(array('token' => Token::generarTokenLog($bdUser)));
     } else {
         http_response_code(422);
     }
-}*/
+}
