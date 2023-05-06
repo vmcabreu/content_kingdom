@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $passwd = $_POST['passwd'];
         if (DAOUsuario::validarLogin($passwd, $user)) {
             $bdUser = DAOUsuario::loginGetUser($passwd, $user);
-            Token::loginJWT($bdUser);
+            echo Token::loginJWT($bdUser);
             http_response_code(200);
         } else {
             http_response_code(422);
