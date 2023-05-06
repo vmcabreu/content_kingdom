@@ -12,6 +12,6 @@ Se crearán su perfil, añadirán sus principales plataformas de contenido, la o
 Estás publicaciones tendrán varias etiquetas donde los usuarios puedan encontrar lo que desean como por ejemplo: Guía,Meme,Ilustración... 
 
 ## Prototipo
-![](../img/prototipo.png)
+![](../../img/prototipo.png)
 
 </div>

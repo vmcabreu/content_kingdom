@@ -11,6 +11,6 @@ Angular will be used for the frontend, which includes Typescript, CSS, and HTML,
 Users will create their profile, add their main content platforms, and specify the type of content they create. They will then be able to upload posts, clips, videos, etc. to promote themselves, and other platform users can like, save, and comment on these posts. The posts with the most likes will appear on the homepage so that new users can see who has great talent for this profession. A "Recent" section will also be added to the homepage to showcase the most recent posts, giving them a chance to shine even if they have less visibility. These posts will have various tags, such as Guide, Meme, Illustration, etc., to help users find what they are looking for.
 
 ## Prototype
-![](../img/prototipo.png)
+![](../../img/prototipo.png)
 
 </div>

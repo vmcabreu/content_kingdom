@@ -1,3 +1,3 @@
 # Diagrama de Clases
 
-![](../img/classdiagram.png)
+![](../../img/classdiagram.png)

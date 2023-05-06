@@ -1,3 +1,3 @@
 # Casos de uso
 
-![](../img/case_use.png)
+![](../../img/case_use.png)

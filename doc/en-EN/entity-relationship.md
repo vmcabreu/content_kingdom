@@ -1,3 +1,3 @@
 # Diagrama Entidad - Relacion
 
-![](../img/entity.png)
+![](../../img/entity.png)
