@@ -16,18 +16,18 @@ Un lugar donde los pequeños creadores de contenido se puedan dar a conocer en l
 
 ### Spanish
 
-- [Anteproyecto](doc/anteproyecto.md)
+- [Anteproyecto](doc/es-ES/anteproyecto.md)
 
-- [Documentación](doc/README.md)
+- [Documentación](doc/es-ES/README.md)
 
-- [Despliegue](despliegue/README.md)
+- [Despliegue](despliegue/es-ES/README.md)
 
 ### English
 
-- [Preliminary Design](doc/anteproyecto.md)
+- [Draft Project](doc/en-EN/draft-project.md)
 
-- [Documentation](doc/README.md)
+- [Documentation](doc/en-EN/README.md)
 
-- [Deployment](despliegue/README.md)
+- [Deployment](despliegue/en-EN/README.md)
 
 </div>   
