@@ -15,6 +15,6 @@ export class JwtService {
 
   decodeUsuario(token: string){
     let decoded = this.jwt.decodeToken(token);
-    return new Usuario(decoded.id,decoded.nombre,decoded.email);
+    return new Usuario(decoded.id,decoded.nombre,"",decoded.email);
   }
 }

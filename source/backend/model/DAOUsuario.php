@@ -31,7 +31,7 @@ class DAOUsuario
     }
 
 
-    public static function aniadirUsuario(Usuario $usuario): int
+    public static function aniadirUsuario(Usuario $usuario): int|bool
     {
         $resultado = self::comprobarUsuario($usuario->usuario, $usuario->email);
         if (count($resultado) > 0) {

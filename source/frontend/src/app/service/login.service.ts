@@ -1,7 +1,6 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, isEmpty, map } from 'rxjs';
-import { Usuario } from '../model/usuario.model';
+import { Observable } from 'rxjs';
 import { Auth } from '../model/auth.model';
 
 @Injectable({
