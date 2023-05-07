@@ -23,7 +23,7 @@ class DAOPerfil
     {
         $respuesta = array();
         do {
-            $resultado = BaseDAO::consulta(BaseDAO::consulta("SELECT * FROM perfil WHERE id_usuario='$id' LIMIT $limite"));
+            $resultado = BaseDAO::consulta("SELECT * FROM perfil WHERE id_usuario='$id' LIMIT $limite");
             $filas = $resultado->fetchAll(PDO::FETCH_ASSOC);
             $respuesta = array_merge($respuesta, $filas);
             $offset += $limite;
