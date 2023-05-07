@@ -18,4 +18,16 @@ class DAOPerfil
             die("Error en la consulta. " . $ex->getMessage());
         }
     }
+
+    public static function buscarPerfil(int $id, int $limite = 100, int $offset = 0): ?array
+    {
+        $respuesta = array();
+        do {
+            $resultado = BaseDAO::consulta(BaseDAO::consulta("SELECT * FROM perfil WHERE id_usuario='$id' LIMIT $limite"));
+            $filas = $resultado->fetchAll(PDO::FETCH_ASSOC);
+            $respuesta = array_merge($respuesta, $filas);
+            $offset += $limite;
+        } while (!empty($filas));
+        return empty($respuesta) ? null : $respuesta;
+    }
 }

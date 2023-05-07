@@ -4,7 +4,7 @@ require_once(__DIR__ . "../../../inc/bootstrap.php");
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (isset($_GET['id'])) {
         $id = intval($_GET['id']);
-        $perfilById = DAOPerfil::getPerfilById($id);
+        $perfilById = DAOPerfil::buscarPerfil($id,1);
         if ($perfilById != null) {
             echo json_encode($perfilById);
         } else {
