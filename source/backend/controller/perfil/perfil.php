@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__ . "../../../inc/bootstrap.php");
-
+header("Access-Control-Allow-Origin: *");
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (isset($_GET['id'])) {
         $id = intval($_GET['id']);
