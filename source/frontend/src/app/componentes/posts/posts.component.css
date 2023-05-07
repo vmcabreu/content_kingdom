@@ -1,5 +1,8 @@
-.post-background{
-  background-color: aliceblue;
+
+
+.postLayer{
+  height: 75vh;
+  overflow: auto;
 }
 
 .description{
