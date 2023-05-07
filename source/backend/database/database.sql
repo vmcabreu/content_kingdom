@@ -8,9 +8,19 @@ use contentkingdom;
 CREATE TABLE IF NOT EXISTS usuarios (
   id INT auto_increment,
   usuario varchar(30) NOT NULL UNIQUE,
-  passwd varchar(120) NOT NULL,
+  passwd varchar(255) NOT NULL,
   email varchar(40) NOT NULL UNIQUE,
   PRIMARY KEY(id)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS perfil (
+  id INT auto_increment,
+  canales TEXT,
+  biografica varchar(255),
+  profesion varchar(40),
+  id_usuario INT NOT NULL,
+  PRIMARY KEY(id),
+  FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS videojuegos (
@@ -37,7 +47,7 @@ CREATE TABLE IF NOT EXISTS publicaciones (
   fecha DATE NOT NULL,
   megusta INT NOT NULL,
   mensaje TEXT NOT NULL,
-  adjunto VARCHAR(150),
+  adjunto LONGBLOB,
   plataforma VARCHAR(50),
   etiqueta VARCHAR(255),
   PRIMARY KEY(id),
@@ -248,6 +258,3 @@ INSERT INTO videojuegos (nombre, genero, fecha_lanzamiento, plataforma, desarrol
 ("Pokemon Stadium 2","Estrategia","2000-12-14","Nintendo64","Nintendo EAD"),
 ("Hey You, Pikachu!","Simulación","2000-12-12","Nintendo64","Nintendo"),
 ("Pokemon Puzzle League","Puzzle","2000-09-25","Nintendo64","Nintendo Software Technology");
-
-
-
