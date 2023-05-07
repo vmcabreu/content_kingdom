@@ -1,6 +1,9 @@
 .logo {
   width: 50px;
 }
+img {
+  border-radius: 50%;
+}
 
 .header-background {
   background-color: aliceblue;

@@ -3,7 +3,7 @@
     /* Es una clase que representa a un usuario. */
     class Usuario
     {
-        private $atributos = ['id' => null, 'usuario' => "", 'passwd' => "", 'email' => "",'token' => null];
+        private $atributos = ['id' => null, 'usuario' => "", 'passwd' => "", 'email' => ""];
 
         public function __construct(int $id = null, string $usuario = "", string $passwd = "", string $email = "")
         {
