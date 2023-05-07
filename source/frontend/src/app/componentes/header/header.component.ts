@@ -28,11 +28,14 @@ export class HeaderComponent {
     if (token != "") {
       this.usuario = this.jwt.decodeUsuario(token);
       this.getPerfil();
+      console.log(this.perfil);
+
     }
   }
 
   getPerfil(){
     this.perfilService.getProfilebyUserID(this.usuario.id).subscribe((data: Perfil) => {
+      console.log(data)
       this.perfil = data;
     })
   }

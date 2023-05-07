@@ -24,14 +24,13 @@
             return $this->atributos[$atributo];
         }
 
-        public static function crearPerfil(array $datosUsuario): Perfil
+        public static function crearPerfil(array $datos): Perfil
         {
-
-            $usuario = new Perfil();
-            foreach ($datosUsuario as $atributo => $valor) {
-                $usuario->$atributo = $valor;
+            $objeto = new Perfil();
+            foreach ($datos as $atributo => $valor) {
+                $objeto->$atributo = $valor;
             }
-            return $usuario;
+            return $objeto;
         }
 
         public function __toString()

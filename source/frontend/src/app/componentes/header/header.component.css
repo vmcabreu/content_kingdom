@@ -1,7 +1,8 @@
 .logo {
   width: 50px;
 }
-img {
+.profilepic {
+  width: 30px;
   border-radius: 50%;
 }
 
