@@ -14,7 +14,7 @@ export class RegisterService {
   constructor(private http: HttpClient) { }
 
   registerUser(usuario: Usuario){
-    return this.http.post(`${this.url}register/register.php`, usuario)
+    return this.http.post(`${this.url}register/register.php`, usuario,{responseType:"text"})
   }
 
 

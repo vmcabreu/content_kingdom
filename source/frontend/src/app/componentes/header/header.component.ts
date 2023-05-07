@@ -29,5 +29,6 @@ export class HeaderComponent {
 
   logOut(){
     let token = localStorage.setItem('token',"")
+    window.location.reload();
   }
 }

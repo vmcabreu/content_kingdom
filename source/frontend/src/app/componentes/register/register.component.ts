@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Usuario } from 'src/app/model/usuario.model';
 import { LoginService } from 'src/app/service/login.service';
+import { RegisterService } from 'src/app/service/register.service';
 
 @Component({
   selector: 'app-register',
@@ -14,44 +16,18 @@ export class RegisterComponent {
   repeatpasswd: string;
   email: string;
   error: string = "";
+  newUser: Usuario=new Usuario();
   valid: boolean = false;
 
-  constructor( private router: Router,private registerService: LoginService) {
+  constructor( private router: Router,private registerService: RegisterService) {
 
   }
-/*
+
   register() {
-    if (this.valid) {
-      this.auth.register(this.nombre, this.passwd, this.email).subscribe();
-      this.valid = false;
-    }
+      this.registerService.registerUser(this.newUser).subscribe();
+  }
 
   }
 
-  validParams() {
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/;
-    let valido = true;
-    if (this.nombre == "") {
-      this.error += "Nombre de usuario no válido";
-      valido = false;
-    }
-    if (passwordRegex.test(this.passwd)) {
-      this.error += "\n La contraseña debe de tener al menos un mayúscula, un número y un carácter especial [@$!%*?&]";
-      valido = false;
-    }
-    if (this.passwd != this.repeatpasswd) {
-      this.error += " \n Las contraseñas no coinciden";
-      valido = false;
-    }
-    if (emailRegex.test(this.email)) {
-      this.error += "\nEmail no válido";
-      valido = false;
-    }
-    if (valido) {
-      this.error = "";
-      this.valid = true;
-    }
-  }
-  */
-}
+
+

@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
 CREATE TABLE IF NOT EXISTS perfil (
   id INT auto_increment,
   canales TEXT,
+  profile_pic LONGBLOB,
   biografica varchar(255),
   profesion varchar(40),
   id_usuario INT NOT NULL,
