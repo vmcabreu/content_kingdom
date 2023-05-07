@@ -9,7 +9,7 @@ class DAOPublicacion
             $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
             unset($conexion);
             if ($resultado) {
-                return Publicacion::crearPerfil($resultado);
+                return Publicacion::crearPublicacion($resultado);
             } else {
                 return null;
             }
