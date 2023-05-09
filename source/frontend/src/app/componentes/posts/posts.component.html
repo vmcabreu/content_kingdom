@@ -1,6 +1,44 @@
 <div class="post-background">
+  <button data-bs-toggle="modal" data-bs-target="#addPost" class="raise">Añadir publicación</button>
+  <div class="modal fade" id="addPost" tabindex="-1" aria-labelledby="addPostLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="addPostLabel">Añadir publicación</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <label for="texto">Contenido</label>
+          <textarea name="texto" [(ngModel)]="newPublicacion.mensaje" class="form-control" id="texto" cols="30"
+            rows="5"></textarea>
+          <label for="adjunto">Seleccionar plataforma</label>
+          <select class="form-select">
+            <option value="Twitch">Twitch</option>
+          </select>
+          <label for="adjunto">Seleccionar Etiquetas</label>
+          <select class="form-select">
+            <option value="Twitch">Gaming</option>
+          </select>
+          <div>
+            <label for="adjunto">Seleccionar Juego</label>
+            <select class="form-select" [(ngModel)]="juegoSelected">
+              <option *ngFor="let juego of listaVideojuegos" value="{{juego.id}}">{{juego.nombre}}</option>
+            </select>
+            <div>
+              {{this.juegoSelected.nombre}}
+            </div>
+          </div>
+          <label for="adjunto">Añadir archivo</label>
+          <input type="file" class="form-control">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Publicar</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <h2 class="p-3 navbar-header">Timeline</h2>
-  <input class="m-3 searchPost" type="text" name="searchBar" id="searchBar" placeholder="Busca publicaciones...">
   <div class="m-3 d-flex flex-column postLayer">
     <div class="post-card">
       <div class="d-flex justify-content-start align-items-center">
@@ -8,7 +46,7 @@
         <div class="avatarName p-2">Usuario8</div>
       </div>
       <a class="title">Title Test</a>
-        <p class="description"> Description </p>
+      <p class="description"> Description </p>
       <span class="datetime">Date</span>
       <div class="image-preview"></div>
       <div class="comment-like">
@@ -37,7 +75,7 @@
         <div class="avatarName p-2">Usuario8</div>
       </div>
       <a class="title">Title Test</a>
-        <p class="description"> Description </p>
+      <p class="description"> Description </p>
       <span class="datetime">Date</span>
       <div class="image-preview"></div>
       <div class="comment-like">
@@ -66,7 +104,7 @@
         <div class="avatarName p-2">Usuario8</div>
       </div>
       <a class="title">Title Test</a>
-        <p class="description"> Description </p>
+      <p class="description"> Description </p>
       <span class="datetime">Date</span>
       <div class="image-preview"></div>
       <div class="comment-like">

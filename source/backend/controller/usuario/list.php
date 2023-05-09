@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 echo json_encode($listaNewUsuarios);
             } else {
                 http_response_code(404);
-                echo json_encode(array("message" => "No se encontró el usuario con ID " . $id));
+                echo json_encode(array("message" => "Error en base de datos"));
             }
 
         }

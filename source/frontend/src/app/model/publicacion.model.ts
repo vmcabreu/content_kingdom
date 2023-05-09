@@ -13,7 +13,7 @@ export class Publicacion {
     id: number = 0,
     id_usuario: number = 0,
     id_videojuego: number = 0,
-    fecha: Date = null,
+    fecha: Date = new Date(),
     megusta: number = 0,
     mensaje: string = "",
     adjunto: string = "",
