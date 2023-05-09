@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Auth } from 'src/app/model/auth.model';
 import { Usuario } from 'src/app/model/usuario.model';
 import { LoginService } from 'src/app/service/login.service';
 import { PerfilService } from 'src/app/service/perfil.service';
@@ -20,46 +21,33 @@ export class RegisterComponent {
   repeatpasswd: string;
   email: string;
   error: string = "";
-  newUser: Usuario=new Usuario();
+  newUser: Usuario = new Usuario();
   valid: boolean = false;
 
   suscription: Subscription;
 
-  constructor( private router: Router,private registerService: RegisterService, private userService: UsuarioService,private perfilService: PerfilService) {
+  constructor(private router: Router, private registerService: RegisterService, private loginService: LoginService) {
 
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.suscription = this.registerService.getRefresh$.subscribe()
-    this.suscription = this.perfilService.getRefresh$.subscribe()
-    this.suscription = this.perfilService.getRefresh$.subscribe(()=>{
-      this.userLogged();
-    })
   }
 
   register() {
-      this.registerService.registerUser(this.newUser).subscribe(response =>{
-        if (response.status == 200) {
-          this.userService.getUserByUsername(this.nombre).subscribe((data: Usuario) =>{
-            this.generarPerfil(data.id);
+    this.registerService.registerUser(this.newUser).subscribe(response => {
+      if (response.status == 200) {
+          Swal.fire({
+            title: '¡Registro correcto!',
+            icon: 'success',
+            timerProgressBar: true,
+          }).then((result) => {
+            this.router.navigateByUrl("/login");
           })
-        }
-      });
+      }
+    });
   }
 
-  generarPerfil(id: number){
-    this.perfilService.generateEmptyProfile(id).subscribe(response => {
-      if (response.status == 200) {
-        Swal.fire({
-          title: '¡Registro correcto!',
-          icon: 'success',
-          timerProgressBar: true,
-        }).then((result) => {
-          this.userLogged();
-        })
-      }
-    })
-  }
 
   userLogged() {
     let token = localStorage.getItem('token')
@@ -67,7 +55,7 @@ export class RegisterComponent {
       this.router.navigateByUrl("/");
     }
   }
-  }
+}
 
 
 

@@ -79,7 +79,15 @@ CREATE TABLE IF NOT EXISTS amigos_usuarios (
   FOREIGN KEY (amigo_id) REFERENCES usuarios(id)
 ) ENGINE=InnoDB;
   
-
+DELIMITER $$
+CREATE TRIGGER insertar_perfil
+AFTER INSERT ON usuarios
+FOR EACH ROW
+BEGIN
+  INSERT INTO perfil (canales, profile_pic, biografica, profesion, id_usuario)
+  VALUES ('', '', '', '', NEW.id);
+END $$
+DELIMITER ;
 
 
 INSERT INTO videojuegos (nombre, genero, fecha_lanzamiento, plataforma, desarrolladores) VALUES

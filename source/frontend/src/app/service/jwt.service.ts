@@ -20,6 +20,7 @@ export class JwtService {
     return this.jwt.decodeToken(token);
   }
 
+
   decodeUsuario(token: string){
     if (token) {
       let decoded = this.jwt.decodeToken(token);
