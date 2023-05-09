@@ -26,6 +26,7 @@ export class PostsComponent {
   ngOnInit() {
     this.getJuegos();
     this.getUsuario();
+    this.getPublicaciones();
     this.suscription = this.videojuegoService.getRefresh$.subscribe(() => {
       this.getJuegos();
     })
@@ -33,7 +34,7 @@ export class PostsComponent {
       this.getUsuario();
     })
     this.suscription = this.postService.getRefresh$.subscribe(() => {
-      this.getUsuario();
+      this.getPublicaciones();
     })
   }
 
@@ -56,7 +57,7 @@ export class PostsComponent {
     this.newPublicacion.id_videojuego = Number(this.newPublicacion.id_videojuego);
     console.log(this.newPublicacion);
     console.log(this.usuario);
-    this.postService.addPublicacion(this.newPublicacion).subscribe(()=>{
+    this.postService.addPublicacion(this.newPublicacion).subscribe(() => {
       Swal.fire({
         title: '¡Registro correcto!',
         icon: 'success',
@@ -69,7 +70,10 @@ export class PostsComponent {
 
   formatFecha() {
     const fechaActual = new Date();
-    return fechaActual.toLocaleDateString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit' });;
+    const year = fechaActual.getFullYear();
+    const month = ('0' + (fechaActual.getMonth() + 1)).slice(-2);
+    const day = ('0' + fechaActual.getDate()).slice(-2);
+    return `${year}-${month}-${day}`;
   }
 
   selectJuego(id: number) {
