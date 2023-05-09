@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
 })
 export class JwtService {
   jwt: JwtHelperService = new JwtHelperService();
-  
+
   private refresh$ = new Subject<void>();
 
   get getRefresh$(){
@@ -21,7 +21,10 @@ export class JwtService {
   }
 
   decodeUsuario(token: string){
-    let decoded = this.jwt.decodeToken(token);
-    return new Usuario(decoded.id,decoded.nombre,"",decoded.email);
+    if (token) {
+      let decoded = this.jwt.decodeToken(token);
+      return new Usuario(decoded.id,decoded.nombre,"",decoded.email);
+    }
+    return new Usuario();
   }
 }
