@@ -2,12 +2,24 @@
 require_once(__DIR__ . "../../../inc/bootstrap.php");
 header("Access-Control-Allow-Origin: *");
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $list = DAOPublicacion::listaPublicacion();
-    if ($list != null) {
-        echo json_encode($list, JSON_UNESCAPED_UNICODE);
+    if (isset($_GET['listType'])) {
+        if ($_GET['listType'] = "likes") {
+            $list = DAOPublicacion::getPublicacionByMegusta();
+            if ($list != null) {
+                echo json_encode($list, JSON_UNESCAPED_UNICODE);
+            } else {
+                http_response_code(404);
+                echo json_encode(array("message" => "Error con la base de datos"));
+            }
+        }
     } else {
-        http_response_code(404);
-        echo json_encode(array("message" => "Error con la base de datos"));
+        $list = DAOPublicacion::listaPublicacion();
+        if ($list != null) {
+            echo json_encode($list, JSON_UNESCAPED_UNICODE);
+        } else {
+            http_response_code(404);
+            echo json_encode(array("message" => "Error con la base de datos"));
+        }
     }
 }
 
@@ -23,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $publicacion->adjunto = $array['adjunto'];
     $publicacion->plataforma = $array['plataforma'];
     $publicacion->etiqueta = $array['etiqueta'];
-    $response=DAOPublicacion::aniadirPublicacion($publicacion);
+    $response = DAOPublicacion::aniadirPublicacion($publicacion);
     if ($response > 0) {
         http_response_code(200);
     } else {

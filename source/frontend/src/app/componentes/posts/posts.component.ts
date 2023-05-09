@@ -16,6 +16,7 @@ export class PostsComponent {
   isClicked = false;
   newPublicacion: Publicacion = new Publicacion();
   publicaciones: Publicacion[] = [];
+  topPublicaciones: Publicacion[] = [];
   listaVideojuegos: Videojuego[] = [];
   juegoSelected: Videojuego = new Videojuego();
   suscription: Subscription;
@@ -27,6 +28,7 @@ export class PostsComponent {
     this.getJuegos();
     this.getUsuario();
     this.getPublicaciones();
+    this.getPublicacionesOrderLikes();
     this.suscription = this.videojuegoService.getRefresh$.subscribe(() => {
       this.getJuegos();
     })
@@ -35,12 +37,19 @@ export class PostsComponent {
     })
     this.suscription = this.postService.getRefresh$.subscribe(() => {
       this.getPublicaciones();
+      this.getPublicacionesOrderLikes();
     })
   }
 
   getPublicaciones() {
     this.postService.getPublicaciones().subscribe((data: Publicacion[]) => {
       this.publicaciones = data;
+    })
+  }
+
+  getPublicacionesOrderLikes() {
+    this.postService.getPublicacionesOrderMeGusta().subscribe((data: Publicacion[]) => {
+      this.topPublicaciones = data;
     })
   }
 

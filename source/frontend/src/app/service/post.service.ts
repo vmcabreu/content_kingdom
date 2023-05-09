@@ -27,4 +27,8 @@ export class PostService {
   getPublicaciones(): Observable<Publicacion[]>{
     return this.http.get<Publicacion[]>(`${this.url}posts/post.php`)
   }
+
+  getPublicacionesOrderMeGusta(): Observable<Publicacion[]>{
+    return this.http.get<Publicacion[]>(`${this.url}posts/post.php?listType=likes`)
+  }
 }

@@ -23,5 +23,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             }
 
         }
+    }else{
+        $listaUsuarios = DAOUsuario::getListaUsuarios();
+        if ($listaUsuarios != null) {
+            echo json_encode($listaUsuarios);
+        } else {
+            http_response_code(404);
+            echo json_encode(array("message" => "Error en base de datos"));
+        }
     }
 }

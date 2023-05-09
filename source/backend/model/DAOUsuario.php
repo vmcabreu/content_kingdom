@@ -66,6 +66,11 @@ class DAOUsuario
         return empty($respuesta) ? null : $respuesta;
     }
 
+    public static function getListaUsuarios(){
+        $stmt = BaseDAO::consulta("SELECT * FROM usuarios");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public static function getNuevosUsuarios(int $limit=10){
         $stmt = BaseDAO::consulta(" SELECT * FROM usuarios ORDER BY id DESC LIMIT $limit");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -3,7 +3,8 @@ require_once(__DIR__ . "/../inc/bootstrap.php");
 
 class DAOPublicacion
 {
-    public static function getPublicacionById($id){
+    public static function getPublicacionById($id)
+    {
         try {
             $stmt = BaseDAO::consulta("SELECT * FROM publicaciones WHERE id_usuario='$id' LIMIT 1");
             $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -18,7 +19,13 @@ class DAOPublicacion
         }
     }
 
-    public static function listaPublicacion(int $limit = 10000,): ?array
+    public static function getPublicacionByMegusta(int $limit = 10)
+    {
+        $stmt = BaseDAO::consulta("SELECT * FROM publicaciones ORDER BY id LIMIT $limit");
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function listaPublicacion(int $limit = 10000): ?array
     {
         $stmt = BaseDAO::consulta("SELECT * FROM publicaciones ORDER BY id DESC LIMIT $limit");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

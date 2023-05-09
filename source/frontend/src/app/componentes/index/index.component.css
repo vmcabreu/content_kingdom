@@ -59,3 +59,149 @@
   border-radius: 0.8rem;
   padding: 1.2rem;
 }
+
+.post-card {
+  width: 100%;
+  background: lightgrey;
+  background-color: rgb(24 27 32);
+  border: 1px solid rgb(84 90 106);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+}
+
+.avatarName{
+  color: rgb(255, 255, 255);
+}
+
+.avatar {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  background-color: blueviolet;
+  background-image: linear-gradient(to top left, blueviolet,rgb(73, 31, 112));
+}
+
+.title {
+  font-size: 20px;
+  line-height: 22px;
+  font-weight: 600;
+  margin-top: 10px;
+  color: #fff;
+  text-decoration: none;
+  transition: all .35s ease-in;
+}
+
+.title:hover {
+  text-decoration: underline blueviolet;
+}
+
+.datetime {
+  font-size: 12px;
+  color: rgb(168 179 207);
+  margin: 10px 0;
+}
+
+.image-preview {
+  flex: 1;
+  min-height: 150px;
+  width: 100%;
+  border-radius: 20px;
+  background-color: blueviolet;
+  background-image: linear-gradient(to top left, blueviolet,rgb(73, 31, 112));
+  margin-bottom: 4px;
+}
+
+.comment-like {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color:aliceblue;
+  padding: 2px 0;
+}
+
+.comment-like span {
+  cursor: pointer;
+  height: 40px;
+  width: 50px;
+  padding: 0 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  border-radius: 10px;
+  background-color: transparent;
+  transition: all .15s ease;
+}
+
+.comment-like span:hover {
+  background-color: rgba(137, 43, 226, 0.096);
+}
+
+.comment-like span svg {
+  fill: rgb(255, 255, 255);
+  margin-right: 2px;
+}
+
+.searchPost
+{
+  width: 97%;
+}
+
+.like-button {
+  position: relative;
+  display: inline-block;
+  padding: 8px 16px;
+  border: 0px solid #ddd;
+  border-radius: 20px;
+  background-color: #ffffff00;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+
+.like-button .like-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background-image: url('./../../../assets/imgs/hollowHeart.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.like-button.clicked .like-icon:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.like-button.clicked .like-icon:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('./../../../assets/imgs/redHeart.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.like-button.clicked .like-icon:before {
+  opacity: 1;
+}
+
+.like-button.clicked .like-icon:after {
+  opacity: 1;
+}

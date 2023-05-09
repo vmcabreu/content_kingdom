@@ -29,6 +29,11 @@ export class UsuarioService {
     return this.http.get<Usuario>(this.url+'usuario/list.php?id=1');
   }
 
+
+  getUserList():Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(this.url+'usuario/list.php');
+  }
+
   getNewUserList():Observable<Usuario[]> {
     return this.http.get<Usuario[]>(this.url+'usuario/list.php?list=new');
   }
