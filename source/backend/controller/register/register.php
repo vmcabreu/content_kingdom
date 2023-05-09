@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $email = $array['email'];
         $usuario= new Usuario(null,$user,$passwd,$email);
         $response = DAOUsuario::aniadirUsuario($usuario);
-        if (is_int($response)) {
+        if ($response > 0) {
             http_response_code(200);
         }else{
             http_response_code(422);

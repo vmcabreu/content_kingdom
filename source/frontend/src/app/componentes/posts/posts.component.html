@@ -22,10 +22,11 @@
           <div>
             <label for="adjunto">Seleccionar Juego</label>
             <select class="form-select" [(ngModel)]="juegoSelected">
-              <option *ngFor="let juego of listaVideojuegos" value="{{juego.id}}">{{juego.nombre}}</option>
+              <option [ngValue]="juego" *ngFor="let juego of listaVideojuegos" value="{{juego.id}}">{{juego.nombre}}</option>
             </select>
             <div>
               {{this.juegoSelected.nombre}}
+              {{this.juegoSelected.fecha_lanzamiento}}
             </div>
           </div>
           <label for="adjunto">Añadir archivo</label>

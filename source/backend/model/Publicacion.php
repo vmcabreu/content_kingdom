@@ -2,9 +2,9 @@
 
 class Publicacion
     {
-        private $atributos = ['id' => null, 'id_usuario' => null, 'id_videojuego' => null, 'fecha' => null, 'megusta' => 0, 'mensaje' => "",'adjunto' => "",'plataforma' => "",'etiqueta' => ""];
+        private $atributos = ['id' => null, 'id_usuario' => null, 'id_videojuego' => null, 'fecha' => "", 'megusta' => 0, 'mensaje' => "",'adjunto' => "",'plataforma' => "",'etiqueta' => ""];
 
-        public function __construct(int $id = null,int $id_usuario = null,int $id_videojuego = null, DateTime $fecha = new DateTime(), int $megusta = 0, string $mensaje = "", string $adjunto = "",string $plataforma = "",string $etiqueta = "",)
+        public function __construct(int $id = null,int $id_usuario = null,int $id_videojuego = null, string $fecha = "", int $megusta = 0, string $mensaje = "", string $adjunto = "",string $plataforma = "",string $etiqueta = "",)
         {
             $this->id = $id;
             $this->id_usuario = $id_usuario;
