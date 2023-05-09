@@ -23,6 +23,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             }
 
         }
+    }else if(isset($_GET['user'])) {
+        $param = $_GET['user'];
+        $usuarios = DAOUsuario::buscarUsuarioUsuario($param);
+            if ($usuarios != null) {
+                echo json_encode($usuarios);
+            } else {
+                http_response_code(404);
+                echo json_encode(array("message" => "Error en base de datos"));
+            }
     }else{
         $listaUsuarios = DAOUsuario::getListaUsuarios();
         if ($listaUsuarios != null) {

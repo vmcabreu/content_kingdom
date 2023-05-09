@@ -82,6 +82,12 @@ class DAOUsuario
             return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public static function buscarUsuarioUsuario(string $usuario)
+    {
+            $stmt = BaseDAO::consulta("SELECT * FROM usuarios WHERE usuario='$usuario'");
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     /**
      * Elimina un usuario de la base de datos.
      * @param {int} id - El id del usuario a eliminar.

@@ -25,8 +25,12 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) { }
 
-  getUser():Observable<Usuario> {
-    return this.http.get<Usuario>(this.url+'usuario/list.php?id=1');
+  getUser(id:number):Observable<Usuario> {
+    return this.http.get<Usuario>(this.url+'usuario/list.php?id='+id);
+  }
+
+  getUserByUsername(username:string):Observable<Usuario> {
+    return this.http.get<Usuario>(this.url+'usuario/list.php?user='+username);
   }
 
 
