@@ -5,6 +5,7 @@ import { Usuario } from 'src/app/model/usuario.model';
 import { Videojuego } from 'src/app/model/videojuego.model';
 import { JwtService } from 'src/app/service/jwt.service';
 import { PostService } from 'src/app/service/post.service';
+import { UsuarioService } from 'src/app/service/usuario.service';
 import { VideojuegoService } from 'src/app/service/videojuego.service';
 import Swal from 'sweetalert2';
 @Component({
@@ -21,12 +22,14 @@ export class PostsComponent {
   juegoSelected: Videojuego = new Videojuego();
   suscription: Subscription;
   usuario: Usuario;
+  listaUsuario: Usuario[] = []
 
-  constructor(private postService: PostService, private videojuegoService: VideojuegoService, private jwt: JwtService) { }
+  constructor(private postService: PostService, private videojuegoService: VideojuegoService, private jwt: JwtService,private userService: UsuarioService) { }
 
   ngOnInit() {
     this.getJuegos();
     this.getUsuario();
+    this.getUsuarios();
     this.getPublicaciones();
     this.getPublicacionesOrderLikes();
     this.suscription = this.videojuegoService.getRefresh$.subscribe(() => {
@@ -38,6 +41,9 @@ export class PostsComponent {
     this.suscription = this.postService.getRefresh$.subscribe(() => {
       this.getPublicaciones();
       this.getPublicacionesOrderLikes();
+    })
+    this.suscription = this.userService.getRefresh$.subscribe(() => {
+      this.getUsuarios();
     })
   }
 
@@ -75,6 +81,24 @@ export class PostsComponent {
         this.ngOnInit();
       })
     });
+  }
+
+  getUsuarios(): void {
+    this.userService.getUserList().subscribe(
+      (data: Usuario[]) => {
+        this.listaUsuario = data;
+
+      }
+    );
+  }
+  getUserName(id:number){
+    let username: string = "";
+    this.listaUsuario.forEach(element => {
+      if (element.id == id) {
+        username = element.usuario
+      }
+    });
+    return username
   }
 
   formatFecha() {

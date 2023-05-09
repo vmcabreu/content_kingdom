@@ -1,3 +1,4 @@
+
 .mainContainer {
   display: grid;
   grid-template-columns: 0.4fr 2.2fr 0.4fr;
@@ -31,11 +32,13 @@
   grid-area: posts;
   background-color: aliceblue;
   height: fit-content;
+  border-radius: 0rem 0rem 0.8rem 0.8rem ;
 }
 
 .otherContent {
   grid-area: otherContent;
   height: fit-content;
+  overflow: hidden;
 }
 
 .footer {
@@ -55,17 +58,19 @@
   background-color: aliceblue;
   border-radius: 0.8rem;
   padding: 1.2rem;
-  height: fit-content;
+  height: 50vh;
 }
 .bestPosts{
   background-color: aliceblue;
   border-radius: 0.8rem;
   padding: 1.2rem;
+  height: 50vh;
+  overflow: auto;
 }
 
 .subCards{
-  height: 25vh;
-  overflow: auto;
+  height: 200px;
+  overflow-y: auto;
 }
 
 .post-card {

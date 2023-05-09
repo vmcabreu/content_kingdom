@@ -4,7 +4,7 @@ header("Access-Control-Allow-Origin: *");
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (isset($_GET['id'])) {
         $id = intval($_GET['id']);
-        $usuarioById = DAOUsuario::buscarUsuario($id);
+        $usuarioById = DAOUsuario::buscarUsuarioID($id);
         if ($usuarioById != null) {
             echo json_encode($usuarioById);
         } else {

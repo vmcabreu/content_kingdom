@@ -1,5 +1,9 @@
 <div class="post-background">
-  <button data-bs-toggle="modal" data-bs-target="#addPost" class="raise">Añadir publicación</button>
+  <div class="d-flex justify-content-center">
+  <div *ngIf="usuario != null">
+    <button data-bs-toggle="modal" data-bs-target="#addPost" class="raise">Añadir publicación</button>
+  </div>
+</div>
   <div class="modal fade" id="addPost" tabindex="-1" aria-labelledby="addPostLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -46,7 +50,7 @@
     <div class="post-card" *ngFor="let post of publicaciones">
       <div class="d-flex justify-content-start align-items-center">
         <div class="avatar"></div>
-        <div class="avatarName p-2">Usuario8</div>
+        <div class="avatarName p-2">{{getUserName(post.id_usuario)}}</div>
       </div>
       <p class="description"> {{post.mensaje}} </p>
       <span class="datetime">{{post.fecha}}</span>

@@ -78,18 +78,8 @@ class DAOUsuario
 
     public static function buscarUsuarioID(int $id)
     {
-        try {
             $stmt = BaseDAO::consulta("SELECT * FROM usuarios WHERE id='$id' LIMIT 1");
-            $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
-            unset($conexion);
-            if ($resultado) {
-                return Usuario::crearUsuario($resultado);
-            } else {
-                return null;
-            }
-        } catch (Exception $ex) {
-            die("Error en la consulta. " . $ex->getMessage());
-        }
+            return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     /**

@@ -18,7 +18,7 @@ export class RegisterService {
 
   constructor(private http: HttpClient) { }
 
-  registerUser(usuario: Usuario){
+  registerUser(usuario: Usuario):Observable<any>{
     return this.http.post(`${this.url}register/register.php`, usuario,{responseType:"text"}).pipe(tap(()=> {
       this.refresh$.next()
     }))

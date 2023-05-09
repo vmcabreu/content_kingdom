@@ -19,6 +19,11 @@ class DAOPerfil
         }
     }
 
+    public static function crearPerfilZero(int $id_usuario){
+        $sql = "INSERT INTO perfil VALUES (null,'','','','',$id_usuario)";
+        return BaseDAO::consulta($sql);
+    }
+
     public static function buscarPerfil(int $id, int $limite = 100, int $offset = 0): ?array
     {
         $respuesta = array();

@@ -13,6 +13,7 @@ import { GamesComponent } from './componentes/games/games.component';
 import { UserComponent } from './componentes/user/user.component';
 import { PostsComponent } from './componentes/posts/posts.component';
 import { FormsModule } from '@angular/forms';
+import { PerfilComponent } from './componentes/perfil/perfil.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,8 @@ import { FormsModule } from '@angular/forms';
     RegisterComponent,
     GamesComponent,
     UserComponent,
-    PostsComponent
+    PostsComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,

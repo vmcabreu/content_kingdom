@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Publicacion } from 'src/app/model/publicacion.model';
 import { Usuario } from 'src/app/model/usuario.model';
+import { JwtService } from 'src/app/service/jwt.service';
 import { PostService } from 'src/app/service/post.service';
 import { UsuarioService } from 'src/app/service/usuario.service';
 
@@ -12,7 +13,7 @@ import { UsuarioService } from 'src/app/service/usuario.service';
 })
 export class IndexComponent {
   usuario: Usuario;
-  constructor(private userService: UsuarioService, private postService: PostService) { }
+  constructor(private userService: UsuarioService, private postService: PostService,private jwt: JwtService) { }
 
   newUsuarios: Usuario[] = [];
   topPublicaciones: Publicacion[] = [];
@@ -56,6 +57,13 @@ export class IndexComponent {
       }
     });
     return username
+  }
+
+  getUsuario() {
+    let token = localStorage.getItem('token')
+    if (token !== "" && token !== undefined) {
+      this.usuario = this.jwt.decodeUsuario(token);
+    }
   }
   getUsuarios(): void {
     this.userService.getUserList().subscribe(
