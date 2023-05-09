@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { forkJoin } from 'rxjs';
+import { Subscription, forkJoin } from 'rxjs';
 import { LoginService } from 'src/app/service/login.service';
 import Swal from 'sweetalert2';
 
@@ -16,25 +16,32 @@ export class LoginComponent {
   userExist: boolean = false;
   error: string;
 
+  suscription: Subscription;
+
   constructor(private loginService: LoginService, private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     this.userLogged()
+    this.suscription = this.loginService.getRefresh$.subscribe(() => {
+      this.userLogged();
+    })
   }
 
   login() {
     this.loginService.loginPostUser(this.nombre, this.passwd)
       .subscribe(response => {
-        console.log(response.status);
         if (response.status === 200) {
           this.loginService.loginGetUser(this.nombre, this.passwd)
             .subscribe((data: any) => {
               localStorage.setItem("token", data.token);
               this.loginSuccess();
             });
-        } else {
-          console.log("Creedenciales inválidas");
-          this.error = "Creedenciales inválidas"
+        } else{
+          Swal.fire({
+            title: "Creedenciales inválidas",
+            icon: 'error',
+            timerProgressBar: true,
+          })
         }
       });
   }
@@ -45,13 +52,13 @@ export class LoginComponent {
       icon: 'success',
       timerProgressBar: true,
     }).then((result) => {
-      window.location.reload();
+      this.ngOnInit();
     })
   }
 
   userLogged() {
     let token = localStorage.getItem('token')
-    if (token != "") {
+    if (token !== "" && token !== undefined) {
       this.router.navigateByUrl("/");
     }
   }

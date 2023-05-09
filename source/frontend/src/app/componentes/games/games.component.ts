@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-games',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class GamesComponent {
 
+  suscription: Subscription;
 }

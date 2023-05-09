@@ -6,8 +6,23 @@
     <div class="posts">
       <app-posts></app-posts>
     </div>
-    <div class="otherContent">
-      <a routerLink="/usuario">Usuario</a>
+    <div class="otherContent d-flex flex-column align-items-center gap-4">
+      <div class="newUsers">
+        <h3>Nuevos usuarios</h3>
+        <div>
+          <div *ngFor="let newUser of newUsuarios">
+            <p>{{newUser.usuario}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="bestPosts">
+        <h3>Más gustados</h3>
+        <div>
+          <div *ngFor="let newUser of newUsuarios">
+            <p>{{newUser.usuario}}</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="header">

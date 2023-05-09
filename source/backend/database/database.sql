@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
 CREATE TABLE IF NOT EXISTS perfil (
   id INT auto_increment,
   canales TEXT,
-  profile_pic LONGBLOB,
+  profile_pic varchar(255),
   biografica varchar(255),
   profesion varchar(40),
   id_usuario INT NOT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS publicaciones (
   fecha DATE NOT NULL,
   megusta INT NOT NULL,
   mensaje TEXT NOT NULL,
-  adjunto LONGBLOB,
+  adjunto varchar(255),
   plataforma VARCHAR(50),
   etiqueta VARCHAR(255),
   PRIMARY KEY(id),

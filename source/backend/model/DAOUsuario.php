@@ -5,7 +5,8 @@ require_once(__DIR__ . "/../inc/bootstrap.php");
 class DAOUsuario
 {
 
-    public static function validarLogin(string $passwd, string $user){
+    public static function validarLogin(string $passwd, string $user)
+    {
         $stmt = BaseDAO::consulta("SELECT * FROM usuarios WHERE usuario='$user' LIMIT 1");
         if ($stmt->rowCount() > 0) {
             $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -14,7 +15,8 @@ class DAOUsuario
         return false;
     }
 
-    public static function loginGetUser(string $passwd, string $user){
+    public static function loginGetUser(string $passwd, string $user)
+    {
         $stmt = BaseDAO::consulta("SELECT * FROM usuarios WHERE usuario='$user' LIMIT 1");
         if ($stmt->rowCount() > 0) {
             $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -64,9 +66,13 @@ class DAOUsuario
         return empty($respuesta) ? null : $respuesta;
     }
 
+    public static function getNuevosUsuarios(int $limit=10){
+        $stmt = BaseDAO::consulta(" SELECT * FROM usuarios ORDER BY id DESC LIMIT $limit");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public static function buscarUsuarioID(int $id)
     {
-
         try {
             $stmt = BaseDAO::consulta("SELECT * FROM usuarios WHERE id='$id' LIMIT 1");
             $resultado = $stmt->fetch(PDO::FETCH_ASSOC);

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Perfil } from 'src/app/model/perfil.mode';
 import { Usuario } from 'src/app/model/usuario.model';
 import { JwtService } from 'src/app/service/jwt.service';
@@ -14,22 +16,23 @@ export class HeaderComponent {
   usuario: Usuario = null;
   perfil: Perfil = null;
 
-  constructor(private jwt: JwtService,private perfilService: PerfilService) { }
+  suscription: Subscription;
+
+  constructor(private jwt: JwtService,private perfilService: PerfilService, private router: Router) { }
 
   ngOnInit() {
     this.getUsuario();
 
-
+    this.suscription = this.jwt.getRefresh$.subscribe(()=>{
+      this.getUsuario();
+    })
   }
 
 
   getUsuario() {
     let token = localStorage.getItem('token')
-    if (token != "") {
+    if (token !== "" && token !== undefined) {
       this.usuario = this.jwt.decodeUsuario(token);
-      this.getPerfil();
-      console.log(this.perfil);
-
     }
   }
 
@@ -42,6 +45,7 @@ export class HeaderComponent {
 
   logOut(){
     let token = localStorage.setItem('token',"")
-    window.location.reload();
+    this.ngOnInit()
+    this.router.navigateByUrl("/login")
   }
 }

@@ -9,6 +9,9 @@
     ". loginInput ."
     ". . .";
 }
+.form-control{
+  margin-bottom: 10px !important;
+}
 
 .loginInput {
   display: grid;
@@ -39,6 +42,7 @@
 .login-box .user-box {
   position: relative;
 }
+
 
 .login-box .user-box input {
   width: 100%;
@@ -127,4 +131,14 @@
 
 h3 {
   color: aliceblue;
+}
+
+.alerta{
+  color: #ff4c4c;
+  z-index:9999 !important;
+  font-size: smaller;
+  margin: auto;
+}
+.formulario{
+  overflow: hidden;
 }

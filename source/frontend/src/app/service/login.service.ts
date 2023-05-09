@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Auth } from '../model/auth.model';
 
 @Injectable({
@@ -11,7 +11,12 @@ import { Auth } from '../model/auth.model';
 export class LoginService {
 
   url: String = "http://contentkingdom.alu6618.arkania.es/api/controller/";
-  urltest: String = "http://localhost/backend/";
+
+  private refresh$ = new Subject<void>();
+
+  get getRefresh$(){
+    return this.refresh$;
+  }
 
   constructor(private http: HttpClient) { }
 

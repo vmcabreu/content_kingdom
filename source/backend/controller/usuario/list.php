@@ -11,5 +11,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             http_response_code(404);
             echo json_encode(array("message" => "No se encontró el usuario con ID " . $id));
         }
+    }else if(isset($_GET['list'])) {
+        $param = $_GET['list'];
+        if($param = "new"){
+            $listaNewUsuarios = DAOUsuario::getNuevosUsuarios();
+            if ($listaNewUsuarios != null) {
+                echo json_encode($listaNewUsuarios);
+            } else {
+                http_response_code(404);
+                echo json_encode(array("message" => "No se encontró el usuario con ID " . $id));
+            }
+
+        }
     }
 }

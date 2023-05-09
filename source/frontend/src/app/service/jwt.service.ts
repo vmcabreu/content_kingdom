@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Usuario } from '../model/usuario.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JwtService {
   jwt: JwtHelperService = new JwtHelperService();
+  
+  private refresh$ = new Subject<void>();
+
+  get getRefresh$(){
+    return this.refresh$;
+  }
   constructor() { }
 
   decodeToken(token: string){

@@ -43,3 +43,19 @@
 .header {
   grid-area: header;
 }
+
+.newUsers,.bestPosts{
+  width: 100%;
+  margin-left: 1.5rem;
+}
+
+.newUsers{
+  background-color: aliceblue;
+  border-radius: 0.8rem;
+  padding: 1.2rem;
+}
+.bestPosts{
+  background-color: aliceblue;
+  border-radius: 0.8rem;
+  padding: 1.2rem;
+}

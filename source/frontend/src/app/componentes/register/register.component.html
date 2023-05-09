@@ -1,56 +1,56 @@
 <div class="login-box">
-  <form #registerForm="ngForm" (submit)="register()">
+  <form #registerForm="ngForm" (submit)="register()" class="formulario">
     <h3>Registrarse</h3>
     <div class="user-box">
       <input type="text" [(ngModel)]="newUser.usuario" name="name" class="form-control" required #userForm="ngModel">
-      <label>Usuario</label>
-      <div *ngIf="userForm.invalid && (userForm.dirty || userForm.touched)" class="alert alert-danger">
+      <div *ngIf="userForm.invalid && (userForm.dirty || userForm.touched)" class="alerta">
         <div *ngIf="userForm.errors?.['required']">
           El nombre de usuario es obligatorio
         </div>
       </div>
+      <label>Usuario</label>
     </div>
     <div class="user-box">
       <input type="password" [(ngModel)]="newUser.passwd" name="passwrd" class="form-control" required minlength="6"
         pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$" #passwdForm="ngModel">
+        <div *ngIf="passwdForm.invalid && (passwdForm.dirty || passwdForm.touched)" class="alerta">
+          <div *ngIf="passwdForm.errors?.['required']">
+            La contraseña es obligatoria.
+          </div>
+          <div *ngIf="passwdForm.errors?.['minlength']">
+            La contraseña debe tener una longitud de 6 caracteres.
+          </div>
+          <div *ngIf="passwdForm.errors?.['pattern']">
+            La contraseña debe contener, letra mayúscula,número y un símbolo(*$_%&).
+          </div>
+        </div>
       <label>Contraseña</label>
-      <div *ngIf="passwdForm.invalid && (passwdForm.dirty || passwdForm.touched)" class="alert alert-danger">
-        <div *ngIf="passwdForm.errors?.['required']">
-          La contraseña es obligatoria.
-        </div>
-        <div *ngIf="passwdForm.errors?.['minlength']">
-          La contraseña debe tener una longitud de 6 caracteres.
-        </div>
-        <div *ngIf="passwdForm.errors?.['pattern']">
-          La contraseña debe contener, letra mayúscula,número y un símbolo(*$_%&).
-        </div>
-      </div>
     </div>
     <div class="user-box">
       <input type="password" [(ngModel)]="repeatpasswd" name="repeatpasswrd" class="form-control" required
         #checkPasswd="ngModel">
+        <div *ngIf="checkPasswd.invalid && (checkPasswd.dirty || checkPasswd.touched)" class="alerta">
+          <div *ngIf="checkPasswd.errors?.['required']">
+            Este campo es obligatorio.
+          </div>
+          <div *ngIf="checkPasswd != passwdForm">
+            Las contraseñas no coinciden
+          </div>
+        </div>
       <label>Repetir Contraseña</label>
-      <div *ngIf="checkPasswd.invalid && (checkPasswd.dirty || checkPasswd.touched)" class="alert alert-danger">
-        <div *ngIf="checkPasswd.errors?.['required']">
-          Este campo es obligatorio.
-        </div>
-        <div *ngIf="checkPasswd != passwdForm">
-          Las contraseñas no coinciden
-        </div>
-      </div>
     </div>
     <div class="user-box">
       <input type="text" [(ngModel)]="newUser.email" name="email" class="form-control" required
         pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" #emailForm="ngModel">
+        <div *ngIf="emailForm.invalid && (emailForm.dirty || emailForm.touched)" class="alerta">
+          <div *ngIf="emailForm.errors?.['required']">
+            El email es obligatorio.
+          </div>
+          <div *ngIf="emailForm.errors?.['pattern']">
+            El email es inválido.
+          </div>
+        </div>
       <label>Email</label>
-      <div *ngIf="emailForm.invalid && (emailForm.dirty || emailForm.touched)" class="alert alert-danger">
-        <div *ngIf="emailForm.errors?.['required']">
-          El email es obligatorio.
-        </div>
-        <div *ngIf="emailForm.errors?.['pattern']">
-          El email es inválido.
-        </div>
-      </div>
     </div>
     <div class="d-flex justify-content-center">
       <button type="submit" [disabled]="!registerForm.valid">

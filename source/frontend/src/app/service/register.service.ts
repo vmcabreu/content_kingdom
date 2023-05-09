@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 import { Auth } from '../model/auth.model';
 import { Usuario } from '../model/usuario.model';
 
@@ -9,12 +9,19 @@ import { Usuario } from '../model/usuario.model';
 })
 export class RegisterService {
   url: String = "http://contentkingdom.alu6618.arkania.es/api/controller/";
-  urltest: String = "http://localhost/backend/";
+
+  private refresh$ = new Subject<void>();
+
+  get getRefresh$(){
+    return this.refresh$;
+  }
 
   constructor(private http: HttpClient) { }
 
   registerUser(usuario: Usuario){
-    return this.http.post(`${this.url}register/register.php`, usuario,{responseType:"text"})
+    return this.http.post(`${this.url}register/register.php`, usuario,{responseType:"text"}).pipe(tap(()=> {
+      this.refresh$.next()
+    }))
   }
 
 
