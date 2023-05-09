@@ -31,6 +31,8 @@ export class IndexComponent {
     this.suscription = this.postService.getRefresh$.subscribe(() => {
       this.getPublicacionesOrderLikes();
     })
+
+
   }
   getPublicacionesOrderLikes() {
     this.postService.getPublicacionesOrderMeGusta().subscribe((data: Publicacion[]) => {
@@ -58,7 +60,8 @@ export class IndexComponent {
   getUsuarios(): void {
     this.userService.getUserList().subscribe(
       (data: Usuario[]) => {
-        this.newUsuarios = data;
+        this.listaUsuario = data;
+
       }
     );
   }

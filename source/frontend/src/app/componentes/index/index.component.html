@@ -6,7 +6,7 @@
     <div class="otherContent d-flex flex-column align-items-center gap-4 p-3">
       <div class="newUsers">
         <h3>Nuevos usuarios</h3>
-        <div>
+        <div class="subCard">
           <div *ngFor="let newUser of newUsuarios">
             <p>{{newUser.usuario}}</p>
           </div>
@@ -14,17 +14,14 @@
       </div>
       <div class="bestPosts">
         <h3>Más gustados</h3>
-        <div>
-          <div>
-<!--
-              <div class="post-card" *ngFor="let publicacion of topPublicaciones">
+        <div class="subCard">
+            <div class="post-card" *ngFor="let publicacion of topPublicaciones">
               <div class="d-flex justify-content-start align-items-center">
                 <div class="avatar"></div>
                 <div class="avatarName p-2">{{getUserName(publicacion.id_usuario)}}</div>
               </div>
               <p class="description"> {{publicacion.mensaje}} </p>
               <span class="datetime">{{publicacion.fecha}}</span>
-              <div class="image-preview"></div>
               <div class="comment-like">
                 <span>
                   <div class='large-font text-center top-20 d-flex'>
@@ -45,8 +42,6 @@
                   </svg>4</span>
               </div>
             </div>
- -->
-          </div>
         </div>
       </div>
     </div>

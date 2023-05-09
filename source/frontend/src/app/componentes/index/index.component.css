@@ -30,10 +30,12 @@
 .posts {
   grid-area: posts;
   background-color: aliceblue;
+  height: fit-content;
 }
 
 .otherContent {
   grid-area: otherContent;
+  height: fit-content;
 }
 
 .footer {
@@ -53,6 +55,7 @@
   background-color: aliceblue;
   border-radius: 0.8rem;
   padding: 1.2rem;
+  height: fit-content;
 }
 .bestPosts{
   background-color: aliceblue;
@@ -60,8 +63,14 @@
   padding: 1.2rem;
 }
 
+.subCards{
+  height: 25vh;
+  overflow: auto;
+}
+
 .post-card {
   width: 100%;
+  color: rgb(255, 255, 255);
   background: lightgrey;
   background-color: rgb(24 27 32);
   border: 1px solid rgb(84 90 106);
