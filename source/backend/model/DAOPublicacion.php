@@ -21,7 +21,7 @@ class DAOPublicacion
 
     public static function getPublicacionByMegusta(int $limit = 10)
     {
-        $stmt = BaseDAO::consulta("SELECT * FROM publicaciones ORDER BY megusta LIMIT $limit");
+        $stmt = BaseDAO::consulta("SELECT * FROM publicaciones ORDER BY megusta DESC LIMIT $limit");
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
