@@ -16,10 +16,6 @@ export class UserComponent implements OnInit{
   }
 
   getUsuario():void{
-    this.userService.getUser().subscribe(
-      (data: Usuario) => {
-        this.usuario = data[0];
-      }
-    );
+
   }
 }

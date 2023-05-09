@@ -22,7 +22,7 @@ export class PerfilService {
     return this.http.get<Perfil>(`${this.url}perfil/perfil.php?id=${id_usuario}`);
   }
 
-  generateEmptyProfile(id_usuario: number) {
+  generateEmptyProfile(id_usuario: number): Observable<any> {
     const params = new HttpParams()
     .set('id', id_usuario)
     return this.http.post(`${this.url}perfil/perfil.php`,{params:params})
