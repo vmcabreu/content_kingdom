@@ -26,7 +26,8 @@ class DAOPublicacion
 
     public static function aniadirPublicacion(Publicacion $post): int
     {
-        $sql = "INSERT INTO publicaciones VALUES (null,'$post->id_usuario','$post->id_videojuego','$post->fecha','$post->megusta','$post->mensaje','$post->adjunto','$post->plataforma','$post->etiqueta'";
+        $newFecha = DateTime::createFromFormat('Y-m-d', $post->fecha)->format('Y-m-d');
+        $sql = "INSERT INTO publicaciones VALUES (null,'$post->id_usuario','$post->id_videojuego','$newFecha','$post->megusta','$post->mensaje','$post->adjunto','$post->plataforma','$post->etiqueta'";
         return BaseDAO::consulta($sql);
     }
 }
