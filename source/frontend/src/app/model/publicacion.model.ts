@@ -2,7 +2,7 @@ export class Publicacion {
   public id: number;
   public id_usuario: number;
   public id_videojuego: number;
-  public fecha: Date;
+  public fecha: string;
   public megusta: number;
   public mensaje: string;
   public adjunto: string;
@@ -13,7 +13,7 @@ export class Publicacion {
     id: number = 0,
     id_usuario: number = 0,
     id_videojuego: number = 0,
-    fecha: Date = new Date(),
+    fecha: string = "",
     megusta: number = 0,
     mensaje: string = "",
     adjunto: string = "",

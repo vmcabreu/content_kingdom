@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject, tap } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 import { Publicacion } from '../model/publicacion.model';
 
 @Injectable({
@@ -18,9 +18,13 @@ export class PostService {
 
   constructor(private http: HttpClient) { }
 
-  addPublicacion(publicacion: Publicacion) {
-    return this.http.post(`${this.url}post/add.php`, publicacion, { responseType: "text" }).pipe(tap(() => {
+  addPublicacion(publicacion: Publicacion): Observable<any> {
+    return this.http.post(`${this.url}posts/post.php`, publicacion, { responseType: "text" }).pipe(tap(() => {
       this.refresh$.next()
     }))
+  }
+
+  getPublicaciones(): Observable<Publicacion[]>{
+    return this.http.get<Publicacion[]>(`${this.url}posts/post.php`)
   }
 }

@@ -6,6 +6,7 @@ import { Videojuego } from 'src/app/model/videojuego.model';
 import { JwtService } from 'src/app/service/jwt.service';
 import { PostService } from 'src/app/service/post.service';
 import { VideojuegoService } from 'src/app/service/videojuego.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
@@ -14,6 +15,7 @@ import { VideojuegoService } from 'src/app/service/videojuego.service';
 export class PostsComponent {
   isClicked = false;
   newPublicacion: Publicacion = new Publicacion();
+  publicaciones: Publicacion[] = [];
   listaVideojuegos: Videojuego[] = [];
   juegoSelected: Videojuego = new Videojuego();
   suscription: Subscription;
@@ -24,9 +26,20 @@ export class PostsComponent {
   ngOnInit() {
     this.getJuegos();
     this.getUsuario();
-    this.suscription = this.videojuegoService.getRefresh$.subscribe(() =>{
+    this.suscription = this.videojuegoService.getRefresh$.subscribe(() => {
       this.getJuegos();
+    })
+    this.suscription = this.jwt.getRefresh$.subscribe(() => {
       this.getUsuario();
+    })
+    this.suscription = this.postService.getRefresh$.subscribe(() => {
+      this.getUsuario();
+    })
+  }
+
+  getPublicaciones() {
+    this.postService.getPublicaciones().subscribe((data: Publicacion[]) => {
+      this.publicaciones = data;
     })
   }
 
@@ -39,14 +52,29 @@ export class PostsComponent {
 
   addPublicacion() {
     this.newPublicacion.id_usuario = this.usuario.id;
-    this.newPublicacion.fecha= new Date();
-    this.newPublicacion.id_videojuego = this.juegoSelected.id;
-    this.postService.addPublicacion(this.newPublicacion).subscribe();
+    this.newPublicacion.fecha = this.formatFecha();
+    this.newPublicacion.id_videojuego = Number(this.newPublicacion.id_videojuego);
+    console.log(this.newPublicacion);
+    console.log(this.usuario);
+    this.postService.addPublicacion(this.newPublicacion).subscribe(()=>{
+      Swal.fire({
+        title: '¡Registro correcto!',
+        icon: 'success',
+        timerProgressBar: true,
+      }).then((result) => {
+        this.ngOnInit();
+      })
+    });
   }
 
-  selectJuego(id:number){
+  formatFecha() {
+    const fechaActual = new Date();
+    return fechaActual.toLocaleDateString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit' });;
+  }
+
+  selectJuego(id: number) {
     this.listaVideojuegos.forEach(element => {
-      if (element.id==id) {
+      if (element.id == id) {
         this.juegoSelected = element;
       }
     });
