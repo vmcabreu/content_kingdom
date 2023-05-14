@@ -8,6 +8,8 @@ import { PostService } from 'src/app/service/post.service';
 import { UsuarioService } from 'src/app/service/usuario.service';
 import { VideojuegoService } from 'src/app/service/videojuego.service';
 import Swal from 'sweetalert2';
+
+
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',

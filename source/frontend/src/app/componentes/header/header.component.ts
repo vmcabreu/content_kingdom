@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 export class HeaderComponent {
   usuario: Usuario = null;
   perfil: Perfil = null;
+  sidebarVisible: boolean;
 
   suscription: Subscription;
 

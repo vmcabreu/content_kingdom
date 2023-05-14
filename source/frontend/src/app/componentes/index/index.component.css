@@ -1,84 +1,86 @@
+* {
+  color: #fff;
+}
+
+.iconNumber {
+  font-family: var(--font-family);
+  text-align: center;
+}
 
 .mainContainer {
   display: grid;
-  grid-template-columns: 0.4fr 2.2fr 0.4fr;
-  grid-template-rows: 0.2fr 2.8fr 0.1fr;
+  grid-template-columns: 0.2fr 1.7fr 1.3fr;
+  grid-template-rows: 1fr;
   gap: 0px 0px;
   grid-auto-flow: row;
   grid-template-areas:
-    "header header header"
-    ". content ."
-    "footer footer footer";
+    "menu content otherContent";
+}
+
+.menu {
+  grid-area: menu;
 }
 
 .content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 0.2fr 1.8fr 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "posts otherContent"
-    "posts otherContent"
-    "posts otherContent";
   grid-area: content;
-}
-
-.add-newPost {
-  grid-area: add-newPost;
-}
-
-.posts {
-  grid-area: posts;
-  background-color: aliceblue;
-  height: fit-content;
-  border-radius: 0rem 0rem 0.8rem 0.8rem ;
-}
-
-.otherContent {
-  grid-area: otherContent;
-  height: fit-content;
+  background-color: #0e0f12;
+  border-radius: 0.8rem;
+  padding: 1.2rem;
   overflow: hidden;
 }
 
-.footer {
-  grid-area: footer;
+.otherContent {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "bestPosts"
+    "newUsers";
+  grid-area: otherContent;
 }
 
-.header {
-  grid-area: header;
+.bestPosts {
+  grid-area: bestPosts;
 }
 
-.newUsers,.bestPosts{
+.newUsers {
+  grid-area: newUsers;
+}
+
+
+.newUsers,
+.bestPosts {
   width: 100%;
   margin-left: 1.5rem;
 }
 
-.newUsers{
-  background-color: aliceblue;
+.newUsers {
+  background-color: #0e0f12;
   border-radius: 0.8rem;
   padding: 1.2rem;
   height: 50vh;
-  overflow: auto;
+  overflow: hidden;
 }
-.bestPosts{
-  background-color: aliceblue;
+
+.bestPosts {
+  background-color: #0e0f12;
   border-radius: 0.8rem;
   padding: 1.2rem;
   height: 50vh;
   overflow: auto;
 }
 
-.subCards{
+.subCards {
   height: 200px;
   overflow-y: auto;
 }
 
 .post-card {
   width: 100%;
-  color: rgb(255, 255, 255);
   background: lightgrey;
-  background-color: rgb(24 27 32);
+  background-color: #1a1d21;
   border: 1px solid rgb(84 90 106);
   border-radius: 20px;
   display: flex;
@@ -86,7 +88,7 @@
   padding: 10px 20px;
 }
 
-.avatarName{
+.avatarName {
   color: rgb(255, 255, 255);
 }
 
@@ -95,7 +97,7 @@
   width: 35px;
   border-radius: 50%;
   background-color: blueviolet;
-  background-image: linear-gradient(to top left, blueviolet,rgb(73, 31, 112));
+  background-image: linear-gradient(to top left, blueviolet, rgb(73, 31, 112));
 }
 
 .title {
@@ -124,7 +126,7 @@
   width: 100%;
   border-radius: 20px;
   background-color: blueviolet;
-  background-image: linear-gradient(to top left, blueviolet,rgb(73, 31, 112));
+  background-image: linear-gradient(to top left, blueviolet, rgb(73, 31, 112));
   margin-bottom: 4px;
 }
 
@@ -132,7 +134,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  color:aliceblue;
+  color: aliceblue;
   padding: 2px 0;
 }
 
@@ -151,7 +153,7 @@
 }
 
 .comment-like span:hover {
-  background-color: rgba(137, 43, 226, 0.096);
+  background-color: #002f50;
 }
 
 .comment-like span svg {
@@ -159,8 +161,7 @@
   margin-right: 2px;
 }
 
-.searchPost
-{
+.searchPost {
   width: 97%;
 }
 

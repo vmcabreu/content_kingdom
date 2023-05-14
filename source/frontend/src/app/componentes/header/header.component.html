@@ -31,51 +31,59 @@
   </div>
 </nav>
 -->
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand d-flex align-items-center" routerLink="/"><img src="./../../../assets/imgs/CKLogo.png"
-        class="logo"></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div *ngIf="usuario != null;then isLogged else isGuest"></div>
-    <ng-template #isLogged>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Publicaciones</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Juegos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Explorar</a>
-          </li>
-        </ul>
-        <div class="dropdown dropstart">
-          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img class="profilepic" src="./../../../assets/imgs/defaultPic.png" alt="">
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Perfil</a></li>
-            <li><a class="dropdown-item" href="#">Mi cuenta</a></li>
-            <li><button class="btn headerButton dropdown-item" (click)="logOut()">Cerrar Sesión</button></li>
+<nav class="d-flex flex-column navBar">
+  <a class="navbar-brand d-flex align-items-center" routerLink="/"><img src="./../../../assets/imgs/CKLogo.png"
+    class="logo"></a>
+    <div class="container">
+          <p-sidebar [(visible)]="sidebarVisible">
+            <h3>Sidebar</h3>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+        </p-sidebar>
+        <p-button (click)="sidebarVisible = true" icon="pi pi-arrow-right"></p-button>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div *ngIf="usuario != null;then isLogged else isGuest"></div>
+      <ng-template #isLogged>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Publicaciones</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Juegos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Explorar</a>
+            </li>
           </ul>
+          <div class="dropdown dropstart">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img class="profilepic" src="./../../../assets/imgs/defaultPic.png" alt="">
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="/profile">Perfil</a></li>
+              <li><a class="dropdown-item" href="#">Mi cuenta</a></li>
+              <li><button class="btn headerButton dropdown-item" (click)="logOut()">Cerrar Sesión</button></li>
+            </ul>
+          </div>
+
         </div>
+      </ng-template>
+      <ng-template #isGuest>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <h2>Content Kingdom</h2>
+            </li>
+          </ul>
+          <a routerLink="/login" class="headerButton">Iniciar Sesión</a>
+        </div>
+      </ng-template>
 
-      </div>
-    </ng-template>
-    <ng-template #isGuest>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <h2>Content Kingdom</h2>
-          </li>
-        </ul>
-        <a routerLink="/login" class="headerButton">Iniciar Sesión</a>
-      </div>
-    </ng-template>
-
-  </div>
+    </div>
 </nav>

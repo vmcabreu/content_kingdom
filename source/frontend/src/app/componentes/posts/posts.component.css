@@ -1,4 +1,10 @@
-
+*{
+  color: #fff;
+}
+.iconNumber{
+  font-family: var(--font-family);
+  text-align: center;
+}
 
 .postLayer{
   height: 75vh;
@@ -72,7 +78,7 @@
 .comment-like span {
   cursor: pointer;
   height: 40px;
-  width: 50px;
+  width: 80px;
   padding: 0 3px;
   display: flex;
   align-items: center;
@@ -84,7 +90,7 @@
 }
 
 .comment-like span:hover {
-  background-color: rgba(137, 43, 226, 0.096);
+  background-color: #002f50;
 }
 
 .comment-like span svg {
@@ -103,6 +109,7 @@
   padding: 8px 16px;
   border: 0px solid #ddd;
   border-radius: 20px;
+  text-align: center;
   background-color: #ffffff00;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -230,7 +237,9 @@
 
 
 
-
+.modal-content,.modal-dialog{
+  background-color: #1a1d21 !important;
+}
 
 
 h1 { font-weight: 400; }

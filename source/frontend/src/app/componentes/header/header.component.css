@@ -6,10 +6,12 @@
   border-radius: 50%;
 }
 
-.header-background {
-  background-color: aliceblue;
-  height: 50%;
+.navBar{
+ background-color: #0e0f12;
+ height: 100vh;
+ width: fit-content;
 }
+
 
 .headerButton {
   border: none;
