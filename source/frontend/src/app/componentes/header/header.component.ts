@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { TooltipOptions } from 'primeng/tooltip';
 import { Subscription } from 'rxjs';
 import { Perfil } from 'src/app/model/perfil.mode';
 import { Usuario } from 'src/app/model/usuario.model';
@@ -16,7 +17,11 @@ export class HeaderComponent {
   usuario: Usuario = null;
   perfil: Perfil = null;
   sidebarVisible: boolean;
-
+  tooltipOptions: TooltipOptions = {
+    autoHide: false,
+    tooltipEvent: 'hover',
+    tooltipPosition: 'top'
+};
   suscription: Subscription;
 
   constructor(private jwt: JwtService,private perfilService: PerfilService, private router: Router) { }

@@ -21,6 +21,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SidebarModule } from 'primeng/sidebar';
 import { ButtonModule } from 'primeng/button';
 import { Menu, MenuModule } from 'primeng/menu';
+import { TooltipModule } from 'primeng/tooltip';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +44,7 @@ import { Menu, MenuModule } from 'primeng/menu';
     InputTextModule,
     SidebarModule,
     SkeletonModule,
+    TooltipModule,
     MenuModule,
     FormsModule,
     CommonModule,
