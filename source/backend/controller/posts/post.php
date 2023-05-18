@@ -12,6 +12,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 echo json_encode(array("message" => "Error con la base de datos"));
             }
         }
+    }else  if (isset($_GET['id'])) {
+            $id = intval($_GET['id']);
+            $listMegusta = DAOPublicacion::getPublicacionByUsuario($id);
+            if ($listMegusta != null) {
+                echo json_encode($listMegusta, JSON_UNESCAPED_UNICODE);
+            } else {
+                http_response_code(404);
+                echo json_encode(array("message" => "Error con la base de datos"));
+            }
     } else {
         $list = DAOPublicacion::listaPublicacion();
         if ($list != null) {

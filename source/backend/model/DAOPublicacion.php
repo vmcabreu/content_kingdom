@@ -19,6 +19,12 @@ class DAOPublicacion
         }
     }
 
+    public static function getPublicacionByUsuario($id)
+    {
+            $stmt = BaseDAO::consulta("SELECT * FROM publicaciones WHERE id_usuario='$id'");
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public static function getPublicacionByMegusta(int $limit = 10)
     {
         $stmt = BaseDAO::consulta("SELECT * FROM publicaciones ORDER BY megusta DESC LIMIT $limit");

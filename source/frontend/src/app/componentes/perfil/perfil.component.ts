@@ -15,6 +15,6 @@ export class PerfilComponent {
   usuario: Usuario;
 
   ngOnInit(){
-    this.jwt.checkToken();
+    this.usuario= this.jwt.checkToken();
   }
 }
