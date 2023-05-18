@@ -85,7 +85,7 @@
   text-transform: uppercase;
   overflow: hidden;
   transition: .5s;
-  margin-top: 40px;
+  margin-top: 10px;
   letter-spacing: 4px
 }
 
@@ -136,7 +136,7 @@ h3 {
 .alerta{
   color: #ff4c4c;
   z-index:9999 !important;
-  font-size: smaller;
+  font-size: xx-small;
   margin: auto;
 }
 .formulario{

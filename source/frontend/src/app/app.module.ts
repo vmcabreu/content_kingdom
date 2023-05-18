@@ -22,6 +22,9 @@ import { SidebarModule } from 'primeng/sidebar';
 import { ButtonModule } from 'primeng/button';
 import { Menu, MenuModule } from 'primeng/menu';
 import { TooltipModule } from 'primeng/tooltip';
+import { AvatarModule } from 'primeng/avatar';
+import { FieldsetModule } from 'primeng/fieldset';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +51,9 @@ import { TooltipModule } from 'primeng/tooltip';
     MenuModule,
     FormsModule,
     CommonModule,
-    AppRoutingModule
+    AvatarModule,
+    AppRoutingModule,
+    FieldsetModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,43 +1,38 @@
 <div class="mainContainer">
-
   <div class="content m-2">
-      <app-posts></app-posts>
+    <app-posts></app-posts>
+  </div>
+  <div class="otherContent d-flex flex-column gap-4 p-3">
+    <div class="newUsers">
+      <h3>Nuevos usuarios</h3>
+      <p-scrollPanel>
+        <ng-container *ngFor="let newUser of newUsuarios">
+          <p>{{newUser.usuario}}</p>
+        </ng-container>
+      </p-scrollPanel>
     </div>
-    <div class="otherContent d-flex flex-column gap-4 p-3">
-      <div class="newUsers">
-        <div>
-          <h3>Nuevos usuarios</h3>
-        </div>
-        <p-scrollPanel>
-          <div *ngFor="let newUser of newUsuarios">
-            <p>{{newUser.usuario}}</p>
+    <div class="bestPosts d-flex flex-column">
+      <h3>Más gustados</h3>
+      <p-scrollPanel [style]="{ width: '100%', height: '150px'}">
+        <div class="post-card" *ngFor="let publicacion of topPublicaciones">
+          <div class="d-flex justify-content-start align-items-center">
+            <div class="avatar"></div>
+            <div class="avatarName p-2">{{getUserName(publicacion.id_usuario)}}</div>
           </div>
-        </p-scrollPanel>
-      </div>
-      <div class="bestPosts d-flex flex-column">
-        <div>
-          <h3>Más gustados</h3>
-        </div>
-        <p-scrollPanel [style]="{ width: '100%', height: '150px'}">
-          <div class="post-card" *ngFor="let publicacion of topPublicaciones">
-            <div class="d-flex justify-content-start align-items-center">
-              <div class="avatar"></div>
-              <div class="avatarName p-2">{{getUserName(publicacion.id_usuario)}}</div>
-            </div>
-            <p class="description"> {{publicacion.mensaje}} </p>
-            <span class="datetime">{{publicacion.fecha}}</span>
-            <div class="comment-like">
-              <span>
-                <div class='large-font text-center top-20 d-flex'>
-                  <button class="like-button">
-                    <span class="pi pi-heart gap-1"><div class="iconNumber">{{publicacion.megusta}}</div></span>
-                  </button>
-                </div>
-              </span>
-              <span class="pi pi-comments gap-1"> 4</span>
-            </div>
+          <p class="description">{{publicacion.mensaje}}</p>
+          <span class="datetime">{{publicacion.fecha}}</span>
+          <div class="comment-like">
+            <span>
+              <div class='large-font text-center top-20 d-flex'>
+                <button class="like-button">
+                  <span class="pi pi-heart gap-1"><div class="iconNumber">{{publicacion.megusta}}</div></span>
+                </button>
+              </div>
+            </span>
+            <span class="pi pi-comments gap-1">4</span>
           </div>
-        </p-scrollPanel>
-      </div>
+        </div>
+      </p-scrollPanel>
     </div>
+  </div>
 </div>

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Usuario } from 'src/app/model/usuario.model';
+import { JwtService } from 'src/app/service/jwt.service';
+import { PerfilService } from 'src/app/service/perfil.service';
 
 @Component({
   selector: 'app-perfil',
@@ -7,4 +10,11 @@ import { Component } from '@angular/core';
 })
 export class PerfilComponent {
 
+  constructor(private perfilService: PerfilService,private jwt: JwtService){}
+
+  usuario: Usuario;
+
+  ngOnInit(){
+    this.jwt.checkToken();
+  }
 }

@@ -1,75 +1,73 @@
 <div class="post-background">
-  <div class="d-flex">
+  <div class="d-flex justify-content-between align-items-center">
     <h2 class="p-3 navbar-header">Timeline</h2>
-    <div *ngIf="usuario != null">
-      <button data-bs-toggle="modal" data-bs-target="#addPost" class="raise">Añadir publicación</button>
-    </div>
+    <p-button *ngIf="usuario != null" label="Añadir publicación" icon="pi pi-check" data-bs-toggle="modal" data-bs-target="#addPost" styleClass="p-button-info"></p-button>
   </div>
 
   <p-scrollPanel [style]="{ width: '100%', height: '75vh' }" class="p-2">
     <div class="post-card" *ngFor="let post of publicaciones">
       <div class="d-flex justify-content-start align-items-center">
         <div class="avatar"></div>
-        <div class="avatarName p-2">{{getUserName(post.id_usuario)}}</div>
+        <div class="avatarName p-2">{{ getUserName(post.id_usuario) }}</div>
       </div>
-      <p class="description"> {{post.mensaje}} </p>
-      <span class="datetime">{{post.fecha}}</span>
+      <p class="description">{{ post.mensaje }}</p>
+      <span class="datetime">{{ post.fecha }}</span>
       <!--
-      <div *ngIf="post.adjunto != ''">
-      <div class="image-preview"></div>
-    </div>
-    -->
+      <div *ngIf="post.adjunto !== ''">
+        <div class="image-preview"></div>
+      </div>
+      -->
       <div class="comment-like">
         <span>
-          <div class='large-font text-center top-20 d-flex'>
-            <button class="like-button d-flex" [ngClass]="{'clicked': isClicked}" (click)="toggleLike()">
-              <span class="pi pi-heart gap-1"><div class="iconNumber">{{post.megusta}}</div></span>
+          <div class="large-font text-center top-20 d-flex">
+            <button class="like-button d-flex" [ngClass]="{ 'clicked': isClicked }" (click)="toggleLike()">
+              <span class="pi pi-heart gap-1">
+                <div class="iconNumber">{{ post.megusta }}</div>
+              </span>
             </button>
           </div>
         </span>
-        <span class="pi pi-comments gap-1"> 4</span>
+        <span class="pi pi-comments gap-1">4</span>
       </div>
     </div>
-</p-scrollPanel>
-<div class="modal fade" id="addPost" tabindex="-1" aria-labelledby="addPostLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="addPostLabel">Añadir publicación</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form (submit)="addPublicacion()">
-          <label for="mensaje">Contenido</label>
-          <input type="text" name="mensaje" [(ngModel)]="newPublicacion.mensaje" class="form-control" id="mensaje"
-            cols="30" rows="5" />
-          <label for="plataforma">Seleccionar plataforma</label>
-          <select class="form-select" name="plataforma" [(ngModel)]="newPublicacion.plataforma">
-            <option value="Twitch">Twitch</option>
-          </select>
-          <label for="etiqueta">Seleccionar Etiquetas</label>
-          <select class="form-select" name="etiqueta" [(ngModel)]="newPublicacion.etiqueta">
-            <option value="Gaming">Gaming</option>
-          </select>
-          <div>
-            <label for="juegoSelect">Seleccionar Juego</label>
-            <select class="form-select" name="juegoSelect" [(ngModel)]="newPublicacion.id_videojuego">
-              <option *ngFor="let juego of listaVideojuegos" value="{{juego.id}}">{{juego.nombre}}
-              </option>
+  </p-scrollPanel>
+
+  <div class="modal fade" id="addPost" tabindex="-1" aria-labelledby="addPostLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="addPostLabel">Añadir publicación</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form (submit)="addPublicacion()">
+            <label for="mensaje">Contenido</label>
+            <input type="text" name="mensaje" [(ngModel)]="newPublicacion.mensaje" class="form-control" id="mensaje" cols="30" rows="5" />
+            <label for="plataforma">Seleccionar plataforma</label>
+            <select class="form-select" name="plataforma" [(ngModel)]="newPublicacion.plataforma">
+              <option value="Twitch">Twitch</option>
+            </select>
+            <label for="etiqueta">Seleccionar Etiquetas</label>
+            <select class="form-select" name="etiqueta" [(ngModel)]="newPublicacion.etiqueta">
+              <option value="Gaming">Gaming</option>
             </select>
             <div>
-              {{this.juegoSelected.nombre}}
-              {{this.juegoSelected.fecha_lanzamiento}}
+              <label for="juegoSelect">Seleccionar Juego</label>
+              <select class="form-select" name="juegoSelect" [(ngModel)]="newPublicacion.id_videojuego">
+                <option *ngFor="let juego of listaVideojuegos" [value]="juego.id">{{ juego.nombre }}</option>
+              </select>
+              <div>
+                {{ juegoSelected.nombre }}
+                {{ juegoSelected.fecha_lanzamiento }}
+              </div>
             </div>
-          </div>
-          <label for="adjunto">Añadir archivo</label>
-          <input type="file" name="adjunto" class="form-control">
-          <button type="submit" class="btn btn-primary">Publicar</button>
-        </form>
-      </div>
-      <div class="modal-footer">
+            <label for="adjunto">Añadir archivo</label>
+            <input type="file" name="adjunto" class="form-control">
+            <button type="submit" class="btn btn-primary">Publicar</button>
+          </form>
+        </div>
+        <div class="modal-footer"></div>
       </div>
     </div>
   </div>
-</div>
 </div>

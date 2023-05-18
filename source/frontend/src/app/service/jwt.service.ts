@@ -20,12 +20,19 @@ export class JwtService {
     return this.jwt.decodeToken(token);
   }
 
-
   decodeUsuario(token: string){
     if (token) {
       let decoded = this.jwt.decodeToken(token);
       return new Usuario(decoded.id,decoded.nombre,"",decoded.email);
     }
     return new Usuario();
+  }
+
+  checkToken() {
+    let token = localStorage.getItem('token')
+    if (token !== "" && token !== undefined) {
+      return this.decodeUsuario(token);
+    }
+    return null
   }
 }

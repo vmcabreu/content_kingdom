@@ -1,10 +1,15 @@
-
-<div class="containerMenu">
-  <div class="menu">
-    <app-header></app-header>
+<div class="backgroundWaves">
+<div>
+  <div class="containerMenu">
+    <div *ngIf="!checkLogin();">
+      <div class="menu">
+        <app-header></app-header>
+      </div>
+    </div>
+    <div class="index">
+      <router-outlet></router-outlet>
+    </div>
   </div>
-  <div class="index">
-    <router-outlet></router-outlet>
-  </div>
+</div>
 </div>
 

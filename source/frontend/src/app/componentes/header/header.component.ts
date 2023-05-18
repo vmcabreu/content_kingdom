@@ -28,10 +28,10 @@ export class HeaderComponent {
 
   ngOnInit() {
     this.getUsuario();
+  }
 
-    this.suscription = this.jwt.getRefresh$.subscribe(()=>{
-      this.getUsuario();
-    })
+  ngDoCheck(){
+    this.getUsuario();
   }
 
 
@@ -51,7 +51,8 @@ export class HeaderComponent {
 
   logOut(){
     let token = localStorage.setItem('token',"")
-    this.ngOnInit()
-    this.router.navigateByUrl("/login")
+    this.getUsuario()
+    this.router.navigateByUrl("/login");
+
   }
 }
