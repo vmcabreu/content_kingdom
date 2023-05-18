@@ -10,8 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $usuario= new Usuario(null,$user,$passwd,$email);
         $response = DAOUsuario::aniadirUsuario($usuario);
         if ($response > 0) {
-            $insertedUsuario = DAOUsuario::buscarUsuarioUsuario($user);
-            DAOPerfil::crearPerfilZero($insertedUsuario->id);
             http_response_code(200);
         }else{
             http_response_code(422);
