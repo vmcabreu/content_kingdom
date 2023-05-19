@@ -22,7 +22,7 @@ class DAOPublicacion
     public static function getPublicacionByUsuario(int $id)
     {
             $stmt = BaseDAO::consulta("SELECT * FROM publicaciones WHERE id_usuario='$id'");
-            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function getPublicacionByMegusta(int $limit = 10)
