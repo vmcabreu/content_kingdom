@@ -22,15 +22,13 @@ export class PerfilComponent {
 
   ngOnInit(){
     this.usuario= this.jwt.checkToken();
-    this.getPublicacionesUsuario;
-    this.getPerfil;
+    this.getPublicacionesUsuario();
+    this.getPerfil();
   }
 
   getNumberPosts(){
     console.log(this.listaPublicaciones);
     return this.listaPublicaciones.length
-
-
   }
 
   getPublicacionesUsuario(){

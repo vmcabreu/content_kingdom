@@ -12,7 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 echo json_encode(array("message" => "Error con la base de datos"));
             }
         }
-    }else if (isset($_GET['idUsuario'])) {
+    }
+    if (isset($_GET['idUsuario'])) {
             $id = intval($_GET['idUsuario']);
             $listaFromUsuario = DAOPublicacion::getPublicacionByUsuario($id);
             if ($listaFromUsuario != null) {
