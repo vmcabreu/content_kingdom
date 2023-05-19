@@ -19,7 +19,7 @@ class DAOPublicacion
         }
     }
 
-    public static function getPublicacionByUsuario($id)
+    public static function getPublicacionByUsuario(int $id)
     {
             $stmt = BaseDAO::consulta("SELECT * FROM publicaciones WHERE id_usuario='$id'");
             $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
