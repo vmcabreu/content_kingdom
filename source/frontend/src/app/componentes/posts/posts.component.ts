@@ -52,7 +52,8 @@ export class PostsComponent implements OnInit {
 
   getPublicacionesOrderLikes() {
     this.postService.getPublicacionesOrderMeGusta().subscribe((data: Publicacion[]) => {
-      this.topPublicaciones = data;
+      console.log(JSON.stringify(data, null, 0));
+
     });
   }
 
