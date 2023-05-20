@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/model/usuario.model';
+import { JwtService } from 'src/app/service/jwt.service';
 import { UsuarioService } from 'src/app/service/usuario.service';
 
 @Component({
@@ -9,13 +10,17 @@ import { UsuarioService } from 'src/app/service/usuario.service';
 })
 export class UserComponent implements OnInit{
   usuario: Usuario;
-  constructor(private userService: UsuarioService){}
+  listaUsuarios: Usuario[] = []
+  constructor(private userService: UsuarioService,private jwt:JwtService){}
 
   ngOnInit(){
     this.getUsuario();
+    this.usuario = this.jwt.checkToken()
   }
 
   getUsuario():void{
-
+    this.userService.getUserList().subscribe((data: Usuario[]) =>{
+      this.listaUsuarios = data;
+    })
   }
 }

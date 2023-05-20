@@ -6,6 +6,7 @@ import { RegisterComponent } from './componentes/register/register.component';
 import { UserComponent } from './componentes/user/user.component';
 import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { GamesComponent } from './componentes/games/games.component';
+import { GamePostsComponent } from './componentes/game-posts/game-posts.component';
 
 const routes: Routes = [
   {path: "", component: IndexComponent},
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path: "usuario", component: UserComponent},
   {path: "profile", component: PerfilComponent},
   {path: "register", component: RegisterComponent},
-  {path: "games", component: GamesComponent}
+  {path: "games", component: GamesComponent},
+  {path: "games/:id", component: GamePostsComponent}
 ];
 
 @NgModule({

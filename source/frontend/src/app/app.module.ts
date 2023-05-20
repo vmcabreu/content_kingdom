@@ -26,6 +26,9 @@ import { AvatarModule } from 'primeng/avatar';
 import { FieldsetModule } from 'primeng/fieldset';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { Card, CardModule } from 'primeng/card';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { GamePostsComponent } from './componentes/game-posts/game-posts.component';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +41,8 @@ import { Card, CardModule } from 'primeng/card';
     GamesComponent,
     UserComponent,
     PostsComponent,
-    PerfilComponent
+    PerfilComponent,
+    GamePostsComponent
   ],
   imports: [
     BrowserModule,
@@ -57,6 +61,7 @@ import { Card, CardModule } from 'primeng/card';
     AvatarModule,
     AppRoutingModule,
     FieldsetModule,
+    AutoCompleteModule,
     TabMenuModule
   ],
   providers: [],

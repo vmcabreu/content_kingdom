@@ -16,10 +16,12 @@
   background-color: #0e0f12;
   height: 100%;
   color: #fff;
+  z-index: 9999;
 }
 
 .index {
   grid-area: index;
+  overflow: hidden;
 }
 
 .backgroundWaves {
