@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         if ($_GET['listType'] == "likes") {
             $listMegusta = DAOPublicacion::getPublicacionByMegusta();
             if ($listMegusta != null) {
-                echo json_encode($listMegusta,JSON_UNESCAPED_UNICODE);
+                echo str_replace(json_encode($listMegusta,JSON_UNESCAPED_UNICODE)," ","");;
             } else {
                 http_response_code(404);
                 echo json_encode(array("message" => "Error con la base de datos"));
