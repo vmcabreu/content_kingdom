@@ -21,4 +21,9 @@ export class VideojuegoService {
   getAllGames(): Observable<Videojuego[]> {
     return this.http.get<Videojuego[]>(this.url + 'videojuego/list.php');
   }
+
+  getJuegoById(id:number): Observable<Videojuego>{
+    return this.http.get<Videojuego>(this.url + 'videojuego/list.php?id='+id);
+  }
+
 }

@@ -22,10 +22,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         } else {
             http_response_code(404);
             echo json_encode(array("message" => "Error con la base de datos"));
+        } 
+        return;
+    }
+
+    if (isset($_GET['idJuego'])) {
+        $id = intval($_GET['idJuego']);
+        $listaFromJuego = DAOPublicacion::getPublicacionByVideojuego($id);
+        if ($listaFromJuego != null) {
+            echo json_encode($listaFromJuego, JSON_UNESCAPED_UNICODE);
+        } else {
+            http_response_code(404);
+            echo json_encode(array("message" => "Error con la base de datos"));
         }
         return;
     }
-    
+
     $list = DAOPublicacion::listaPublicacion();
     if ($list != null) {
         echo json_encode($list, JSON_UNESCAPED_UNICODE);

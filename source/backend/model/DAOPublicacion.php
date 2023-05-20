@@ -25,6 +25,12 @@ class DAOPublicacion
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function getPublicacionByVideojuego(int $id)
+    {
+            $stmt = BaseDAO::consulta("SELECT * FROM publicaciones WHERE id_videojuego='$id'");
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public static function getPublicacionByMegusta(int $limit = 10)
     {
         $stmt = BaseDAO::consulta("SELECT * FROM publicaciones ORDER BY megusta DESC LIMIT $limit");

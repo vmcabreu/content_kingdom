@@ -6,4 +6,9 @@ class DAOVideojuego{
         $stmt = BaseDAO::consulta(" SELECT * FROM videojuegos ORDER BY nombre LIMIT $limit");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function getVideojuegoById(int $id,int $limit=1){
+        $stmt = BaseDAO::consulta(" SELECT * FROM videojuegos WHERE id=$id LIMIT $limit");
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
