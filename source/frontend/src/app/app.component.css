@@ -9,9 +9,11 @@
 }
 
 .menu {
+  position: fixed;
+  top: 0;
+  left: 0;
   grid-area: menu;
   background-color: #0e0f12;
-  width: 75%;
   height: 100%;
   color: #fff;
 }

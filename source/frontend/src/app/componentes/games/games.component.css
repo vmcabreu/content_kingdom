@@ -1,0 +1,64 @@
+
+.cardGame {
+  width: 250px;
+  height: 508px;
+  border-radius: 20px;
+  background: #0e0f12;;
+  position: relative;
+  padding: 1.8rem;
+  border: 2px solid #0e0f12;;
+  transition: 0.5s ease-out;
+  overflow: visible;
+ }
+
+ .cardGame-img{
+  width: 179px;
+  height: 250px;
+  border: 2px solid #fff;
+  border-radius: 4px;
+ }
+
+ .cardGame-details {
+  color: rgb(255, 255, 255);
+  height: 100%;
+  gap: .5em;
+  display: grid;
+  place-content: center;
+ }
+
+ .cardGame-button {
+  transform: translate(-50%, 125%);
+  width: 60%;
+  border-radius: 1rem;
+  border: none;
+  background-color: #008bf8;
+  color: #ffffff;
+  font-size: 1rem;
+  padding: .5rem 1rem;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  opacity: 0;
+  transition: 0.3s ease-out;
+ }
+
+ .text-bodyGame {
+  color: rgb(255, 255, 255);
+ }
+
+ /*Text*/
+ .text-titleGame {
+  font-size: 1em;
+  font-weight: bold;
+ }
+
+ /*Hover*/
+ .cardGame:hover {
+  border-color: #22ff5a;
+  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+ }
+
+ .cardGame:hover .cardGame-button {
+  transform: translate(-50%, 50%);
+  opacity: 1;
+ }

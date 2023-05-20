@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Videojuego } from 'src/app/model/videojuego.model';
+import { JwtService } from 'src/app/service/jwt.service';
+import { VideojuegoService } from 'src/app/service/videojuego.service';
 
 @Component({
   selector: 'app-games',
@@ -8,5 +10,17 @@ import { Subscription } from 'rxjs';
 })
 export class GamesComponent {
 
-  suscription: Subscription;
+  listaVideojuegos: Videojuego[] = [];
+
+  constructor(private jwt:JwtService,private gameService: VideojuegoService){}
+
+  ngOnInit(){
+    this.getListaJuegos()
+  }
+
+  getListaJuegos(){
+    this.gameService.getAllGames().subscribe((data:Videojuego[]) =>{
+      this.listaVideojuegos = data;
+    })
+  }
 }

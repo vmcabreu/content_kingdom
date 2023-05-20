@@ -25,6 +25,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { AvatarModule } from 'primeng/avatar';
 import { FieldsetModule } from 'primeng/fieldset';
 import { TabMenuModule } from 'primeng/tabmenu';
+import { Card, CardModule } from 'primeng/card';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { TabMenuModule } from 'primeng/tabmenu';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    CardModule,
     HttpClientModule,
     ScrollPanelModule,
     ButtonModule,

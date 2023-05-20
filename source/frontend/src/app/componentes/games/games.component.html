@@ -1,1 +1,9 @@
-<p>games works!</p>
+<div class="container d-flex flex-wrap p-3 gap-2">
+  <div *ngFor="let juego of listaVideojuegos" class="cardGame">
+    <div class="cardGame-details">
+      <img class="cardGame-img" src="{{juego.imagen}}" />
+      <p class="text-titleGame">{{juego.nombre}}</p>
+      <p class="text-bodyGame">{{juego.plataforma}}</p>
+    </div>
+  </div>
+</div>
