@@ -24,6 +24,7 @@ import { Menu, MenuModule } from 'primeng/menu';
 import { TooltipModule } from 'primeng/tooltip';
 import { AvatarModule } from 'primeng/avatar';
 import { FieldsetModule } from 'primeng/fieldset';
+import { TabMenuModule } from 'primeng/tabmenu';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { FieldsetModule } from 'primeng/fieldset';
     CommonModule,
     AvatarModule,
     AppRoutingModule,
-    FieldsetModule
+    FieldsetModule,
+    TabMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

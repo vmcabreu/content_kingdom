@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__ . "/../../inc/bootstrap.php");
-
+header("Access-Control-Allow-Origin: *");
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['usuario']) && isset($_POST['passwd'])) {
         $user = $_POST['usuario'];

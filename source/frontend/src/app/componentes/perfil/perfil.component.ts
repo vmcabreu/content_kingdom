@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MenuItem } from 'primeng/api';
 import { Perfil } from 'src/app/model/perfil.mode';
 import { Publicacion } from 'src/app/model/publicacion.model';
 import { Usuario } from 'src/app/model/usuario.model';
@@ -13,32 +14,49 @@ import { PostService } from 'src/app/service/post.service';
 })
 export class PerfilComponent {
 
-  constructor(private perfilService: PerfilService,private postService: PostService,private jwt: JwtService){}
+  constructor(private perfilService: PerfilService, private postService: PostService, private jwt: JwtService) { }
 
   usuario: Usuario;
   listaPublicaciones: Publicacion[] = [];
-  perfil: Perfil;
+  perfil: Perfil = new Perfil;
+  items: MenuItem[];
 
+  activeItem: MenuItem;
 
-  ngOnInit(){
-    this.usuario= this.jwt.checkToken();
+  ngOnInit() {
+    this.usuario = this.jwt.checkToken();
+    this.items = [
+      { label: 'Biografia', icon: 'pi pi-fw pi-user' },
+      { label: 'Publicaciones', icon: 'pi pi-fw pi-comment' },
+      { label: 'Canales', icon: 'pi pi-fw pi-desktop' },
+      { label: 'Amigos', icon: 'pi pi-fw pi-users' }
+    ];
+
+    this.activeItem = this.items[0];
     this.getPublicacionesUsuario();
     this.getPerfil();
   }
 
-  getNumberPosts(){
-    console.log(this.listaPublicaciones);
+  onActiveItemChange(event) {
+    this.activeItem = event;
+  }
+
+  activateLast() {
+    this.activeItem = this.items[this.items.length - 1];
+  }
+
+  getNumberPosts() {
     return this.listaPublicaciones.length
   }
 
-  getPublicacionesUsuario(){
-    this.postService.getPublicacionesByUsuario(this.usuario.id).subscribe((data: Publicacion[]) =>{
+  getPublicacionesUsuario() {
+    this.postService.getPublicacionesByUsuario(this.usuario.id).subscribe((data: Publicacion[]) => {
       this.listaPublicaciones = data;
 
     });
   }
 
-  getPerfil(){
+  getPerfil() {
     this.perfilService.getProfilebyUserID(this.usuario.id).subscribe((data: Perfil) => {
       this.perfil = data
     });

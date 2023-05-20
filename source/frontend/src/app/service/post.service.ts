@@ -24,16 +24,16 @@ export class PostService {
     }))
   }
 
-  getPublicaciones(): Observable<Publicacion[]>{
+  getPublicaciones(): Observable<Publicacion[]> {
     return this.http.get<Publicacion[]>(`${this.url}posts/post.php`)
   }
 
-  getPublicacionesByUsuario(id:number): Observable<Publicacion[]>{
+  getPublicacionesByUsuario(id: number): Observable<Publicacion[]> {
     return this.http.get<Publicacion[]>(`${this.url}posts/post.php?idUsuario=${id}`)
   }
 
 
-  getPublicacionesOrderMeGusta(): Observable<Publicacion[]>{
+  getPublicacionesOrderMeGusta(): Observable<Publicacion[]> {
     return this.http.get<Publicacion[]>(`${this.url}posts/post.php?listType=likes`)
   }
 }

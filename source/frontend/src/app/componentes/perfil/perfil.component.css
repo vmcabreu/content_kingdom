@@ -3,28 +3,23 @@
   padding: 1.6rem;
   grid-template-columns: 0.5fr 1.7fr;
   grid-template-rows: 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
+  height: 100%;
+  gap: 0;
   align-items: center;
-  grid-template-areas:
-    "profile-menu profile-settings";
+  grid-template-areas: "profile-menu profile-settings";
+}
 
+.profile-menu,
+.profile-settings {
+  height: 100%;
 }
 
 .profile-menu {
   grid-area: profile-menu;
-  height: 100%;
-  background-color: #fff;
-  border-radius: 4px;
-  border-color: rgba(0, 0, 0, 0.175);
 }
 
 .profile-settings {
   grid-area: profile-settings;
-  height: 100%;
-  background-color: #fff;
-  border-radius: 4px;
-  border-color: rgba(0, 0, 0, 0.175);
 }
 
 :host ::ng-deep .p-fieldset-legend {
@@ -34,8 +29,29 @@
   width: 25%;
   font-size: 16px;
 }
+
 :host ::ng-deep .p-fieldset {
   border: 1px solid grey;
+}
+
+:host ::ng-deep .p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link,
+:host ::ng-deep .p-tabmenu:hover .p-tabmenu-nav:hover .p-tabmenuitem:hover .p-menuitem-link {
+  border: 1px solid crimson;
+  border-width: 1px;
+  border-color: crimson;
+  background: crimson;
+  color: #fff;
+  padding: 0.857rem 1rem;
+  font-weight: 700;
+  border-top-right-radius: 2px;
+  border-top-left-radius: 2px;
+  transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  margin: 0 0 -1px 0;
+}
+
+:host ::ng-deep .p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link {
+  background-color: rgb(117, 11, 32);
+  color: #fff;
 }
 
 @import url('https://fonts.googleapis.com/css?family=Krub:400,700');
@@ -56,22 +72,18 @@ body {
   font-family: 'Krub', sans-serif;
 }
 
-.card {
+.cardProfile {
   position: absolute;
   margin: auto;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
   width: 250px;
-  height: 400px;
+  height: 85%;
   border-radius: 10px;
   box-shadow: 0 10px 25px 5px rgba(0, 0, 0, 0.2);
   background: #151515;
   overflow: hidden;
 }
 
-.card .ds-top {
+.cardProfile .ds-top {
   position: absolute;
   margin: auto;
   top: 0;
@@ -83,7 +95,7 @@ body {
   animation: dsTop 1.5s;
 }
 
-.card .avatar-holder {
+.cardProfile .avatar-holder {
   position: absolute;
   margin: auto;
   top: 40px;
@@ -92,19 +104,19 @@ body {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  box-shadow: 0 0 0 5px #151515, inset 0 0 0 5px #000000, inset 0 0 0 5px #000000, inset 0 0 0 5px #000000, inset 0 0 0 5px #000000;
+  box-shadow: 0 0 0 5px #151515, inset 0 0 0 5px #000000;
   background: white;
   overflow: hidden;
   animation: mvTop 1.5s;
 }
 
-.card .avatar-holder img {
+.cardProfile .avatar-holder img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.card .name {
+.cardProfile .name {
   position: absolute;
   margin: auto;
   top: -60px;
@@ -117,19 +129,19 @@ body {
   animation: fadeIn 2s ease-in;
 }
 
-.card .name a {
+.cardProfile .name a {
   color: white;
   text-decoration: none;
   font-weight: 700;
   font-size: 18px;
 }
 
-.card .name a:hover {
+.cardProfile .name a:hover {
   text-decoration: underline;
   color: crimson;
 }
 
-.card .name h6 {
+.cardProfile .name h6 {
   position: absolute;
   margin: auto;
   left: 0;
@@ -139,7 +151,7 @@ body {
   width: 40px;
 }
 
-.card .button {
+.cardProfile .button {
   position: absolute;
   margin: auto;
   padding: 8px;
@@ -154,7 +166,7 @@ body {
   outline: none;
 }
 
-.card .button a {
+.cardProfile .button a {
   padding: 5px 20px;
   border-radius: 10px;
   color: white;
@@ -164,12 +176,12 @@ body {
   transition: all 1s;
 }
 
-.card .button a:hover {
+.cardProfile .button a:hover {
   color: white;
   background: crimson;
 }
 
-.card .ds-info {
+.cardProfile .ds-info {
   position: absolute;
   margin: auto;
   top: 120px;
@@ -181,9 +193,9 @@ body {
   display: flex;
 }
 
-.card .ds-info .pens,
-.card .ds-info .projects,
-.card .ds-info .posts {
+.cardProfile .ds-info .pens,
+.cardProfile .ds-info .projects,
+.cardProfile .ds-info .posts {
   position: relative;
   left: -300px;
   width: calc(250px / 3);
@@ -193,28 +205,28 @@ body {
   animation-fill-mode: forwards;
 }
 
-.card .ds-info .pens h6,
-.card .ds-info .projects h6,
-.card .ds-info .posts h6 {
+.cardProfile .ds-info .pens h6,
+.cardProfile .ds-info .projects h6,
+.cardProfile .ds-info .posts h6 {
   text-transform: uppercase;
   color: crimson;
 }
 
-.card .ds-info .pens p,
-.card .ds-info .projects p,
-.card .ds-info .posts p {
+.cardProfile .ds-info .pens p,
+.cardProfile .ds-info .projects p,
+.cardProfile .ds-info .posts p {
   font-size: 12px;
 }
 
-.card .ds-info .ds:nth-of-type(2) {
-  animation-delay: .5s;
+.cardProfile .ds-info .ds:nth-of-type(2) {
+  animation-delay: 0.5s;
 }
 
-.card .ds-info .ds:nth-of-type(1) {
+.cardProfile .ds-info .ds:nth-of-type(1) {
   animation-delay: 1s;
 }
 
-.card .ds-skill {
+.cardProfile .ds-skill {
   position: absolute;
   margin: auto;
   bottom: 10px;
@@ -225,14 +237,14 @@ body {
   animation: mvBottom 1.5s;
 }
 
-.card .ds-skill h6 {
+.cardProfile .ds-skill h6 {
   margin-bottom: 5px;
   font-weight: 700;
   text-transform: uppercase;
   color: crimson;
 }
 
-.card .ds-skill .skill h6 {
+.cardProfile .ds-skill .skill h6 {
   font-weight: 400;
   font-size: 8px;
   letter-spacing: 0.05em;
@@ -240,12 +252,12 @@ body {
   color: white;
 }
 
-.card .ds-skill .skill .fab {
+.cardProfile .ds-skill .skill .fab {
   color: crimson;
   font-size: 14px;
 }
 
-.card .ds-skill .skill .bar {
+.cardProfile .ds-skill .skill .bar {
   height: 5px;
   background: crimson;
   text-align: right;
@@ -253,26 +265,26 @@ body {
   animation: fadeIn 5s;
 }
 
-.card .ds-skill .skill .bar:hover {
+.cardProfile .ds-skill .skill .bar:hover {
   background: white;
 }
 
-.card .ds-skill .skill .bar-html {
+.cardProfile .ds-skill .skill .bar-html {
   width: 95%;
   animation: htmlSkill 1s;
-  animation-delay: .4s;
+  animation-delay: 0.4s;
 }
 
-.card .ds-skill .skill .bar-css {
+.cardProfile .ds-skill .skill .bar-css {
   width: 90%;
   animation: cssSkill 2s;
-  animation-delay: .4s;
+  animation-delay: 0.4s;
 }
 
-.card .ds-skill .skill .bar-js {
+.cardProfile .ds-skill .skill .bar-js {
   width: 75%;
   animation: jsSkill 3s;
-  animation-delay: .4s;
+  animation-delay: 0.4s;
 }
 
 @keyframes fadeInMove {
@@ -353,4 +365,3 @@ body {
   color: white;
   background: crimson;
 }
-

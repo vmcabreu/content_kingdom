@@ -38,6 +38,14 @@ CREATE TABLE IF NOT EXISTS plataforma (
   id INT auto_increment,
   nombre varchar(50) NOT NULL,
   enlace varchar(255) NOT NULL,
+  id_usuario INT NOT NULL,
+  PRIMARY KEY(id),
+  FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS etiquetas (
+  id INT auto_increment,
+  nombre varchar(50) NOT NULL,
   PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
@@ -54,6 +62,13 @@ CREATE TABLE IF NOT EXISTS publicaciones (
   PRIMARY KEY(id),
   FOREIGN KEY (id_videojuego) REFERENCES videojuegos(id),
   FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS etiquetasPublicacion (
+  id_etiqueta INT NOT NULL,
+  id_publicacion INT NOT NULL,
+  FOREIGN KEY (id_etiqueta) REFERENCES etiquetas(id),
+  FOREIGN KEY (id_publicacion) REFERENCES publicaciones(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS comentarios (

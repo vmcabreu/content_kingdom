@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Publicacion } from 'src/app/model/publicacion.model';
 import { Usuario } from 'src/app/model/usuario.model';
@@ -9,13 +9,12 @@ import { UsuarioService } from 'src/app/service/usuario.service';
 import { VideojuegoService } from 'src/app/service/videojuego.service';
 import Swal from 'sweetalert2';
 
-
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css']
 })
-export class PostsComponent {
+export class PostsComponent implements OnInit {
   isClicked = false;
   newPublicacion: Publicacion = new Publicacion();
   publicaciones: Publicacion[] = [];
@@ -24,46 +23,45 @@ export class PostsComponent {
   juegoSelected: Videojuego = new Videojuego();
   suscription: Subscription;
   usuario: Usuario;
-  listaUsuario: Usuario[] = []
+  listaUsuario: Usuario[] = [];
 
-  constructor(private postService: PostService, private videojuegoService: VideojuegoService, private jwt: JwtService,private userService: UsuarioService) { }
+  constructor(
+    private postService: PostService,
+    private videojuegoService: VideojuegoService,
+    private jwt: JwtService,
+    private userService: UsuarioService
+  ) {}
 
   ngOnInit() {
+    this.initializeData();
+  }
+
+  initializeData() {
     this.getJuegos();
     this.getUsuario();
     this.getUsuarios();
     this.getPublicaciones();
     this.getPublicacionesOrderLikes();
-    this.suscription = this.videojuegoService.getRefresh$.subscribe(() => {
-      this.getJuegos();
-    })
-    this.suscription = this.jwt.getRefresh$.subscribe(() => {
-      this.getUsuario();
-    })
-    this.suscription = this.postService.getRefresh$.subscribe(() => {
-      this.getPublicaciones();
-      this.getPublicacionesOrderLikes();
-    })
-    this.suscription = this.userService.getRefresh$.subscribe(() => {
-      this.getUsuarios();
-    })
   }
 
   getPublicaciones() {
     this.postService.getPublicaciones().subscribe((data: Publicacion[]) => {
       this.publicaciones = data;
-    })
+    });
   }
 
   getPublicacionesOrderLikes() {
     this.postService.getPublicacionesOrderMeGusta().subscribe((data: Publicacion[]) => {
+      if (typeof data === 'string') {
+        data = JSON.parse(data);
+      }
       this.topPublicaciones = data;
-    })
+    });
   }
 
   getUsuario() {
-    let token = localStorage.getItem('token')
-    if (token !== "" && token !== undefined) {
+    const token = localStorage.getItem('token');
+    if (token) {
       this.usuario = this.jwt.decodeUsuario(token);
     }
   }
@@ -75,32 +73,33 @@ export class PostsComponent {
     console.log(this.newPublicacion);
     console.log(this.usuario);
     this.postService.addPublicacion(this.newPublicacion).subscribe(() => {
+      this.refreshPublicaciones();
       Swal.fire({
         title: '¡Registro correcto!',
         icon: 'success',
         timerProgressBar: true,
-      }).then((result) => {
-        this.ngOnInit();
-      })
+      }).then(() => {
+        this.refreshPublicaciones();
+      });
     });
+  }
+
+  refreshPublicaciones() {
+    this.getPublicaciones();
+    this.getPublicacionesOrderLikes();
   }
 
   getUsuarios(): void {
     this.userService.getUserList().subscribe(
       (data: Usuario[]) => {
         this.listaUsuario = data;
-
       }
     );
   }
-  getUserName(id:number){
-    let username: string = "";
-    this.listaUsuario.forEach(element => {
-      if (element.id == id) {
-        username = element.usuario
-      }
-    });
-    return username
+
+  getUserName(id: number) {
+    const user = this.listaUsuario.find(element => element.id === id);
+    return user ? user.usuario : '';
   }
 
   formatFecha() {
@@ -112,18 +111,15 @@ export class PostsComponent {
   }
 
   selectJuego(id: number) {
-    this.listaVideojuegos.forEach(element => {
-      if (element.id == id) {
-        this.juegoSelected = element;
-      }
-    });
+    this.juegoSelected = this.listaVideojuegos.find(element => element.id === id);
   }
 
   getJuegos() {
     this.videojuegoService.getAllGames().subscribe((data: Videojuego[]) => {
       this.listaVideojuegos = data;
-    })
+    });
   }
+
   toggleLike() {
     this.isClicked = !this.isClicked;
   }

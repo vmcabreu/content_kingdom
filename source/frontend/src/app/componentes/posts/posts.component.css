@@ -202,6 +202,10 @@
   background-color: #1a1d21 !important;
 }
 
+input,select,option{
+  color: #000;
+}
+
 h1 {
   font-weight: 400;
 }
