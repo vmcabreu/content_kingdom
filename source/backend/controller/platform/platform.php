@@ -42,10 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         }
     }
 } elseif ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
-    if (isset($_GET['id']) && isset($_GET['post'])) {
+    if (isset($_GET['id'])) {
         $id = intval($_GET['id']);
-        $post = intval($_GET['post']);
-        $respuestaDelete = DAOPlataforma::deletePlataforma($id, $post);
+        $respuestaDelete = DAOPlataforma::deletePlataforma($id);
         $httpCode = $respuestaDelete > 0 ? 200 : 422;
         echo json_encode(array("respuesta" => $respuestaDelete));
         http_response_code($httpCode);
