@@ -2,6 +2,14 @@
   color: #fff;
 }
 
+.likedMG {
+  color: red;
+}
+
+.not-liked {
+  color: none;
+}
+
 .trasparentButton{
   background-color: transparent;
   border: 0px;

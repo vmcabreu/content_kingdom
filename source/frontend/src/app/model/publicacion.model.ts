@@ -7,6 +7,7 @@ export class Publicacion {
   public mensaje: string;
   public adjunto: string;
   public plataforma: string;
+  public isLiked: boolean;
 
   constructor(
     id: number = 0,
@@ -16,7 +17,8 @@ export class Publicacion {
     megusta: number = 0,
     mensaje: string = "",
     adjunto: string = "",
-    plataforma: string = ""
+    plataforma: string = "",
+    isLiked: boolean=false
   ) {
     this.id = id;
     this.id_usuario = id_usuario;
@@ -26,5 +28,6 @@ export class Publicacion {
     this.mensaje = mensaje;
     this.adjunto = adjunto;
     this.plataforma = plataforma;
+    this.isLiked = isLiked;
   }
 }

@@ -37,6 +37,9 @@ export class PostsComponent implements OnInit {
   etiquetas: Etiqueta[] = [];
   plataformas: string[] = ["Twitch", "YouTube", "TikTok", "Instagram"];
   listaLikes: Like[] = [];
+  likesMap: {
+    [postId: number]: boolean
+  } = {};
 
 
 
@@ -64,32 +67,45 @@ export class PostsComponent implements OnInit {
     this.getLikes();
   }
 
-
-  getLikes(){
+  getLikes() {
     this.likeService.getLikesList().subscribe((data: Like[]) => {
       this.listaLikes = data;
-      console.log(data);
-
-    })
+      this.likesMap = {};
+      for (const like of data) {
+        this.likesMap[like.id_publicacion] = true;
+      }
+    });
   }
 
-  checkIfIsLike(id:number){
-    return this.listaLikes.find(element => element.id_usuario === this.usuario.id && element.id_publicacion === id );
-  }
+checkIfIsLike(postId: number) {
+  return this.likesMap[postId] || false;
+}
 
-  setLike(id:number){
-    this.likeService.setLikes(this.usuario.id,id).subscribe(() => {
-     this.getLikes()
-     this.getPublicaciones();
-    })
+setLike(id: number) {
+  let post = this.publicaciones.find(element => element.id === id);
+  if (!this.checkIfIsLike(id)) {
+    post.megusta++;
+    this.likesMap[id] = true;
+    this.likeService.setLikes(this.usuario.id, id).subscribe();
   }
+}
 
-  unLike(id:number){
-    this.likeService.unLike(this.usuario.id,id).subscribe(() => {
-      this.getLikes()
-      this.getPublicaciones();
-     })
+unLike(id: number) {
+  let post = this.publicaciones.find(element => element.id === id);
+  if (this.checkIfIsLike(id)) {
+    post.megusta--;
+    this.likesMap[id] = false;
+    this.likeService.unLike(this.usuario.id, id).subscribe();
   }
+}
+
+toggleLike(id: number) {
+  if (this.checkIfIsLike(id)) {
+    this.unLike(id);
+  } else {
+    this.setLike(id);
+  }
+}
 
 
   getPublicaciones() {
@@ -234,9 +250,5 @@ export class PostsComponent implements OnInit {
         window.location.reload();
       });
     });
-  }
-
-  toggleLike() {
-    this.isClicked = !this.isClicked;
   }
 }
