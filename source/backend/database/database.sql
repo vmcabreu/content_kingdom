@@ -13,6 +13,17 @@ CREATE TABLE IF NOT EXISTS usuarios (
   PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
+CREATE TABLE IF NOT EXISTS videojuegos (
+  id INT auto_increment,
+  nombre varchar(100) NOT NULL,
+  genero varchar(50) NOT NULL,
+  fecha_lanzamiento DATE NOT NULL,
+  plataforma varchar(50) NOT NULL,
+  desarrolladores varchar(100) NOT NULL,
+  imagen TEXT NOT NULL,
+  PRIMARY KEY(id)
+) ENGINE=InnoDB;
+
 CREATE TABLE IF NOT EXISTS perfil (
   id INT auto_increment,
   canales TEXT,
@@ -23,6 +34,7 @@ CREATE TABLE IF NOT EXISTS perfil (
   PRIMARY KEY(id),
   FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
+
 
 CREATE TABLE IF NOT EXISTS publicaciones (
   id INT auto_increment,
@@ -35,7 +47,7 @@ CREATE TABLE IF NOT EXISTS publicaciones (
   plataforma VARCHAR(50),
   PRIMARY KEY(id),
   FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE,
-  FOREIGN KEY (id_videojuego) REFERENCES videojuegos(id)
+  FOREIGN KEY (id_videojuego) REFERENCES videojuegos(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS comentarios (
