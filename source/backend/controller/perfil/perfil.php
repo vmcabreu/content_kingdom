@@ -4,8 +4,9 @@ header("Access-Control-Allow-Origin: *");
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (isset($_GET['id'])) {
         $id = intval($_GET['id']);
-        $perfilById = DAOPerfil::buscarPerfil($id,1);
+        $perfilById = DAOPerfil::getPerfilById($id,1);
         if ($perfilById != null) {
+            http_response_code(200);
             echo json_encode($perfilById);
         } else {
             http_response_code(404);

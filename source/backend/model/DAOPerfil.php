@@ -6,31 +6,15 @@ class DAOPerfil
 {
     public static function getPerfilById($id)
     {
-        try {
-            $stmt = BaseDAO::consulta("SELECT * FROM perfil WHERE id_usuario='$id' LIMIT 1");
-            $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
-            unset($conexion);
-            if ($resultado) {
-                return Perfil::crearPerfil($resultado);
-            } else {
-                return null;
-            }
-        } catch (Exception $ex) {
-            die("Error en la consulta. " . $ex->getMessage());
-        }
+        $stmt = BaseDAO::consulta("SELECT * FROM perfil WHERE id_usuario='$id' LIMIT 1");
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
 
-    public static function buscarPerfil(int $id, int $limite = 100, int $offset = 0): ?array
+    public static function listaPerfil(int $limite = 100): ?array
     {
-        $respuesta = array();
-        do {
-            $resultado = BaseDAO::consulta("SELECT * FROM perfil WHERE id_usuario='$id' LIMIT $limite");
-            $filas = $resultado->fetchAll(PDO::FETCH_ASSOC);
-            $respuesta = array_merge($respuesta, $filas);
-            $offset += $limite;
-        } while (!empty($filas));
-        return empty($respuesta) ? null : $respuesta;
+        $stmt = BaseDAO::consulta("SELECT * FROM perfil LIMIT $limite");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function modificarPerfil(Perfil $perfil): int
