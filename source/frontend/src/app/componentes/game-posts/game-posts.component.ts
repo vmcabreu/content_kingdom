@@ -46,14 +46,6 @@ export class GamePostsComponent {
     })
   }
 
-  getUsuarios(): void {
-    this.userService.getUserList().subscribe(
-      (data: Usuario[]) => {
-        this.listaUsuario = data;
-      }
-    );
-  }
-
   getJuego(){
     this.gameService.getJuegoById(this.idJuego).subscribe((data: Videojuego)=>{
       this.juego = data;
@@ -63,6 +55,14 @@ export class GamePostsComponent {
   getUserName(id: number) {
     const user = this.listaUsuario.find(element => element.id === id);
     return user ? user.usuario : '';
+  }
+
+  getUsuarios(): void {
+    this.userService.getUserList().subscribe(
+      (data: Usuario[]) => {
+        this.listaUsuario = data;
+      }
+    );
   }
 
 
