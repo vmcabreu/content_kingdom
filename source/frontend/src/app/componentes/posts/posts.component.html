@@ -7,9 +7,16 @@
 
   <p-scrollPanel [style]="{ width: '100%', height: '75vh' }" class="p-2">
     <div class="post-card" *ngFor="let post of publicaciones">
-      <div class="d-flex justify-content-start align-items-center">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex">
         <div class="avatar"></div>
         <div class="avatarName p-2">{{ getUserName(post.id_usuario) }}</div>
+      </div>
+        <div>
+          <div *ngIf="post.id_usuario == usuario.id">
+            <button class="pi pi-trash p-3 deleteButton" (click)="deletePost(post.id)"></button>
+          </div>
+        </div>
       </div>
       <p class="description">{{ post.mensaje }}</p>
       <span class="datetime">{{ post.fecha }}</span>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Comentario } from 'src/app/model/comentario.model';
 import { Publicacion } from 'src/app/model/publicacion.model';
@@ -28,12 +29,14 @@ export class PostsComponent implements OnInit {
   listaUsuario: Usuario[] = [];
   postComentarios: Comentario[] = [];
   comentario: Comentario = new Comentario();
+  selectedPost: number;
 
   constructor(
     private postService: PostService,
     private videojuegoService: VideojuegoService,
     private jwt: JwtService,
-    private userService: UsuarioService
+    private userService: UsuarioService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -62,6 +65,7 @@ export class PostsComponent implements OnInit {
   }
 
   getCommentsByPostId(id: number) {
+    this.selectedPost = id;
     this.comentario.id_publicacion=id;
     this.comentario.id_usuario=this.usuario.id;
     this.postService.getComentariosFromPostId(id).subscribe((data: Comentario[]) => {
@@ -107,13 +111,32 @@ export class PostsComponent implements OnInit {
 
   deleteComentario(postID:number){
     this.postService.deleteComentario(postID).subscribe(() => {
-      this.getCommentsByPostId(this.comentario.id_publicacion);
+      this.getCommentsNumber();
+      this.getCommentsByPostId(this.selectedPost);
       Swal.fire({
         title: '¡Comentario borrado con éxito!',
         icon: 'success',
         timerProgressBar: true,
       }).then(() => {
-        this.getCommentsByPostId(this.comentario.id_publicacion);
+        this.getCommentsNumber();
+        this.getCommentsByPostId(this.selectedPost);
+        window.location.reload();
+      });
+    });
+  }
+
+  deletePost(postID:number){
+    this.postService.deleteComentario(postID).subscribe(() => {
+      this.getCommentsNumber();
+      this.getCommentsByPostId(this.selectedPost);
+      Swal.fire({
+        title: '¡Comentario borrado con éxito!',
+        icon: 'success',
+        timerProgressBar: true,
+      }).then(() => {
+        this.getCommentsNumber();
+        this.getCommentsByPostId(this.selectedPost);
+        window.location.reload();
       });
     });
   }
