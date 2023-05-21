@@ -7,6 +7,7 @@ import { UserComponent } from './componentes/user/user.component';
 import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { GamesComponent } from './componentes/games/games.component';
 import { GamePostsComponent } from './componentes/game-posts/game-posts.component';
+import { CommunityComponent } from './componentes/community/community.component';
 
 const routes: Routes = [
   {path: "", component: IndexComponent},
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: "profile", component: PerfilComponent},
   {path: "register", component: RegisterComponent},
   {path: "games", component: GamesComponent},
+  {path: "community", component: CommunityComponent},
   {path: "games/:id", component: GamePostsComponent}
 ];
 

@@ -28,6 +28,7 @@ import { TabMenuModule } from 'primeng/tabmenu';
 import { Card, CardModule } from 'primeng/card';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { GamePostsComponent } from './componentes/game-posts/game-posts.component';
+import { CommunityComponent } from './componentes/community/community.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { GamePostsComponent } from './componentes/game-posts/game-posts.componen
     UserComponent,
     PostsComponent,
     PerfilComponent,
-    GamePostsComponent
+    GamePostsComponent,
+    CommunityComponent
   ],
   imports: [
     BrowserModule,
