@@ -21,9 +21,16 @@
           No existe ninguna publicación ¡Añade una!
         </div>
         <div class="post-card" *ngFor="let post of listaPublicaciones">
-          <div class="d-flex justify-content-start align-items-center">
-            <div class="avatar"></div>
-            <div class="avatarName p-2">{{ getUserName(post.id_usuario) }}</div>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex">
+              <div class="avatar"></div>
+              <div class="avatarName p-2">{{ getUserName(post.id_usuario) }}</div>
+            </div>
+            <div>
+              <div *ngIf="post.id_usuario == usuario.id">
+                <button class="pi pi-trash p-3 deleteButton" (click)="deletePost(post.id)"></button>
+              </div>
+            </div>
           </div>
           <p class="description">{{ post.mensaje }}</p>
           <span class="datetime">{{ post.fecha }}</span>
@@ -42,11 +49,44 @@
                 </button>
               </div>
             </span>
-            <span class="pi pi-comments gap-1">4</span>
+            <span class="pi pi-comments gap-1" (click)="getCommentsByPostId(post.id)" data-bs-toggle="modal"
+              data-bs-target="#addComment">{{getNumberOfPosts(post.id)}}</span>
           </div>
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="modal fade" id="addComment" tabindex="-1" aria-hidden="true" aria-labelledby="addCommentLabel">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="cardComments">
+          <div class="chat-header">Comentarios</div>
+          <div class="chat-window">
+            <ul class="message-list">
+              <li *ngFor="let comentarios of postComentarios">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="d-flex align-items-center">
+                    <div class="avatar"></div>
+                    <div class="avatarName p-2">{{ getUserName(comentarios.id_usuario) }}</div>
+                    <div>{{comentarios.comentario}}</div>
+                  </div>
+                  <div *ngIf="comentarios.id_usuario == usuario.id">
+                    <button class="pi pi-trash p-3 deleteButton" (click)="deleteComentario(comentarios.id)"></button>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chat-input">
+            <input [(ngModel)]="comentario.comentario" type="text" class="message-input"
+              placeholder="Type your message here">
+            <button class="send-button" (click)="addComentario()">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
 </div>

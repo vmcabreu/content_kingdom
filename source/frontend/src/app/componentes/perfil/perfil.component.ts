@@ -28,6 +28,7 @@ export class PerfilComponent {
     this.items = [
       { label: 'Biografia', icon: 'pi pi-fw pi-user' },
       { label: 'Publicaciones', icon: 'pi pi-fw pi-comment' },
+      { label: 'Gustados', icon: 'pi pi-fw pi-heart' },
       { label: 'Canales', icon: 'pi pi-fw pi-desktop' },
       { label: 'Amigos', icon: 'pi pi-fw pi-users' }
     ];

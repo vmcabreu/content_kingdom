@@ -55,30 +55,11 @@ export class PostsComponent implements OnInit {
     this.getEtiquetas();
   }
 
-  getEtiquetas() {
-    this.postService.getEtiquetas().subscribe((data: Etiqueta[]) => {
-      this.etiquetas = data;
-    })
-  }
+
 
   getPublicaciones() {
     this.postService.getPublicaciones().subscribe((data: Publicacion[]) => {
       this.publicaciones = data;
-    });
-  }
-
-  getCommentsNumber() {
-    this.postService.getNumComentarios().subscribe((data: any[]) => {
-      this.commentsNumber = data;
-    });
-  }
-
-  getCommentsByPostId(id: number) {
-    this.selectedPost = id;
-    this.comentario.id_publicacion = id;
-    this.comentario.id_usuario = this.usuario.id;
-    this.postService.getComentariosFromPostId(id).subscribe((data: Comentario[]) => {
-      this.postComentarios = data;
     });
   }
 
@@ -93,39 +74,6 @@ export class PostsComponent implements OnInit {
     if (token) {
       this.usuario = this.jwt.decodeUsuario(token);
     }
-  }
-
-  getNumberOfPosts(idPost: number) {
-    const comentario = this.commentsNumber.find(element => element.id_publicacion === idPost);
-    return comentario ? comentario.numero_publicaciones : 0;
-  }
-
-  addComentario() {
-    this.postService.addComentario(this.comentario).subscribe(() => {
-      this.refreshDataAndComments();
-      Swal.fire({
-        title: '¡Has publicado con éxito!',
-        icon: 'success',
-        timerProgressBar: true,
-      }).then(() => {
-        this.refreshDataAndComments();
-        this.getCommentsByPostId(this.comentario.id_publicacion);
-      });
-    });
-  }
-
-  deleteComentario(postID: number) {
-    this.postService.deleteComentario(postID).subscribe(() => {
-      this.refreshDataAndComments();
-      Swal.fire({
-        title: '¡Comentario borrado con éxito!',
-        icon: 'success',
-        timerProgressBar: true,
-      }).then(() => {
-        this.refreshDataAndComments();
-        window.location.reload();
-      });
-    });
   }
 
   deletePost(postID: number) {
@@ -196,6 +144,60 @@ export class PostsComponent implements OnInit {
   getJuegos() {
     this.videojuegoService.getAllGames().subscribe((data: Videojuego[]) => {
       this.listaVideojuegos = data;
+    });
+  }
+
+  getEtiquetas() {
+    this.postService.getEtiquetas().subscribe((data: Etiqueta[]) => {
+      this.etiquetas = data;
+    })
+  }
+
+  getCommentsNumber() {
+    this.postService.getNumComentarios().subscribe((data: any[]) => {
+      this.commentsNumber = data;
+    });
+  }
+
+  getCommentsByPostId(id: number) {
+    this.selectedPost = id;
+    this.comentario.id_publicacion = id;
+    this.comentario.id_usuario = this.usuario.id;
+    this.postService.getComentariosFromPostId(id).subscribe((data: Comentario[]) => {
+      this.postComentarios = data;
+    });
+  }
+
+  getNumberOfPosts(idPost: number) {
+    const comentario = this.commentsNumber.find(element => element.id_publicacion === idPost);
+    return comentario ? comentario.numero_publicaciones : 0;
+  }
+
+  addComentario() {
+    this.postService.addComentario(this.comentario).subscribe(() => {
+      this.refreshDataAndComments();
+      Swal.fire({
+        title: '¡Has publicado con éxito!',
+        icon: 'success',
+        timerProgressBar: true,
+      }).then(() => {
+        this.refreshDataAndComments();
+        this.getCommentsByPostId(this.comentario.id_publicacion);
+      });
+    });
+  }
+
+  deleteComentario(postID: number) {
+    this.postService.deleteComentario(postID).subscribe(() => {
+      this.refreshDataAndComments();
+      Swal.fire({
+        title: '¡Comentario borrado con éxito!',
+        icon: 'success',
+        timerProgressBar: true,
+      }).then(() => {
+        this.refreshDataAndComments();
+        window.location.reload();
+      });
     });
   }
 
