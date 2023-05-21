@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { Like } from '../model/like.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,32 +12,31 @@ export class LikesService {
 
   private refresh$ = new Subject<void>();
 
-  get getRefresh$(){
+  get getRefresh$() {
     return this.refresh$;
   }
 
   constructor(private http: HttpClient) { }
 
-  getLikesList(){
-    return this.http.get(`${this.url}/likes/list.php`)
+  getLikesList(): Observable<Like[]> {
+    return this.http.get<Like[]>(`${this.url}/likes/list.php`)
   }
 
-  getLikesFromUsuario(id:number){
-    return this.http.get(`${this.url}/likes/list.php?id=${id}`)
+  getLikesFromUsuario(id: number): Observable<Like[]> {
+    return this.http.get<Like[]>(`${this.url}/likes/list.php?id=${id}`)
   }
 
-  getLikesFromPublicacion(id:number){
-    return this.http.get(`${this.url}/likes/list.php?post=${id}`)
+  getLikesFromPublicacion(id: number): Observable<Like[]> {
+    return this.http.get<Like[]>(`${this.url}/likes/list.php?post=${id}`)
   }
 
-  setLikes(id: number, post: number) {
+  setLikes(id: number, post: number): Observable<any> {
     const body = { id_publicacion: post, id_usuarios: id };
-    return this.http.post(`${this.url}/likes/list.php`, body);
+    return this.http.post<any>(`${this.url}/likes/list.php`, body);
   }
 
 
-  unLike(id: number, post: number) {
-    const body = { id_publicacion: post, id_usuarios: id };
-    return this.http.delete(`${this.url}/likes/list.php?id=${id}&post=${post}`);
+  unLike(id: number, post: number): Observable<any> {
+    return this.http.delete<any>(`${this.url}/likes/list.php?id=${id}&post=${post}`);
   }
 }

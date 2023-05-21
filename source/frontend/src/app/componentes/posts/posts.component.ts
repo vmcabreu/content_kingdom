@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NumberValueAccessor } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Comentario } from 'src/app/model/comentario.model';
@@ -12,6 +13,7 @@ import { PostService } from 'src/app/service/post.service';
 import { UsuarioService } from 'src/app/service/usuario.service';
 import { VideojuegoService } from 'src/app/service/videojuego.service';
 import Swal from 'sweetalert2';
+import { Like } from 'src/app/model/like.model';
 
 @Component({
   selector: 'app-posts',
@@ -33,7 +35,9 @@ export class PostsComponent implements OnInit {
   comentario: Comentario = new Comentario();
   selectedPost: number;
   etiquetas: Etiqueta[] = [];
-  plataformas: string[] = ["Twitch", "YouTube", "TikTok", "Instagram"]
+  plataformas: string[] = ["Twitch", "YouTube", "TikTok", "Instagram"];
+  listaLikes: Like[] = [];
+
 
 
   constructor(
@@ -53,13 +57,20 @@ export class PostsComponent implements OnInit {
     this.getJuegos();
     this.getUsuario();
     this.getUsuarios();
-    this.refreshData();
+    this.getPublicaciones();
+    this.getPublicacionesOrderLikes();
+    this.getCommentsNumber();
     this.getEtiquetas();
+    this.getLikes();
   }
 
 
-  getLikeFromPost(){
-    
+  getLikes(){
+    this.likeService.getLikesList().subscribe((data: Like[]) => {
+      this.listaLikes = data;
+      console.log(data);
+
+    })
   }
 
 

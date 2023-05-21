@@ -34,9 +34,7 @@ export class PostService {
 
 
   getPublicacionesOrderMeGusta(): Observable<Publicacion[]> {
-    return this.http.get<Publicacion[]>(`${this.url}posts/post.php?listType=likes`).pipe(tap(() => {
-      this.refresh$.next()
-    }))
+    return this.http.get<Publicacion[]>(`${this.url}posts/post.php?listType=likes`)
   }
 
   getPublicacionesFromGameId(idJuego: number): Observable<Publicacion[]> {
