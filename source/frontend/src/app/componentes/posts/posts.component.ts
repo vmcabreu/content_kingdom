@@ -7,6 +7,7 @@ import { Publicacion } from 'src/app/model/publicacion.model';
 import { Usuario } from 'src/app/model/usuario.model';
 import { Videojuego } from 'src/app/model/videojuego.model';
 import { JwtService } from 'src/app/service/jwt.service';
+import { LikesService } from 'src/app/service/likes.service';
 import { PostService } from 'src/app/service/post.service';
 import { UsuarioService } from 'src/app/service/usuario.service';
 import { VideojuegoService } from 'src/app/service/videojuego.service';
@@ -40,6 +41,7 @@ export class PostsComponent implements OnInit {
     private videojuegoService: VideojuegoService,
     private jwt: JwtService,
     private userService: UsuarioService,
+    private likeService: LikesService,
     private router: Router
   ) { }
 
@@ -55,6 +57,10 @@ export class PostsComponent implements OnInit {
     this.getEtiquetas();
   }
 
+
+  getLikeFromPost(){
+    
+  }
 
 
   getPublicaciones() {

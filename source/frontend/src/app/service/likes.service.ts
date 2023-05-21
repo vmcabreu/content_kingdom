@@ -17,6 +17,10 @@ export class LikesService {
 
   constructor(private http: HttpClient) { }
 
+  getLikesList(){
+    return this.http.get(`${this.url}/likes/list.php`)
+  }
+
   getLikesFromUsuario(id:number){
     return this.http.get(`${this.url}/likes/list.php?id=${id}`)
   }

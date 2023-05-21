@@ -4,6 +4,12 @@ require_once(__DIR__ . "/../inc/bootstrap.php");
 
 class DAOLikes
 {
+    public static function getListOfLikes(int $limit = 10000)
+    {
+        $stmt = BaseDAO::consulta(" SELECT * FROM megusta LIMIT $limit");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public static function getLikesFromUsuarios(int $id, int $limit = 10000)
     {
         $stmt = BaseDAO::consulta(" SELECT * FROM megusta WHERE id_usuario='$id' LIMIT $limit");
