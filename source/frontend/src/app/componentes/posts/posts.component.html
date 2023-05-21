@@ -88,11 +88,11 @@
               cols="30" rows="5" />
             <label for="plataforma">Seleccionar plataforma</label>
             <select class="form-select" name="plataforma" [(ngModel)]="newPublicacion.plataforma">
-              <option value="Twitch">Twitch</option>
+              <option *ngFor="let item of plataformas" value="{{item}}">{{item}}</option>
             </select>
             <label for="etiqueta">Seleccionar Etiquetas</label>
             <select class="form-select" name="etiqueta">
-              <option value="Gaming">Gaming</option>
+              <option *ngFor="let etiqueta of etiquetas" value="{{etiqueta.nombre}}">{{etiqueta.nombre}}</option>
             </select>
             <div>
               <label for="juegoSelect">Seleccionar Juego</label>

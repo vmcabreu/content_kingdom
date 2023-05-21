@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
 import { Publicacion } from '../model/publicacion.model';
 import { Comentario } from '../model/comentario.model';
+import { Etiqueta } from '../model/etiqueta.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,42 +21,59 @@ export class PostService {
   constructor(private http: HttpClient) { }
 
   getPublicaciones(): Observable<Publicacion[]> {
-    return this.http.get<Publicacion[]>(`${this.url}posts/post.php`)
+    return this.http.get<Publicacion[]>(`${this.url}posts/post.php`).pipe(tap(() => {
+      this.refresh$.next()
+    }))
   }
 
   getPublicacionesByUsuario(id: number): Observable<Publicacion[]> {
-    return this.http.get<Publicacion[]>(`${this.url}posts/post.php?idUsuario=${id}`)
+    return this.http.get<Publicacion[]>(`${this.url}posts/post.php?idUsuario=${id}`).pipe(tap(() => {
+      this.refresh$.next()
+    }))
   }
 
 
   getPublicacionesOrderMeGusta(): Observable<Publicacion[]> {
-    return this.http.get<Publicacion[]>(`${this.url}posts/post.php?listType=likes`)
+    return this.http.get<Publicacion[]>(`${this.url}posts/post.php?listType=likes`).pipe(tap(() => {
+      this.refresh$.next()
+    }))
   }
 
   getPublicacionesFromGameId(idJuego: number): Observable<Publicacion[]> {
-    return this.http.get<Publicacion[]>(`${this.url}posts/post.php?idJuego=${idJuego}`)
+    return this.http.get<Publicacion[]>(`${this.url}posts/post.php?idJuego=${idJuego}`).pipe(tap(() => {
+      this.refresh$.next()
+    }))
   }
 
   getComentariosFromPostId(id: number): Observable<Comentario[]> {
-    return this.http.get<Comentario[]>(`${this.url}posts/comment.php?post=${id}`)
+    return this.http.get<Comentario[]>(`${this.url}posts/comment.php?post=${id}`).pipe(tap(() => {
+      this.refresh$.next()
+    }))
   }
 
   getComentariosByUsuario(id: number): Observable<Comentario[]> {
-    return this.http.get<Comentario[]>(`${this.url}posts/comment.php?idUsuario=${id}`)
+    return this.http.get<Comentario[]>(`${this.url}posts/comment.php?idUsuario=${id}`).pipe(tap(() => {
+      this.refresh$.next()
+    }))
   }
 
   getNumComentarios(): Observable<any> {
-    return this.http.get<any>(`${this.url}posts/comment.php?listType=number`)
+    return this.http.get<any>(`${this.url}posts/comment.php?listType=number`).pipe(tap(() => {
+      this.refresh$.next()
+    }))
   }
 
   deleteComentario(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.url}posts/comment.php?id=${id}`);
+    return this.http.delete<any>(`${this.url}posts/comment.php?id=${id}`).pipe(tap(() => {
+      this.refresh$.next()
+    }));
   }
 
   deletePublicacion(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.url}posts/post.php?id=${id}`);
+    return this.http.delete<any>(`${this.url}posts/post.php?id=${id}`).pipe(tap(() => {
+      this.refresh$.next()
+    }));
   }
-
 
   addPublicacion(publicacion: Publicacion): Observable<any> {
     return this.http.post(`${this.url}posts/post.php`, publicacion, { responseType: "text" }).pipe(tap(() => {
@@ -65,6 +83,12 @@ export class PostService {
 
   addComentario(comentario: Comentario): Observable<any> {
     return this.http.post(`${this.url}posts/comment.php`, comentario, { responseType: "text" }).pipe(tap(() => {
+      this.refresh$.next()
+    }))
+  }
+
+  getEtiquetas(): Observable<Etiqueta[]> {
+    return this.http.get<Etiqueta[]>(`${this.url}tags/list.php`).pipe(tap(() => {
       this.refresh$.next()
     }))
   }

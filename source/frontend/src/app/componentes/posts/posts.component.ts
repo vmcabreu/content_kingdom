@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Comentario } from 'src/app/model/comentario.model';
+import { Etiqueta } from 'src/app/model/etiqueta.model';
 import { Publicacion } from 'src/app/model/publicacion.model';
 import { Usuario } from 'src/app/model/usuario.model';
 import { Videojuego } from 'src/app/model/videojuego.model';
@@ -30,6 +31,9 @@ export class PostsComponent implements OnInit {
   postComentarios: Comentario[] = [];
   comentario: Comentario = new Comentario();
   selectedPost: number;
+  etiquetas: Etiqueta[] = [];
+  plataformas: string[] = ["Twitch", "YouTube", "TikTok", "Instagram"]
+
 
   constructor(
     private postService: PostService,
@@ -48,6 +52,13 @@ export class PostsComponent implements OnInit {
     this.getUsuario();
     this.getUsuarios();
     this.refreshData();
+    this.getEtiquetas();
+  }
+
+  getEtiquetas() {
+    this.postService.getEtiquetas().subscribe((data: Etiqueta[]) => {
+      this.etiquetas = data;
+    })
   }
 
   getPublicaciones() {
