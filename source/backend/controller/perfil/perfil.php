@@ -19,5 +19,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $perfil = Perfil::crearPerfil($data);
     $response = DAOPerfil::modificarPerfil($perfil);
     http_response_code($response > 0 ? 200 : 422);
-    echo json_encode(array("respuesta" => $respuestaDelete));
 }

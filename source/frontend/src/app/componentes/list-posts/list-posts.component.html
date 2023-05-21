@@ -1,0 +1,147 @@
+<div class="container">
+<div class="d-flex justify-content-between align-items-center p-3 filtradoContainer">
+  <h2>Explora todas las publicaciones</h2>
+  <div>
+    <button *ngIf="usuario != null" icon="pi pi-check" data-bs-toggle="modal"
+    data-bs-target="#addPost" class="btn btn-secondary"
+    >Añadir publicación +</button>
+  </div>
+</div>
+  <div class="d-flex flex-wrap gap-2">
+    <div class="post-card" *ngFor="let post of publicaciones">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex">
+          <div class="avatar">
+            <img class="avatar" src="./../../../assets/imgs/defaultPic.png" alt="">
+          </div>
+          <div class="avatarName p-2">{{ getUserName(post.id_usuario) }}</div>
+        </div>
+        <div>
+          <div *ngIf="post.id_usuario == usuario.id">
+            <button class="pi pi-trash p-3 deleteButton" (click)="deletePost(post.id)"></button>
+          </div>
+        </div>
+      </div>
+      <div>
+      <p class="description">{{ post.mensaje }}</p>
+      <div class="d-flex gap-1 p-2 w-50">
+        <p-chip *ngFor="let tag of getTagFormPost(post.id)" label="{{tag}}" ></p-chip>
+      </div>
+      <span class="datetime">{{ post.fecha }} {{getJuegoFromPost(post.id)}} </span>
+    </div>
+      <!--
+      <div *ngIf="post.adjunto !== ''">
+        <div class="image-preview"></div>
+      </div>
+      -->
+      <div class="comment-like">
+        <span>
+          <div class="large-font text-center top-20 d-flex">
+            <div  *ngIf="checkIfIsLike(post.id); then liked else noLiked"></div>
+            <ng-template #liked>
+              <button class="like-button d-flex" (click)="toggleLike(post.id)">
+                <span id="mgfill-{{post.id}}" class="pi pi-heart-fill gap-1" style="color: red;">
+                  <div class="iconNumber">{{ post.megusta}}</div>
+                </span>
+              </button>
+            </ng-template>
+            <ng-template #noLiked>
+              <button class="like-button d-flex" (click)="toggleLike(post.id)">
+                <span id="mg-{{post.id}}" class="pi pi-heart gap-1" >
+                  <div class="iconNumber">{{ post.megusta }}</div>
+                </span>
+              </button>
+            </ng-template>
+          </div>
+        </span>
+        <span class="pi pi-comments gap-1" (click)="getCommentsByPostId(post.id)" data-bs-toggle="modal"
+          data-bs-target="#addComment">{{getNumberOfPosts(post.id)}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="addComment" tabindex="-1" aria-hidden="true" aria-labelledby="addCommentLabel">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="cardComments">
+          <div class="chat-header" id="addCommentLabel">Comentarios
+            <button class="trasparentButton"  data-bs-dismiss="modal" aria-label="Close">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-octagon" viewBox="0 0 16 16">
+                <path d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z"/>
+                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+              </svg>
+            </button>
+          </div>
+          <div class="chat-window">
+            <ul class="message-list">
+              <li *ngFor="let comentarios of postComentarios">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="d-flex align-items-center">
+                    <div class="avatar"></div>
+                    <div class="avatarName p-2">{{ getUserName(comentarios.id_usuario) }}</div>
+                    <div>{{comentarios.comentario}}</div>
+                  </div>
+                  <div *ngIf="comentarios.id_usuario == usuario.id">
+                    <button class="pi pi-trash p-3 deleteButton" (click)="deleteComentario(comentarios.id)"></button>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chat-input">
+            <input [(ngModel)]="comentario.comentario" type="text" class="message-input"
+              placeholder="Type your message here">
+            <button class="send-button" (click)="addComentario()">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="modal fade" id="addPost" tabindex="-1" aria-labelledby="addPostLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="addPostLabel">Añadir publicación</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form (submit)="addPublicacion()">
+            <label for="mensaje">Contenido</label>
+            <input type="text" name="mensaje" [(ngModel)]="newPublicacion.mensaje" class="form-control" id="mensaje"
+              cols="30" rows="5" />
+            <label for="plataforma">Seleccionar plataforma</label>
+            <select class="form-select" name="plataforma" [(ngModel)]="newPublicacion.plataforma">
+              <option *ngFor="let item of plataformas" value="{{item}}">{{item}}</option>
+            </select>
+            <label for="etiqueta">Seleccionar Etiquetas</label>
+            <div class="d-flex">
+            <select class="form-select" name="etiqueta" [(ngModel)]="newEtiqueta">
+              <option *ngFor="let etiqueta of etiquetas" [ngValue]="etiqueta">{{etiqueta.nombre}}</option>
+            </select>
+            <button type="button" class="btn btn-primary" (click)="addTagToList(newEtiqueta)">+</button>
+          </div>
+          <div class="d-flex gap-1 p-2">
+              <p-chip *ngFor="let item of tagsSelected" label="{{item.nombre}}"></p-chip>
+          </div>
+            <div>
+              <label for="juegoSelect">Seleccionar Juego</label>
+              <select class="form-select" name="juegoSelect" [(ngModel)]="newPublicacion.id_videojuego">
+                <option *ngFor="let juego of listaVideojuegos" [value]="juego.id">{{ juego.nombre }}</option>
+              </select>
+              <div>
+                {{ juegoSelected.nombre }}
+                {{ juegoSelected.fecha_lanzamiento }}
+              </div>
+            </div>
+            <label for="adjunto">Añadir archivo</label>
+            <input type="file" name="adjunto" class="form-control">
+            <button type="submit" class="btn btn-primary">Publicar</button>
+          </form>
+        </div>
+        <div class="modal-footer"></div>
+      </div>
+    </div>
+  </div>

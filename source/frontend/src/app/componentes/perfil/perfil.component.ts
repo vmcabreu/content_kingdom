@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { post } from 'jquery';
 import { MenuItem } from 'primeng/api';
 import { AmigosUsuarios } from 'src/app/model/amigos.model';
 import { Comentario } from 'src/app/model/comentario.model';
@@ -66,9 +67,26 @@ export class PerfilComponent {
     this.activeItem = event;
   }
 
+
   activateLast() {
     this.activeItem = this.items[this.items.length - 1];
   }
+
+  updateBiografia(){
+    this.perfilService.updatePerfil(this.perfil).subscribe(response => {
+      if (response.status === 200) {
+        Swal.fire({
+          title: '¡Actualizado con éxito!',
+          icon: 'success',
+          timerProgressBar: true,
+          background: '#151515'
+        }).then(() => {
+          this.getPerfil();
+        });
+      }
+    })
+  }
+
 
   getPlataformaByUsuarioId() {
     this.plataformasService.getPlataformaFromUsuarios(this.usuario.id).subscribe((data: Plataforma[]) => {
@@ -193,14 +211,17 @@ export class PerfilComponent {
   }
 
   deleteComentario(postID: number) {
-    this.postService.deleteComentario(postID).subscribe(() => {
-      Swal.fire({
-        title: '¡Comentario borrado con éxito!',
-        icon: 'success',
-        timerProgressBar: true,
-      }).then(() => {
-        window.location.reload();
-      });
+    this.postService.deleteComentario(postID).subscribe(response => {
+      if (response.status === 200) {
+        Swal.fire({
+          title: '¡Comentario borrado con éxito!',
+          icon: 'success',
+          timerProgressBar: true,
+        }).then(() => {
+          this.getCommentsByPostId(postID);
+        });
+      }
+
     });
   }
 
