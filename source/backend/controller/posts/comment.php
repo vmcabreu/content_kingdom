@@ -55,5 +55,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         http_response_code(404);
         echo json_encode(array("message" => "Error con la base de datos"));
     }
+}elseif ($_SERVER['REQUEST_METHOD'] == 'DELETE'){
+    if (isset($_GET['id'])) {
+        $id = intval($_GET['id']);
+        $respuestaDelete = DAOComentario::borrarComentario($id);
+        http_response_code($respuestaDelete > 0 ? 200 : 422);
+        return;
+    }
 }
 ?>

@@ -31,7 +31,13 @@ class DAOComentario
 
     public static function aniadirComentario(Comentario $post): int
     {
-        $sql = "INSERT INTO comentarios VALUES ('$post->id_publicacion','$post->id_usuario','$post->comentario')";
+        $sql = "INSERT INTO comentarios VALUES ($post->id,'$post->id_publicacion','$post->id_usuario','$post->comentario')";
+        return BaseDAO::consulta($sql);
+    }
+
+    public static function borrarComentario(int $id): int
+    {
+        $sql = "DELETE FROM comentarios WHERE id=$id";
         return BaseDAO::consulta($sql);
     }
 }
