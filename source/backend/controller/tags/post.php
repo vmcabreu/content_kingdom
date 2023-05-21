@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (isset($_GET['listType']) && $_GET['listType'] == "list") {
         $json = file_get_contents('php://input');
         $array = json_decode($json, true);
-        if (DAOEtiquetaPublicacion::addPlataformaList($array)) {
+        if (DAOEtiquetaPublicacion::addEtiquetaPublicacionList($array)) {
             http_response_code(200);
         } else {
             http_response_code(422);
