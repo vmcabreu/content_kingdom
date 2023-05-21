@@ -36,7 +36,7 @@ export class PostService {
     return this.http.get<Publicacion[]>(`${this.url}posts/post.php?idJuego=${idJuego}`)
   }
 
-  getComentariosFromPostId(id: Publicacion): Observable<Comentario[]> {
+  getComentariosFromPostId(id: number): Observable<Comentario[]> {
     return this.http.get<Comentario[]>(`${this.url}posts/comment.php?post=${id}`)
   }
 
@@ -44,8 +44,12 @@ export class PostService {
     return this.http.get<Comentario[]>(`${this.url}posts/comment.php?idUsuario=${id}`)
   }
 
-  getNumComentariosFromPostId(id: Publicacion): Observable<any> {
+  getNumComentarios(): Observable<any> {
     return this.http.get<any>(`${this.url}posts/comment.php?listType=number`)
+  }
+
+  deleteComentrio(id:number): Observable<any> {
+    return this.http.delete<any>(`${this.url}posts/comment.php`)
   }
 
   addPublicacion(publicacion: Publicacion): Observable<any> {

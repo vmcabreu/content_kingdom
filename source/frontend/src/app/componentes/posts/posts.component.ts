@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Comentario } from 'src/app/model/comentario.model';
 import { Publicacion } from 'src/app/model/publicacion.model';
 import { Usuario } from 'src/app/model/usuario.model';
 import { Videojuego } from 'src/app/model/videojuego.model';
@@ -23,14 +24,17 @@ export class PostsComponent implements OnInit {
   juegoSelected: Videojuego = new Videojuego();
   suscription: Subscription;
   usuario: Usuario;
+  commentsNumber: any[] = [];
   listaUsuario: Usuario[] = [];
+  postComentarios: Comentario[] = [];
+  comentario: Comentario = new Comentario();
 
   constructor(
     private postService: PostService,
     private videojuegoService: VideojuegoService,
     private jwt: JwtService,
     private userService: UsuarioService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.initializeData();
@@ -42,12 +46,27 @@ export class PostsComponent implements OnInit {
     this.getUsuarios();
     this.getPublicaciones();
     this.getPublicacionesOrderLikes();
+    this.getCommentsNumber();
   }
 
   getPublicaciones() {
     this.postService.getPublicaciones().subscribe((data: Publicacion[]) => {
       this.publicaciones = data;
     });
+  }
+
+  getCommentsNumber() {
+    this.postService.getNumComentarios().subscribe((data: any[]) => {
+      this.commentsNumber = data;
+    })
+  }
+
+  getCommentsByPostId(id: number) {
+    this.comentario.id_publicacion=id;
+    this.comentario.id_usuario=this.usuario.id;
+    this.postService.getComentariosFromPostId(id).subscribe((data: Comentario[]) => {
+      this.postComentarios = data;
+    })
   }
 
   getPublicacionesOrderLikes() {
@@ -63,16 +82,49 @@ export class PostsComponent implements OnInit {
     }
   }
 
+  getNumberOfPosts(idPost: number) {
+    if (this.commentsNumber.length == 0) {
+      return 0
+    } else {
+    let comentario = this.commentsNumber.find(element => element.id_publicacion === idPost);
+      return comentario.numero_publicaciones;
+    }
+  }
+  addComentario() {
+    this.postService.addComentario(this.comentario).subscribe(() => {
+      this.refreshPublicaciones();
+      Swal.fire({
+        title: '¡Has publicado con éxito!',
+        icon: 'success',
+        timerProgressBar: true,
+      }).then(() => {
+        this.refreshPublicaciones();
+        this.getCommentsByPostId(this.comentario.id_publicacion);
+      });
+    });
+  }
+
+  deleteComentario(postID:number){
+    this.postService.deleteComentrio(postID).subscribe(() => {
+      this.refreshPublicaciones();
+      Swal.fire({
+        title: '¡Comentario borrado con éxito!',
+        icon: 'success',
+        timerProgressBar: true,
+      }).then(() => {
+        this.refreshPublicaciones();
+      });
+    });
+  }
+
   addPublicacion() {
     this.newPublicacion.id_usuario = this.usuario.id;
     this.newPublicacion.fecha = this.formatFecha();
     this.newPublicacion.id_videojuego = Number(this.newPublicacion.id_videojuego);
-    console.log(this.newPublicacion);
-    console.log(this.usuario);
     this.postService.addPublicacion(this.newPublicacion).subscribe(() => {
       this.refreshPublicaciones();
       Swal.fire({
-        title: '¡Registro correcto!',
+        title: '¡Has publicado con éxito!',
         icon: 'success',
         timerProgressBar: true,
       }).then(() => {
@@ -84,6 +136,7 @@ export class PostsComponent implements OnInit {
   refreshPublicaciones() {
     this.getPublicaciones();
     this.getPublicacionesOrderLikes();
+    this.getCommentsNumber();
   }
 
   getUsuarios(): void {

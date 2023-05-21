@@ -57,9 +57,11 @@ CREATE TABLE IF NOT EXISTS publicaciones (
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS comentarios (
+  id INT auto_increment,
   id_publicacion INT NOT NULL,
   id_usuario INT NOT NULL,
   comentario TEXT NOT NULL,
+  PRIMARY KEY(id),
   FOREIGN KEY (id_publicacion) REFERENCES publicaciones(id) ON DELETE CASCADE,
   FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;

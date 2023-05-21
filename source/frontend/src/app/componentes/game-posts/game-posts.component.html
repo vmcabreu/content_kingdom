@@ -17,6 +17,9 @@
     <div class="p-3">
       <h2 class="fontStyling">Publicaciones sobre {{juego.nombre}}</h2>
       <div>
+        <div *ngIf="listaPublicaciones.length == 0">
+          No existe ninguna publicación ¡Añade una!
+        </div>
         <div class="post-card" *ngFor="let post of listaPublicaciones">
           <div class="d-flex justify-content-start align-items-center">
             <div class="avatar"></div>
