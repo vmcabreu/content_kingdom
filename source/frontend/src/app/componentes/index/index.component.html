@@ -1,6 +1,10 @@
 <div class="mainContainer container">
   <div class="content m-2">
-    <app-posts></app-posts>
+     <app-posts *ngIf="this.usuario != null"></app-posts>
+     <div *ngIf="this.usuario == null" class="d-flex flex-column justify-content-center align-items-center">
+     <img src="./../../../assets/imgs/CKLogo.png" alt="" style="width: 400px;">
+     <h2>¡Bienvenido a Content Kingdom!</h2>
+    </div>
   </div>
   <div class="otherContent d-flex flex-column gap-4 p-3">
     <div class="newUsers">

@@ -25,7 +25,6 @@ export class AccountComponent {
   modificarUser(){
     this.usuario.usuario = this.editedUser;
     this.userService.editUser(this.usuario).subscribe(response =>{
-      if (response === 200) {
         Swal.fire({
           title: '¡Editado con éxito!',
           icon: 'success',
@@ -33,7 +32,7 @@ export class AccountComponent {
           background: '#151515',
           color: '#fff'
         })
-      }
+
     })
 
 
@@ -41,7 +40,8 @@ export class AccountComponent {
 
   deleteUsuario(){
     Swal.fire({
-      title: '¡Editado con éxito!',
+      title: '¡Cuidado! Va a darse de baja',
+      text: "¿Esta seguro?",
       icon: 'warning',
       background: '#151515',
       color: '#fff',
@@ -51,7 +51,6 @@ export class AccountComponent {
     }).then((result)=>{
       if (result.isConfirmed) {
         this.userService.deleteUser(this.usuario.id).subscribe(response =>{
-          if (response == 200) {
             Swal.fire({
               title: 'Eliminado con éxito!',
               icon: 'success',
@@ -60,9 +59,8 @@ export class AccountComponent {
               color: '#fff'
             }).then(()=>{
               localStorage.setItem('token',"")
-              this.router.navigateByUrl("/")
+              this.router.navigateByUrl("/login")
             })
-          }
         })
       }
     })
