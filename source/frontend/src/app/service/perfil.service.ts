@@ -8,7 +8,7 @@ import { Observable, Subject } from 'rxjs';
 })
 export class PerfilService {
 
-  url: String = "http://contentkingdom.alu6618.arkania.es/api/controller/";
+  url: String = "https://contentkingdom.alu6618.arkania.es/api/controller/";
 
   private refresh$ = new Subject<void>();
 

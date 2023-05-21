@@ -8,7 +8,7 @@ import { Like } from '../model/like.model';
 })
 export class LikesService {
 
-  url: String = "http://contentkingdom.alu6618.arkania.es/api/controller";
+  url: String = "https://contentkingdom.alu6618.arkania.es/api/controller";
 
   private refresh$ = new Subject<void>();
 

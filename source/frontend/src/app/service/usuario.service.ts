@@ -14,7 +14,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class UsuarioService {
-  url: String = "http://contentkingdom.alu6618.arkania.es/api/controller/";
+  url: String = "https://contentkingdom.alu6618.arkania.es/api/controller/";
   urltest: String = "http://localhost/backend/";
 
   private refresh$ = new Subject<void>();

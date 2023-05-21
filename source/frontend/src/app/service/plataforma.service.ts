@@ -8,7 +8,7 @@ import { Plataforma } from '../model/plataforma.model';
 })
 export class PlataformaService {
 
-  url: String = "http://contentkingdom.alu6618.arkania.es/api/controller/platform/platform.php";
+  url: String = "https://contentkingdom.alu6618.arkania.es/api/controller/platform/platform.php";
 
   private refresh$ = new Subject<void>();
 

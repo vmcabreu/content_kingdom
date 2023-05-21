@@ -8,7 +8,7 @@ import { Usuario } from '../model/usuario.model';
   providedIn: 'root'
 })
 export class RegisterService {
-  url: String = "http://contentkingdom.alu6618.arkania.es/api/controller/";
+  url: String = "https://contentkingdom.alu6618.arkania.es/api/controller/";
 
   private refresh$ = new Subject<void>();
 

@@ -8,7 +8,7 @@ import { AmigosUsuarios } from '../model/amigos.model';
 })
 export class AmigosService {
 
-  url: String = "http://contentkingdom.alu6618.arkania.es/api/controller/friends/";
+  url: String = "https://contentkingdom.alu6618.arkania.es/api/controller/friends/";
 
   private refresh$ = new Subject<void>();
 

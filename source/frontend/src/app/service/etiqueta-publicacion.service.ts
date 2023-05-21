@@ -9,7 +9,7 @@ import { EtiquetasPublicacion } from '../model/etiqueta-publicacion.model';
 export class EtiquetaPublicacionService {
 
 
-  url: String = "http://contentkingdom.alu6618.arkania.es/api/controller/tags/post.php";
+  url: String = "https://contentkingdom.alu6618.arkania.es/api/controller/tags/post.php";
 
   private refresh$ = new Subject<void>();
 

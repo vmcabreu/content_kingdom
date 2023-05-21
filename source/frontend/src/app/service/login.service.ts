@@ -10,7 +10,7 @@ import { Auth } from '../model/auth.model';
 
 export class LoginService {
 
-  url: String = "http://contentkingdom.alu6618.arkania.es/api/controller/";
+  url: String = "https://contentkingdom.alu6618.arkania.es/api/controller/";
 
   private refresh$ = new Subject<void>();
 

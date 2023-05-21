@@ -8,7 +8,7 @@ import { Videojuego } from '../model/videojuego.model';
 })
 export class VideojuegoService {
 
-  url: String = "http://contentkingdom.alu6618.arkania.es/api/controller/";
+  url: String = "https://contentkingdom.alu6618.arkania.es/api/controller/";
 
   private refresh$ = new Subject<void>();
 
