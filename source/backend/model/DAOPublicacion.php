@@ -48,4 +48,13 @@ class DAOPublicacion
         $sql = "INSERT INTO publicaciones VALUES (null,'$post->id_usuario','$post->id_videojuego','$post->fecha','$post->megusta','$post->mensaje','$post->adjunto','$post->plataforma','$post->etiqueta')";
         return BaseDAO::consulta($sql);
     }
+
+    
+
+    public static function borrarPublicacion(int $id): int
+    {
+        $sql = "DELETE FROM publicaciones WHERE id=$id";
+        return BaseDAO::consulta($sql);
+    }
+
 }

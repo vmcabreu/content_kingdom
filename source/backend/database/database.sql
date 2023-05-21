@@ -21,33 +21,7 @@ CREATE TABLE IF NOT EXISTS perfil (
   profesion varchar(40),
   id_usuario INT NOT NULL,
   PRIMARY KEY(id),
-  FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
-) ENGINE=InnoDB;
-
-CREATE TABLE IF NOT EXISTS videojuegos (
-  id INT auto_increment,
-  nombre varchar(100) NOT NULL,
-  genero varchar(50) NOT NULL,
-  fecha_lanzamiento DATE NOT NULL,
-  plataforma varchar(50) NOT NULL,
-  desarrolladores varchar(100) NOT NULL,
-  imagen TEXT NOT NULL,
-  PRIMARY KEY(id)
-) ENGINE=InnoDB;
-
-CREATE TABLE IF NOT EXISTS plataforma (
-  id INT auto_increment,
-  nombre varchar(50) NOT NULL,
-  enlace varchar(255) NOT NULL,
-  id_usuario INT NOT NULL,
-  PRIMARY KEY(id),
-  FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
-) ENGINE=InnoDB;
-
-CREATE TABLE IF NOT EXISTS etiquetas (
-  id INT auto_increment,
-  nombre varchar(50) NOT NULL,
-  PRIMARY KEY(id)
+  FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS publicaciones (
@@ -59,40 +33,48 @@ CREATE TABLE IF NOT EXISTS publicaciones (
   mensaje TEXT NOT NULL,
   adjunto varchar(255),
   plataforma VARCHAR(50),
-  etiqueta VARCHAR(255),
   PRIMARY KEY(id),
-  FOREIGN KEY (id_videojuego) REFERENCES videojuegos(id),
-  FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
-) ENGINE=InnoDB;
-
-CREATE TABLE IF NOT EXISTS etiquetasPublicacion (
-  id_etiqueta INT NOT NULL,
-  id_publicacion INT NOT NULL,
-  FOREIGN KEY (id_etiqueta) REFERENCES etiquetas(id),
-  FOREIGN KEY (id_publicacion) REFERENCES publicaciones(id)
+  FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE,
+  FOREIGN KEY (id_videojuego) REFERENCES videojuegos(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS comentarios (
   id_publicacion INT NOT NULL,
   id_usuario INT NOT NULL,
   comentario TEXT NOT NULL,
-  FOREIGN KEY (id_publicacion) REFERENCES publicaciones(id),
-  FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+  FOREIGN KEY (id_publicacion) REFERENCES publicaciones(id) ON DELETE CASCADE,
+  FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS megusta (
   id_publicacion INT NOT NULL,
   id_usuario INT NOT NULL,
-  FOREIGN KEY (id_publicacion) REFERENCES publicaciones(id),
-  FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+  FOREIGN KEY (id_publicacion) REFERENCES publicaciones(id) ON DELETE CASCADE,
+  FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS plataforma (
+  id INT auto_increment,
+  nombre varchar(50) NOT NULL,
+  enlace varchar(255) NOT NULL,
+  id_usuario INT NOT NULL,
+  PRIMARY KEY(id),
+  FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS etiquetasPublicacion (
+  id_etiqueta INT NOT NULL,
+  id_publicacion INT NOT NULL,
+  FOREIGN KEY (id_etiqueta) REFERENCES etiquetas(id) ON DELETE CASCADE,
+  FOREIGN KEY (id_publicacion) REFERENCES publicaciones(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS amigos_usuarios (
   usuario_id INT NOT NULL,
   amigo_id INT NOT NULL,
   fecha_amistad DATE NOT NULL,
-  FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
-  FOREIGN KEY (amigo_id) REFERENCES usuarios(id)
+  FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+  FOREIGN KEY (amigo_id) REFERENCES usuarios(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
   
 DELIMITER $$
@@ -105,6 +87,24 @@ BEGIN
 END $$
 DELIMITER ;
 
+INSERT INTO etiquetas (nombre) VALUES
+  ('Meme'),
+  ('Gameplay'),
+  ('Edit'),
+  ('Foto'),
+  ('Ilustración'),
+  ('Tremenda Jugada'),
+  ('Clip'),
+  ('Timing'),
+  ('Comedia'),
+  ('Horror'),
+  ('Susto'),
+  ('Reacción'),
+  ('Evento'),
+  ('Música'),
+  ('OMG'),
+  ('Collab'),
+  ('AD');
 
 
 INSERT INTO videojuegos (nombre, genero, fecha_lanzamiento, plataforma, desarrolladores, imagen) VALUES

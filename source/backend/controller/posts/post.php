@@ -59,4 +59,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $publicacion->etiqueta = $data['etiqueta'];
     $response = DAOPublicacion::aniadirPublicacion($publicacion);
     http_response_code($response > 0 ? 200 : 422);
+} elseif ($_SERVER['REQUEST_METHOD'] == 'DELETE'){
+    if (isset($_GET['id'])) {
+        $id = intval($_GET['id']);
+        $respuestaDelete = DAOPublicacion::borrarPublicacion($id);
+        http_response_code($respuestaDelete > 0 ? 200 : 422);
+        return;
+    }
 }
