@@ -47,9 +47,7 @@ export class PostsComponent implements OnInit {
     this.getJuegos();
     this.getUsuario();
     this.getUsuarios();
-    this.getPublicaciones();
-    this.getPublicacionesOrderLikes();
-    this.getCommentsNumber();
+    this.refreshData();
   }
 
   getPublicaciones() {
@@ -61,22 +59,21 @@ export class PostsComponent implements OnInit {
   getCommentsNumber() {
     this.postService.getNumComentarios().subscribe((data: any[]) => {
       this.commentsNumber = data;
-    })
+    });
   }
 
   getCommentsByPostId(id: number) {
     this.selectedPost = id;
-    this.comentario.id_publicacion=id;
-    this.comentario.id_usuario=this.usuario.id;
+    this.comentario.id_publicacion = id;
+    this.comentario.id_usuario = this.usuario.id;
     this.postService.getComentariosFromPostId(id).subscribe((data: Comentario[]) => {
       this.postComentarios = data;
-
-    })
+    });
   }
 
   getPublicacionesOrderLikes() {
     this.postService.getPublicacionesOrderMeGusta().subscribe((data: Publicacion[]) => {
-      this.topPublicaciones = data
+      this.topPublicaciones = data;
     });
   }
 
@@ -88,75 +85,73 @@ export class PostsComponent implements OnInit {
   }
 
   getNumberOfPosts(idPost: number) {
-    if (this.commentsNumber.length == 0) {
-      return 0
-    } else {
-    let comentario = this.commentsNumber.find(element => element.id_publicacion === idPost);
-      return comentario.numero_publicaciones;
-    }
+    const comentario = this.commentsNumber.find(element => element.id_publicacion === idPost);
+    return comentario ? comentario.numero_publicaciones : 0;
   }
+
   addComentario() {
     this.postService.addComentario(this.comentario).subscribe(() => {
-      this.refreshPublicaciones();
+      this.refreshDataAndComments();
       Swal.fire({
         title: '¡Has publicado con éxito!',
         icon: 'success',
         timerProgressBar: true,
       }).then(() => {
-        this.refreshPublicaciones();
+        this.refreshDataAndComments();
         this.getCommentsByPostId(this.comentario.id_publicacion);
       });
     });
   }
 
-  deleteComentario(postID:number){
+  deleteComentario(postID: number) {
     this.postService.deleteComentario(postID).subscribe(() => {
-      this.getCommentsNumber();
-      this.getCommentsByPostId(this.selectedPost);
+      this.refreshDataAndComments();
       Swal.fire({
         title: '¡Comentario borrado con éxito!',
         icon: 'success',
         timerProgressBar: true,
       }).then(() => {
-        this.getCommentsNumber();
-        this.getCommentsByPostId(this.selectedPost);
+        this.refreshDataAndComments();
         window.location.reload();
       });
     });
   }
 
-  deletePost(postID:number){
-    this.postService.deletePublicacion(postID).subscribe(response => {
-      if(response.status === 200){
-        Swal.fire({
-          title: '¡Publicacion borrada con éxito!',
-          icon: 'success',
-          timerProgressBar: true,
-        }).then(() => {
-          this.refreshPublicaciones()
-        });
-      }
-    })
-
-    }
+  deletePost(postID: number) {
+    this.postService.deletePublicacion(postID).subscribe(() => {
+      Swal.fire({
+        title: '¡Publicacion borrada con éxito!',
+        icon: 'success',
+        timerProgressBar: true,
+      }).then(() => {
+        this.refreshData();
+        window.location.reload();
+      });
+    });
+  }
 
   addPublicacion() {
     this.newPublicacion.id_usuario = this.usuario.id;
     this.newPublicacion.fecha = this.formatFecha();
     this.newPublicacion.id_videojuego = Number(this.newPublicacion.id_videojuego);
     this.postService.addPublicacion(this.newPublicacion).subscribe(() => {
-      this.refreshPublicaciones();
+      this.refreshData();
       Swal.fire({
         title: '¡Has publicado con éxito!',
         icon: 'success',
         timerProgressBar: true,
       }).then(() => {
-        this.refreshPublicaciones();
+        this.refreshData();
       });
     });
   }
 
-  refreshPublicaciones() {
+  refreshDataAndComments() {
+    this.refreshData();
+    this.getCommentsByPostId(this.selectedPost);
+  }
+
+  refreshData() {
     this.getPublicaciones();
     this.getPublicacionesOrderLikes();
     this.getCommentsNumber();
