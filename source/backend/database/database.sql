@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS publicaciones (
   plataforma VARCHAR(50),
   PRIMARY KEY(id),
   FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE,
-  FOREIGN KEY (id_videojuego) REFERENCES videojuegos(id) ON DELETE CASCADE
+  FOREIGN KEY (id_videojuego) REFERENCES videojuegos(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS comentarios (
