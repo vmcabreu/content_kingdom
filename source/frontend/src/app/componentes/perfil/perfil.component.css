@@ -90,23 +90,6 @@ textarea{
 
 @import url('https://fonts.googleapis.com/css?family=Krub:400,700');
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html,
-body {
-  width: 100%;
-  height: 100%;
-}
-
-body {
-  background: #202020;
-  font-family: 'Krub', sans-serif;
-}
-
 .cardProfile {
   position: absolute;
   margin: auto;
@@ -595,4 +578,14 @@ body {
   background-color: #739ce4;
   color: rgb(0, 0, 0);
   box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+}
+
+.modal-content,
+.modal-dialog {
+  color: white;
+  background-color: #1a1d21 !important;
+}
+
+input,select,option{
+  color: #000;
 }

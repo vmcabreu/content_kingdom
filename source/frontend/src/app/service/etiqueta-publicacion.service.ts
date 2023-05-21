@@ -19,8 +19,8 @@ export class EtiquetaPublicacionService {
 
   constructor(private http: HttpClient) { }
 
-  getTagFromPost(id: number): Observable<EtiquetasPublicacion[]> {
-    return this.http.get<EtiquetasPublicacion[]>(`${this.url}?id=${id}`)
+  getTagFromPost(id: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.url}?id=${id}`)
   }
 
   getTagFromTag(id: number): Observable<EtiquetasPublicacion[]> {

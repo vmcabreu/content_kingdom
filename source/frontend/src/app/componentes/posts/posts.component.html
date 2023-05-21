@@ -18,8 +18,13 @@
           </div>
         </div>
       </div>
+      <div>
       <p class="description">{{ post.mensaje }}</p>
+      <div class="d-flex gap-1 p-2 w-50">
+        <p-chip *ngFor="let tag of getTagFormPost(post.id)" label="{{tag}}" ></p-chip>
+      </div>
       <span class="datetime">{{ post.fecha }}</span>
+    </div>
       <!--
       <div *ngIf="post.adjunto !== ''">
         <div class="image-preview"></div>
@@ -32,14 +37,14 @@
             <ng-template #liked>
               <button class="like-button d-flex" (click)="toggleLike(post.id)">
                 <span id="mgfill-{{post.id}}" class="pi pi-heart-fill gap-1" style="color: red;">
-                  <div class="iconNumber">{{ post.megusta+1 }}</div>
+                  <div class="iconNumber">{{ post.megusta}}</div>
                 </span>
               </button>
             </ng-template>
             <ng-template #noLiked>
               <button class="like-button d-flex" (click)="toggleLike(post.id)">
                 <span id="mg-{{post.id}}" class="pi pi-heart gap-1" >
-                  <div class="iconNumber">{{ post.megusta+1 }}</div>
+                  <div class="iconNumber">{{ post.megusta }}</div>
                 </span>
               </button>
             </ng-template>

@@ -39,10 +39,11 @@ export class PostsComponent implements OnInit {
   etiquetas: Etiqueta[] = [];
   plataformas: string[] = ["Twitch", "YouTube", "TikTok", "Instagram"];
   listaLikes: Like[] = [];
-  likesMap: {[postId: number]: boolean} = {};
+  likesMap: { [postId: number]: boolean } = {};
+  tagsMap: EtiquetasPublicacion[] = [];
   newEtiqueta: Etiqueta;
-  tagsSelected: Etiqueta[]=[];
-  newListEtiquetas: EtiquetasPublicacion[]=[];
+  tagsSelected: Etiqueta[] = [];
+  newListEtiquetas: EtiquetasPublicacion[] = [];
 
 
 
@@ -69,6 +70,7 @@ export class PostsComponent implements OnInit {
     this.getCommentsNumber();
     this.getEtiquetas();
     this.getLikes();
+    this.getEtiquetasFromPost();
   }
 
   getLikes() {
@@ -81,8 +83,10 @@ export class PostsComponent implements OnInit {
     });
   }
 
-  getEtiquetasFromPost(id: number) {
-    this.tagService.getTagFromPost(id).subscribe()
+  getEtiquetasFromPost() {
+    this.tagService.getListTagPost().subscribe(
+      (data: EtiquetasPublicacion[]) => { this.tagsMap = data }
+    )
   }
 
   getJuegoFromPost(id: number) {
@@ -110,6 +114,8 @@ export class PostsComponent implements OnInit {
       this.likeService.unLike(this.usuario.id, id).subscribe();
     }
   }
+
+
 
   toggleLike(id: number) {
     if (this.checkIfIsLike(id)) {
@@ -169,22 +175,31 @@ export class PostsComponent implements OnInit {
     });
   }
 
-  addTagToList(etiqueta: Etiqueta){
+  addTagToList(etiqueta: Etiqueta) {
     if (!this.tagsSelected.find(element => element.id === etiqueta.id)) {
       this.newListEtiquetas.push(new EtiquetasPublicacion(etiqueta.id))
       this.tagsSelected.push(etiqueta);
     }
   }
 
-  addEtiquetasForPost(){
-    this.postService.getPublicaciones().subscribe((data:Publicacion[]) =>{
+  addEtiquetasForPost() {
+    this.postService.getPublicaciones().subscribe((data: Publicacion[]) => {
       let id = data[0].id
       this.newListEtiquetas.forEach(element => {
         element.id_publicacion = id
       });
       this.tagService.addTagPostList(this.newListEtiquetas).subscribe()
     })
+  }
 
+  getTagFormPost(id:number) {
+    let tagList: string[] =[]
+    this.tagsMap.forEach(element => {
+      if (element.id_publicacion == id) {
+      tagList.push(this.etiquetas.find(tags => tags.id === element.id_etiqueta).nombre);
+      }
+    });
+    return tagList;
   }
 
   refreshDataAndComments() {

@@ -12,7 +12,7 @@ class DAOAmigosUsuario
 
     public static function getAmigosFromUsuarios(int $id, int $limit = 10000)
     {
-        $stmt = BaseDAO::consulta(" SELECT * FROM amigos_usuarios WHERE id_usuario='$id' LIMIT $limit");
+        $stmt = BaseDAO::consulta(" SELECT * FROM amigos_usuarios WHERE usuario_id='$id' LIMIT $limit");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -30,7 +30,7 @@ class DAOAmigosUsuario
 
     public static function deleteAmigo(int $id, int $friend): int
     {
-        $sql = "DELETE FROM amigos_usuarios WHERE id_usuario='$id' AND amigo_id='$friend'";
+        $sql = "DELETE FROM amigos_usuarios WHERE usuario_id='$id' AND amigo_id='$friend'";
         return BaseDAO::consulta($sql);
     }
 }

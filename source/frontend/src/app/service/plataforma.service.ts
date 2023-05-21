@@ -27,7 +27,7 @@ export class PlataformaService {
   }
 
   addPlataforma(plataforma: Plataforma): Observable<any> {
-    return this.http.post<any>(`${this.url}`, plataforma)
+    return this.http.post(`${this.url}`, plataforma,{responseType: "text",observe: 'response'})
   }
 
   addListaPlataforma(plataformas: Plataforma[]): Observable<any> {

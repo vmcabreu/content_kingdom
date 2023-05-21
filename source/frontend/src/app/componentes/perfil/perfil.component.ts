@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { AmigosUsuarios } from 'src/app/model/amigos.model';
 import { Comentario } from 'src/app/model/comentario.model';
 import { Etiqueta } from 'src/app/model/etiqueta.model';
 import { Perfil } from 'src/app/model/perfil.mode';
+import { Plataforma } from 'src/app/model/plataforma.model';
 import { Publicacion } from 'src/app/model/publicacion.model';
 import { Usuario } from 'src/app/model/usuario.model';
+import { AmigosService } from 'src/app/service/amigos.service';
 import { JwtService } from 'src/app/service/jwt.service';
 import { PerfilService } from 'src/app/service/perfil.service';
+import { PlataformaService } from 'src/app/service/plataforma.service';
 import { PostService } from 'src/app/service/post.service';
 import { UsuarioService } from 'src/app/service/usuario.service';
 import Swal from 'sweetalert2';
@@ -18,7 +22,7 @@ import Swal from 'sweetalert2';
 })
 export class PerfilComponent {
 
-  constructor(private perfilService: PerfilService, private postService: PostService, private jwt: JwtService, private userService: UsuarioService) { }
+  constructor(private perfilService: PerfilService, private postService: PostService, private jwt: JwtService, private userService: UsuarioService, private plataformasService: PlataformaService,private friendService: AmigosService) { }
 
   usuario: Usuario;
   listaPublicaciones: Publicacion[] = [];
@@ -31,6 +35,11 @@ export class PerfilComponent {
   selectedPost: number;
   postComentarios: Comentario[] = [];
   listaUsuario: Usuario[] = [];
+  listaAmigos: AmigosUsuarios[] = [];
+  listaPlataforma: Plataforma[] = [];
+  newPlataforma: Plataforma = new Plataforma();
+  plataformas: string[] = ["Twitch", "YouTube", "TikTok", "Instagram"];
+  imgPlataformas: string[] = ["https://cdn-icons-png.flaticon.com/512/5968/5968819.png", "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/1024px-YouTube_full-color_icon_%282017%29.svg.png", "https://cdn4.iconfinder.com/data/icons/social-media-flat-7/64/Social-media_Tiktok-512.png", "https://cdn-icons-png.flaticon.com/512/174/174855.png"]
 
   ngOnInit() {
     this.usuario = this.jwt.checkToken();
@@ -41,10 +50,11 @@ export class PerfilComponent {
       { label: 'Canales', icon: 'pi pi-fw pi-desktop' },
       { label: 'Amigos', icon: 'pi pi-fw pi-users' }
     ];
-
     this.activeItem = this.items[0];
     this.getPublicacionesUsuario();
     this.getPerfil();
+    this.getPlataformaByUsuarioId();
+    this.getListaAmigos();
   }
 
   onActiveItemChange(event) {
@@ -55,8 +65,57 @@ export class PerfilComponent {
     this.activeItem = this.items[this.items.length - 1];
   }
 
+  getPlataformaByUsuarioId() {
+    this.plataformasService.getPlataformaFromUsuarios(this.usuario.id).subscribe((data: Plataforma[]) => {
+      this.listaPlataforma = data;
+    })
+  }
+
+  addCanal() {
+    this.newPlataforma.id_usuario = this.usuario.id;
+    this.plataformasService.addPlataforma(this.newPlataforma).subscribe(response => {
+      if (response.status === 200) {
+        this.getPlataformaByUsuarioId();
+        Swal.fire({
+          title: '¡Canal añadido con éxito!',
+          icon: 'success',
+          timerProgressBar: true,
+        }).then(() => {
+          this.getPlataformaByUsuarioId();
+        });
+      }
+    });
+  }
+
+  getImage(plataforma: string) {
+    let img: string;
+    for (let index = 0; index < this.plataformas.length; index++) {
+      if (this.plataformas[index] == plataforma) {
+        img = this.imgPlataformas[index]
+      }
+    }
+    return img;
+  }
+
   getNumberPosts() {
     return this.listaPublicaciones.length
+  }
+
+
+  getListaAmigos() {
+    this.friendService.getAmigosFromUsuario(this.usuario.id).subscribe((data: AmigosUsuarios[])=>{
+      this.listaAmigos = data;
+    })
+  };
+
+  getAmigoFromLista(){
+    let lista: Usuario[] = []
+    this.listaAmigos.forEach(element => {
+      if (element.usuario_id == this.usuario.id) {
+        lista.push(this.listaUsuario.find(usuario => usuario.id == element.amigo_id))
+      }
+    });
+    return lista;
   }
 
   getPublicacionesUsuario() {
