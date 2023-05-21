@@ -1,1 +1,49 @@
+<div class="container p-3">
+  <div class="gameBackground d-flex flex-column gap-4">
+    <h1 class="fontStyling">{{juego.nombre}}</h1>
+    <div class="d-flex">
+      <img class="juegoImg" src="{{juego.imagen}}" alt="">
+      <div class="p-3">
+        <h2 class="fontStyling">Plataforma</h2>
+        <p>{{juego.plataforma}}</p>
+        <h2 class="fontStyling">Fecha Lanzamiento</h2>
+        <p>{{juego.fecha_lanzamiento}}</p>
+        <h2 class="fontStyling">Género</h2>
+        <p>{{juego.genero}}</p>
+        <h2 class="fontStyling">Desarrolladores</h2>
+        <p>{{juego.desarrolladores}}</p>
+      </div>
+    </div>
+    <div class="p-3">
+      <h2 class="fontStyling">Publicaciones sobre {{juego.nombre}}</h2>
+      <div>
+        <div class="post-card" *ngFor="let post of listaPublicaciones">
+          <div class="d-flex justify-content-start align-items-center">
+            <div class="avatar"></div>
+            <div class="avatarName p-2">{{ getUserName(post.id_usuario) }}</div>
+          </div>
+          <p class="description">{{ post.mensaje }}</p>
+          <span class="datetime">{{ post.fecha }}</span>
+          <!--
+          <div *ngIf="post.adjunto !== ''">
+            <div class="image-preview"></div>
+          </div>
+          -->
+          <div class="comment-like">
+            <span>
+              <div class="large-font text-center top-20 d-flex">
+                <button class="like-button d-flex">
+                  <span class="pi pi-heart gap-1" style="color: aliceblue;">
+                    <div class="iconNumber">{{ post.megusta }}</div>
+                  </span>
+                </button>
+              </div>
+            </span>
+            <span class="pi pi-comments gap-1">4</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
+</div>

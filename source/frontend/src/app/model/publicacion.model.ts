@@ -8,6 +8,7 @@ export class Publicacion {
   public adjunto: string;
   public plataforma: string;
   public etiqueta: string;
+  usuario: any;
 
   constructor(
     id: number = 0,

@@ -5,6 +5,7 @@
 .iconNumber {
   font-family: var(--font-family);
   text-align: center;
+  color: #fff;
 }
 
 .postLayer {

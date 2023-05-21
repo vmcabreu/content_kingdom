@@ -34,7 +34,7 @@ export class GamesComponent {
   @ViewChild('selectJuegos') selectJuegos!: ElementRef;
   @ViewChild('selectConsolas') selectConsolas!: ElementRef;
 
-  constructor(private jwt: JwtService, private gameService: VideojuegoService,private router:Router) { }
+  constructor(private jwt: JwtService, private gameService: VideojuegoService, private router: Router) { }
 
   ngOnInit() {
     this.getListaJuegos();
@@ -67,17 +67,17 @@ export class GamesComponent {
   filterGame(event: any) {
     const value = event.target.value.toLowerCase();
 
-    this.selectedItem = value; // Actualizar el juego seleccionado
+    this.selectedItem = value;
 
-    this.applyFilter(); // Aplicar el filtrado
+    this.applyFilter();
 
-    this.filterApplied = true; // Marcamos que se aplicó un filtro
+    this.filterApplied = true;
   }
 
   filterConsole() {
-    this.applyFilter(); // Aplicar el filtrado
+    this.applyFilter();
 
-    this.filterApplied = true; // Marcamos que se aplicó un filtro
+    this.filterApplied = true;
   }
 
   applyFilter() {
@@ -86,17 +86,17 @@ export class GamesComponent {
       const consolaEncontrada = juego.plataforma.toLowerCase() === this.selectedConsola.toLowerCase();
 
       if (this.selectedItem && this.selectedConsola) {
-        // Filtrar por nombre del juego y consola
+
         return nombreEncontrado && consolaEncontrada;
       } else if (this.selectedItem) {
-        // Filtrar solo por nombre del juego
+
         return nombreEncontrado;
       } else if (this.selectedConsola) {
-        // Filtrar solo por consola
+
         return consolaEncontrada;
       }
 
-      return true; // No se aplicó ningún filtro
+      return true;
     });
   }
 
@@ -106,7 +106,7 @@ export class GamesComponent {
     return consola ? consola.icon : '';
   }
 
-  navigateToGame(id:number){
-    this.router.navigateByUrl("games/"+id);
+  navigateToGame(id: number) {
+    this.router.navigateByUrl("games/" + id);
   }
 }

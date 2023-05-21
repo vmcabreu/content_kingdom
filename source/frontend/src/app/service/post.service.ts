@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
 import { Publicacion } from '../model/publicacion.model';
+import { Comentario } from '../model/comentario.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +19,6 @@ export class PostService {
 
   constructor(private http: HttpClient) { }
 
-  addPublicacion(publicacion: Publicacion): Observable<any> {
-    return this.http.post(`${this.url}posts/post.php`, publicacion, { responseType: "text" }).pipe(tap(() => {
-      this.refresh$.next()
-    }))
-  }
-
   getPublicaciones(): Observable<Publicacion[]> {
     return this.http.get<Publicacion[]>(`${this.url}posts/post.php`)
   }
@@ -37,7 +32,32 @@ export class PostService {
     return this.http.get<Publicacion[]>(`${this.url}posts/post.php?listType=likes`)
   }
 
-  getPublicacionesFromGameId(idJuego: number):Observable<Publicacion[]> {
+  getPublicacionesFromGameId(idJuego: number): Observable<Publicacion[]> {
     return this.http.get<Publicacion[]>(`${this.url}posts/post.php?idJuego=${idJuego}`)
   }
+
+  getComentariosFromPostId(id: Publicacion): Observable<Comentario[]> {
+    return this.http.get<Comentario[]>(`${this.url}posts/comment.php?post=${id}`)
+  }
+
+  getComentariosByUsuario(id: number): Observable<Comentario[]> {
+    return this.http.get<Comentario[]>(`${this.url}posts/comment.php?idUsuario=${id}`)
+  }
+
+  getNumComentariosFromPostId(id: Publicacion): Observable<any> {
+    return this.http.get<any>(`${this.url}posts/comment.php?listType=number`)
+  }
+
+  addPublicacion(publicacion: Publicacion): Observable<any> {
+    return this.http.post(`${this.url}posts/post.php`, publicacion, { responseType: "text" }).pipe(tap(() => {
+      this.refresh$.next()
+    }))
+  }
+
+  addComentario(comentario: Comentario): Observable<any> {
+    return this.http.post(`${this.url}posts/comment.php`, comentario, { responseType: "text" }).pipe(tap(() => {
+      this.refresh$.next()
+    }))
+  }
+
 }
