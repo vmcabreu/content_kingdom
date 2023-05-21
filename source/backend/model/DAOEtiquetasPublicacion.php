@@ -31,13 +31,22 @@ class DAOEtiquetaPublicacion
     {
         $values = [];
         foreach ($tagPost as $tag) {
-            $id_etiqueta = $tag->id_etiqueta;
-            $id_publicacion = $tag->id_publicacion;
-            $values[] = "('$id_etiqueta','$id_publicacion')";
+            $id_etiqueta = (int) $tag->id_etiqueta;
+            $id_publicacion = (int) $tag->id_publicacion;
+    
+            if ($id_etiqueta && $id_publicacion) {
+                $values[] = "('$id_etiqueta','$id_publicacion')";
+            }
         }
+    
+        if (empty($values)) {
+            return 0;
+        }
+    
         $sql = "INSERT INTO etiquetasPublicacion VALUES " . implode(',', $values);
         return BaseDAO::consulta($sql);
     }
+    
 
     public static function deleteEtiqueta(int $id, int $post): int
     {

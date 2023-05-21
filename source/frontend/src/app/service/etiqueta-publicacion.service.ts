@@ -36,6 +36,6 @@ export class EtiquetaPublicacionService {
   }
 
   addTagPostList(tagPost: EtiquetasPublicacion[]): Observable<any> {
-    return this.http.post<any>(`${this.url}`, tagPost)
+    return this.http.post<any>(`${this.url}?listType=list`, tagPost)
   }
 }

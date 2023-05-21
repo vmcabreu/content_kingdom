@@ -158,13 +158,13 @@ export class PostsComponent implements OnInit {
     this.newPublicacion.id_videojuego = Number(this.newPublicacion.id_videojuego);
     this.postService.addPublicacion(this.newPublicacion).subscribe(() => {
       this.refreshData();
-      this.addEtiquetasForPost(this.publicaciones[0].id);
       Swal.fire({
         title: '¡Has publicado con éxito!',
         icon: 'success',
         timerProgressBar: true,
       }).then(() => {
         this.refreshData();
+        this.addEtiquetasForPost();
       });
     });
   }
@@ -176,11 +176,15 @@ export class PostsComponent implements OnInit {
     }
   }
 
-  addEtiquetasForPost(id:number){
-    this.newListEtiquetas.forEach(element => {
-      element.id_publicacion = id
-    });
-    this.tagService.addTagPostList(this.newListEtiquetas).subscribe()
+  addEtiquetasForPost(){
+    this.userService.getUserList().subscribe((data:Usuario[]) =>{
+      let id = data[data.length-1].id
+      this.newListEtiquetas.forEach(element => {
+        element.id_publicacion = id
+      });
+      this.tagService.addTagPostList(this.newListEtiquetas).subscribe()
+    })
+
   }
 
   refreshDataAndComments() {
