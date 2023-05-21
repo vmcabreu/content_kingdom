@@ -43,6 +43,8 @@ export class LoginComponent implements OnInit {
           title: 'Credenciales inválidas',
           icon: 'error',
           timerProgressBar: true,
+          background: '#151515',
+          color: '#fff'
         });
       }
     });
@@ -53,6 +55,8 @@ export class LoginComponent implements OnInit {
       title: '¡Inicio de sesión correcto!',
       icon: 'success',
       timerProgressBar: true,
+      background: '#151515',
+      color: '#fff'
     }).then((result) => {
       this.ngOnInit();
     });

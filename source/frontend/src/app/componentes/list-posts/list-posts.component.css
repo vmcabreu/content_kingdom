@@ -1,13 +1,17 @@
 * {
   color: #fff;
 }
+.containerPosts{
+  margin-top: 80px;
+}
 
 .filtradoContainer{
   position: fixed;
+  z-index: 9999;
   width: 85vw;
   border-radius: 20px;
   background: #0e0f12;
-  padding: 1.8rem;
+  padding: 2.8rem;
   color: rgb(255, 255, 255);
 }
 

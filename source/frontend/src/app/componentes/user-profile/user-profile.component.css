@@ -9,6 +9,13 @@
   grid-template-areas: "profile-menu profile-settings";
 }
 
+.biografica{
+  width: 100%;
+  height: 250px;
+  border-radius: 8px;
+  border: 2px solid crimson;
+  color: white;
+}
 
 .trasparentButton{
   background-color: transparent;

@@ -18,12 +18,6 @@
           <p>{{getNumberPosts()}}</p>
         </div>
       </div>
-      <div class="ds-skill">
-        <h6>Canales <i class="fa fa-code" aria-hidden="true"></i></h6>
-        <div *ngFor="let channels of listaPlataforma" class="skill html d-flex">
-          <h6><i class="fab fa-html5"></i> {{channels.nombre}}</h6>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -33,15 +27,9 @@
         <p-tabMenu [model]="items" [activeItem]="activeItem"
           (activeItemChange)="onActiveItemChange($event)"></p-tabMenu>
         <div *ngIf="activeItem.label == 'Biografia'">
-          <div *ngIf="perfil.biografica != undefined"
-            class="d-flex flex-column justify-content-center align-items-center">
-            <p-scrollPanel class="p-3" [style]="{ width: '100%', height: '250px' }">
-              <textarea name="biografiaPerfil" id="biografiaPerfil" cols="50" rows="10">
+          <div *ngIf="perfil.biografica != undefined" class="p-2">
+              <div name="biografiaPerfil" id="biografiaPerfil" class="biografica p-3">
               {{perfil.biografica}}
-            </textarea>
-            </p-scrollPanel>
-            <div *ngIf="perfil.id_usuario == usuario.id">
-              <button class="btn btn-primary p-2">Cambiar Biografía</button>
             </div>
           </div>
         </div>
@@ -102,13 +90,15 @@
             </div>
           </div>
           <ng-template #showLista>
-            <div class="d-flex justify-content-between flex-wrap gap-2 p-3" style="max-width: 75%;">
+            <div class="d-flex flex-column gap-2 p-3">
+              <p-scrollPanel [style]="{ width: '100%', height: '75vh' }" class="p-2">
               <div *ngFor="let canal of listaPlataforma">
-                <a href="{{canal.enlace}}">
-
+                <a href="{{canal.enlace}}" >
                   <img  [src]="getImage(canal.nombre)" alt="" style="width: 50px;">
+                  <h2>{{canal.nombre}}</h2>
                 </a>
               </div>
+            </p-scrollPanel>
             </div>
           </ng-template>
         </div>

@@ -32,6 +32,7 @@ import { CommunityComponent } from './componentes/community/community.component'
 import { ChipModule } from 'primeng/chip';
 import { UserProfileComponent } from './componentes/user-profile/user-profile.component';
 import { ListPostsComponent } from './componentes/list-posts/list-posts.component';
+import { AccountComponent } from './componentes/account/account.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { ListPostsComponent } from './componentes/list-posts/list-posts.componen
     GamePostsComponent,
     CommunityComponent,
     UserProfileComponent,
-    ListPostsComponent
+    ListPostsComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,

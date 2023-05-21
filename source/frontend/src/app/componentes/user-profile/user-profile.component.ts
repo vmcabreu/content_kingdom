@@ -91,6 +91,8 @@ export class UserProfileComponent {
           title: '¡Canal añadido con éxito!',
           icon: 'success',
           timerProgressBar: true,
+          background: '#151515',
+          color: '#fff'
         }).then(() => {
           this.getPlataformaByUsuarioId();
         });
@@ -187,6 +189,8 @@ export class UserProfileComponent {
         title: '¡Has publicado con éxito!',
         icon: 'success',
         timerProgressBar: true,
+        background: '#151515',
+        color: '#fff'
       }).then(() => {
         this.getCommentsByPostId(this.comentario.id_publicacion);
       });
@@ -199,6 +203,8 @@ export class UserProfileComponent {
         title: '¡Comentario borrado con éxito!',
         icon: 'success',
         timerProgressBar: true,
+        background: '#151515',
+        color: '#fff'
       }).then(() => {
         window.location.reload();
       });
@@ -211,6 +217,8 @@ export class UserProfileComponent {
         title: '¡Publicacion borrada con éxito!',
         icon: 'success',
         timerProgressBar: true,
+        background: '#151515',
+        color: '#fff'
       }).then(() => {
         window.location.reload();
       });

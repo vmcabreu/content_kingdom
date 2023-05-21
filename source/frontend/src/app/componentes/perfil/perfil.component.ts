@@ -30,6 +30,7 @@ export class PerfilComponent {
   ruta: string[] = this.router.url.split("/")
   listaPublicaciones: Publicacion[] = [];
   listaGustados: Publicacion[] = [];
+  biografia: string = "";
   perfil: Perfil = new Perfil;
   items: MenuItem[];
   comentario: Comentario = new Comentario;
@@ -79,7 +80,8 @@ export class PerfilComponent {
           title: '¡Actualizado con éxito!',
           icon: 'success',
           timerProgressBar: true,
-          background: '#151515'
+          background: '#151515',
+          color: '#fff'
         }).then(() => {
           this.getPerfil();
         });
@@ -103,6 +105,8 @@ export class PerfilComponent {
           title: '¡Canal añadido con éxito!',
           icon: 'success',
           timerProgressBar: true,
+          background: '#151515',
+          color: '#fff'
         }).then(() => {
           this.getPlataformaByUsuarioId();
         });
@@ -204,6 +208,8 @@ export class PerfilComponent {
         title: '¡Has publicado con éxito!',
         icon: 'success',
         timerProgressBar: true,
+        background: '#151515',
+        color: '#fff'
       }).then(() => {
         this.getCommentsByPostId(this.comentario.id_publicacion);
       });
@@ -217,6 +223,8 @@ export class PerfilComponent {
           title: '¡Comentario borrado con éxito!',
           icon: 'success',
           timerProgressBar: true,
+          background: '#151515',
+          color: '#fff'
         }).then(() => {
           this.getCommentsByPostId(postID);
         });
@@ -231,6 +239,8 @@ export class PerfilComponent {
         title: '¡Publicacion borrada con éxito!',
         icon: 'success',
         timerProgressBar: true,
+        background: '#151515',
+        color: '#fff'
       }).then(() => {
         window.location.reload();
       });

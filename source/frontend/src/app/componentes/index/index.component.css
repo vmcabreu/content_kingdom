@@ -225,3 +225,21 @@
 .like-button.clicked .like-icon:after {
   opacity: 1;
 }
+
+@media (min-width: 768px) {
+  .mainContainer {
+    grid-template-columns: 1.7fr 1.3fr;
+    grid-template-areas: "content otherContent";
+  }
+
+  .otherContent {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "bestPosts" "newUsers";
+  }
+
+  .newUsers,
+  .bestPosts {
+    margin-left: 0;
+  }
+}

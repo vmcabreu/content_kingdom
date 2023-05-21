@@ -41,6 +41,8 @@ export class RegisterComponent {
             title: '¡Registro correcto!',
             icon: 'success',
             timerProgressBar: true,
+            background: '#151515',
+            color: '#fff'
           }).then((result) => {
             this.router.navigateByUrl("/login");
           })

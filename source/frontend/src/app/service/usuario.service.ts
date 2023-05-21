@@ -41,4 +41,12 @@ export class UsuarioService {
   getNewUserList():Observable<Usuario[]> {
     return this.http.get<Usuario[]>(this.url+'usuario/list.php?list=new');
   }
+
+  editUser(user:Usuario):Observable<any>{
+    return this.http.put(this.url+'usuario/update.php',user,{responseType:"text",observe:"response"})
+  }
+
+  deleteUser(id:number):Observable<any>{
+    return this.http.delete(this.url+'usuario/delete.php?id='+id,{responseType:"text",observe:"response"})
+  }
 }

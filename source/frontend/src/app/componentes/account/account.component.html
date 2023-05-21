@@ -1,0 +1,21 @@
+<div class="p-3">
+<div class="container">
+  <div class="d-flex flex-column align-items-center justify-content-center  p-3">
+    <img class="avatar" src="./../../../assets/imgs/defaultPic.png">
+    <div class="d-flex flex-column align-items-center gap-2">
+      <h3>Nombre:</h3>
+      <div *ngIf="modificarUsuario == false">{{this.usuario.usuario}}</div>
+      <input class="form-control" *ngIf="modificarUsuario == true" value="{{this.usuario.usuario}}" [(ngModel)]="editedUser"/>
+    </div>
+    <div class="d-flex flex-column align-items-center gap-2">
+      <h3>Opciones:</h3>
+      <div class="d-flex justify-content-around gap-4">
+      <button class="btn btn-danger" (click)="deleteUsuario()">Darse de Baja</button>
+      <button *ngIf="modificarUsuario == false" class="btn btn-primary" (click)="modificarUsuario = true">Modificar Usuario</button>
+      <button *ngIf="modificarUsuario == true" class="btn btn-secondary" (click)="modificarUsuario = false">Dejar de Modificar</button>
+      <button *ngIf="modificarUsuario == true" class="btn btn-success" (click)="modificarUser()">Editar</button>
+    </div>
+    </div>
+  </div>
+</div>
+</div>

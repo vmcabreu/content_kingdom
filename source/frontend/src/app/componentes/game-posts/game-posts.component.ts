@@ -98,6 +98,8 @@ export class GamePostsComponent {
         title: '¡Has publicado con éxito!',
         icon: 'success',
         timerProgressBar: true,
+        background: '#151515',
+        color: '#fff'
       }).then(() => {
         this.getCommentsByPostId(this.comentario.id_publicacion);
       });
@@ -110,6 +112,8 @@ export class GamePostsComponent {
         title: '¡Comentario borrado con éxito!',
         icon: 'success',
         timerProgressBar: true,
+        background: '#151515',
+        color: '#fff'
       }).then(() => {
         window.location.reload();
       });
@@ -122,6 +126,8 @@ export class GamePostsComponent {
         title: '¡Publicacion borrada con éxito!',
         icon: 'success',
         timerProgressBar: true,
+        background: '#151515',
+        color: '#fff'
       }).then(() => {
         window.location.reload();
       });

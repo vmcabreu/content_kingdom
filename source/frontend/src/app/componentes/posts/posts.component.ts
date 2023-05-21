@@ -151,6 +151,8 @@ export class PostsComponent implements OnInit {
         title: '¡Publicacion borrada con éxito!',
         icon: 'success',
         timerProgressBar: true,
+        background: '#151515',
+        color: '#fff'
       }).then(() => {
         this.refreshData();
         window.location.reload();
@@ -168,6 +170,8 @@ export class PostsComponent implements OnInit {
         title: '¡Has publicado con éxito!',
         icon: 'success',
         timerProgressBar: true,
+        background: '#151515',
+        color: '#fff'
       }).then(() => {
         this.refreshData();
         this.addEtiquetasForPost();
@@ -277,6 +281,8 @@ export class PostsComponent implements OnInit {
         title: '¡Has publicado con éxito!',
         icon: 'success',
         timerProgressBar: true,
+        background: '#151515',
+        color: '#fff'
       }).then(() => {
         this.refreshDataAndComments();
         this.getCommentsByPostId(this.comentario.id_publicacion);
@@ -291,6 +297,8 @@ export class PostsComponent implements OnInit {
         title: '¡Comentario borrado con éxito!',
         icon: 'success',
         timerProgressBar: true,
+        background: '#151515',
+        color: '#fff'
       }).then(() => {
         this.refreshDataAndComments();
         window.location.reload();
