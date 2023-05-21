@@ -49,7 +49,7 @@ export class PostService {
   }
 
   deleteComentario(id: number): Observable<any> {
-    return this.http.delete(`${this.url}posts/comment.php?id=${id}`, { responseType: "text" });
+    return this.http.delete<any>(`${this.url}posts/comment.php?id=${id}`);
   }
 
 
