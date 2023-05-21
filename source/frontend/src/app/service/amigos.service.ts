@@ -31,7 +31,7 @@ export class AmigosService {
   }
 
   addAmigo(amigoUsuario: AmigosUsuarios): Observable<any> {
-    return this.http.post<any>(`${this.url}list.php`, amigoUsuario)
+    return this.http.post(`${this.url}list.php`, amigoUsuario,{responseType: "text",observe: 'response'})
   }
 
   deleteAmigo(id: number, friend: number): Observable<any> {

@@ -8,6 +8,7 @@ import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { GamesComponent } from './componentes/games/games.component';
 import { GamePostsComponent } from './componentes/game-posts/game-posts.component';
 import { CommunityComponent } from './componentes/community/community.component';
+import { UserProfileComponent } from './componentes/user-profile/user-profile.component';
 
 const routes: Routes = [
   {path: "", component: IndexComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: "register", component: RegisterComponent},
   {path: "games", component: GamesComponent},
   {path: "community", component: CommunityComponent},
+  {path: "profile/:id", component: UserProfileComponent},
   {path: "games/:id", component: GamePostsComponent}
 ];
 

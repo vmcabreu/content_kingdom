@@ -17,16 +17,17 @@ import { UsuarioService } from 'src/app/service/usuario.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-perfil',
-  templateUrl: './perfil.component.html',
-  styleUrls: ['./perfil.component.css']
+  selector: 'app-user-profile',
+  templateUrl: './user-profile.component.html',
+  styleUrls: ['./user-profile.component.css']
 })
-export class PerfilComponent {
+export class UserProfileComponent {
 
   constructor(private perfilService: PerfilService, private postService: PostService, private jwt: JwtService, private userService: UsuarioService, private plataformasService: PlataformaService,private friendService: AmigosService,private router: Router) { }
 
   usuario: Usuario;
-  ruta: string[] = this.router.url.split("/")
+  tokenUsuario: Usuario = this.jwt.checkToken();
+  id: number = Number(this.router.url.split("/")[2]);
   listaPublicaciones: Publicacion[] = [];
   perfil: Perfil = new Perfil;
   items: MenuItem[];
@@ -45,7 +46,7 @@ export class PerfilComponent {
 
 
   ngOnInit() {
-    this.usuario = this.jwt.checkToken();
+    this.getUsuario();
     this.items = [
       { label: 'Biografia', icon: 'pi pi-fw pi-user' },
       { label: 'Publicaciones', icon: 'pi pi-fw pi-comment' },
@@ -54,10 +55,17 @@ export class PerfilComponent {
       { label: 'Amigos', icon: 'pi pi-fw pi-users' }
     ];
     this.activeItem = this.items[0];
-    this.getPublicacionesUsuario();
-    this.getPerfil();
-    this.getPlataformaByUsuarioId();
-    this.getListaAmigos();
+  }
+
+  getUsuario(){
+    this.userService.getUser(this.id).subscribe((data: Usuario)=>{
+      this.usuario = data;
+      this.getPublicacionesUsuario();
+      this.getPerfil();
+      this.getPlataformaByUsuarioId();
+      this.getListaAmigos();
+      this.getUsuarios();
+    })
   }
 
   onActiveItemChange(event) {

@@ -30,6 +30,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { GamePostsComponent } from './componentes/game-posts/game-posts.component';
 import { CommunityComponent } from './componentes/community/community.component';
 import { ChipModule } from 'primeng/chip';
+import { UserProfileComponent } from './componentes/user-profile/user-profile.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { ChipModule } from 'primeng/chip';
     PostsComponent,
     PerfilComponent,
     GamePostsComponent,
-    CommunityComponent
+    CommunityComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

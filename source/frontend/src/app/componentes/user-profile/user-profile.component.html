@@ -28,7 +28,7 @@
   </div>
 
   <div class="profile-settings">
-    <div class="container">
+    <div class="container-fluid">
       <div class="cardProfile" style="width: fit-content;">
         <p-tabMenu [model]="items" [activeItem]="activeItem"
           (activeItemChange)="onActiveItemChange($event)"></p-tabMenu>
@@ -60,7 +60,7 @@
                     <div class="avatarName p-2">{{usuario.usuario}}</div>
                   </div>
                   <div>
-                    <div *ngIf="post.id_usuario == usuario.id">
+                    <div *ngIf="tokenUsuario.id == usuario.id">
                       <button class="pi pi-trash p-3 deleteButton" (click)="deletePost(post.id)"></button>
                     </div>
                   </div>
@@ -90,7 +90,7 @@
           </ng-template>
           <ng-template #emptyMessage>
             <div class="d-flex justify-content-center align-items-center" style="color: aliceblue;">
-              <p class="p-3">No hay publicaciones tuyas, ¡Añade alguna y podrás verla aquí!</p>
+              <p class="p-3" style="max-width: fit-content;">No hay publicaciones tuyas, ¡Añade alguna y podrás verla aquí!</p>
             </div>
           </ng-template>
         </div>
@@ -98,15 +98,11 @@
         <div *ngIf="activeItem.label == 'Canales'">
           <div *ngIf="listaPlataforma.length == 0;else showLista">
             <div class="d-flex flex-column justify-content-center align-items-center" style="color: aliceblue;">
-              <p class="p-3">No has añadido ningún canal, ¡Añadelo para que la comunidad sepa de tu contenido!</p>
-              <span data-bs-toggle="modal" data-bs-target="#addPlataforma"
-                style="cursor: pointer; font-weight: bold;">Añade aquí tu canal</span>
+              <p class="p-3">Aun no ha añadido ningún comentario</p>
             </div>
           </div>
           <ng-template #showLista>
-            <button data-bs-toggle="modal" data-bs-target="#addPlataforma" class="btn btn-secondary w-100">+ Añadir
-              Canal</button>
-            <div class="d-flex gap-2 p-3" style="max-width: fit-content;">
+            <div class="d-flex justify-content-between flex-wrap gap-2 p-3" style="max-width: 75%;">
               <div *ngFor="let canal of listaPlataforma">
                 <a href="{{canal.enlace}}">
 
@@ -120,9 +116,7 @@
         <div *ngIf="activeItem.label == 'Amigos'">
           <div *ngIf="listaAmigos.length == 0;else showAmigos"
           class="d-flex flex-column justify-content-center align-items-center" style="color: aliceblue;">
-            <p class="p-3">No has añadido a nadie a tu lista, ¡Busca en la comunidad para añadir a quien te caiga bien!</p>
-            <a routerLink="/community"
-              style="cursor: pointer; font-weight: bold;">Busca aquí</a>
+            <p class="p-3">Esta persona aun no sigue a nadie.</p>
           </div>
           <ng-template #showAmigos>
             <div *ngFor="let amigo of getAmigoFromLista()">

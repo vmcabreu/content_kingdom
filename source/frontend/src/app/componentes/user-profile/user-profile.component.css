@@ -1,0 +1,591 @@
+.containerMain {
+  display: grid;
+  padding: 1.6rem;
+  grid-template-columns: 0.5fr 1.7fr;
+  grid-template-rows: 1fr;
+  height: 100%;
+  gap: 0;
+  align-items: center;
+  grid-template-areas: "profile-menu profile-settings";
+}
+
+
+.trasparentButton{
+  background-color: transparent;
+  border: 0px;
+  color: white;
+}
+
+.datetime {
+  font-size: 12px;
+  color: rgb(168, 179, 207);
+  margin: 10px 0;
+}
+
+.description {
+  color: aliceblue;
+}
+
+.deleteButton{
+  background-color: transparent;
+  border: 0px;
+  color: whitesmoke;
+}
+.deleteButton:hover{
+  color: red;
+}
+
+textarea{
+  background-color: #3a3a3a8c;
+  color: aliceblue;
+  border: 0px;
+  border: 1px solid crimson;
+}
+
+
+.profile-menu,
+.profile-settings {
+  height: 100%;
+}
+
+.profile-menu {
+  grid-area: profile-menu;
+}
+
+.profile-settings {
+  grid-area: profile-settings;
+}
+
+:host ::ng-deep .p-fieldset-legend {
+  color: #2d79db;
+  background-color: transparent;
+  border: 1px solid grey;
+  width: 25%;
+  font-size: 16px;
+}
+
+:host ::ng-deep .p-fieldset {
+  border: 1px solid grey;
+}
+
+:host ::ng-deep .p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link,
+:host ::ng-deep .p-tabmenu:hover .p-tabmenu-nav:hover .p-tabmenuitem:hover .p-menuitem-link {
+  border: 1px solid crimson;
+  border-width: 1px;
+  border-color: crimson;
+  background: crimson;
+  color: #fff;
+  padding: 0.857rem 1rem;
+  font-weight: 700;
+  border-top-right-radius: 2px;
+  border-top-left-radius: 2px;
+  transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  margin: 0 0 -1px 0;
+}
+
+:host ::ng-deep .p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link {
+  background-color: rgb(117, 11, 32);
+  color: #fff;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Krub:400,700');
+
+.cardProfile {
+  position: absolute;
+  margin: auto;
+  width: 250px;
+  height: 85%;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px 5px rgba(0, 0, 0, 0.2);
+  background: #151515;
+  overflow: hidden;
+}
+
+.cardProfile .ds-top {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 300px;
+  height: 80px;
+  background: crimson;
+  animation: dsTop 1.5s;
+}
+
+.cardProfile .avatar-holder {
+  position: absolute;
+  margin: auto;
+  top: 40px;
+  right: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 5px #151515, inset 0 0 0 5px #000000;
+  background: white;
+  overflow: hidden;
+  animation: mvTop 1.5s;
+}
+
+.cardProfile .avatar-holder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cardProfile .name {
+  position: absolute;
+  margin: auto;
+  top: -60px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: inherit;
+  height: 40px;
+  text-align: center;
+  animation: fadeIn 2s ease-in;
+}
+
+.cardProfile .name a {
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.cardProfile .name a:hover {
+  text-decoration: underline;
+  color: crimson;
+}
+
+.cardProfile .name h6 {
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: white;
+  width: 40px;
+}
+
+.cardProfile .button {
+  position: absolute;
+  margin: auto;
+  padding: 8px;
+  top: 20px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: inherit;
+  height: 40px;
+  text-align: center;
+  animation: fadeIn 2s ease-in;
+  outline: none;
+}
+
+.cardProfile .button a {
+  padding: 5px 20px;
+  border-radius: 10px;
+  color: white;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  font-size: 10px;
+  transition: all 1s;
+}
+
+.cardProfile .button a:hover {
+  color: white;
+  background: crimson;
+}
+
+.cardProfile .ds-info {
+  position: absolute;
+  margin: auto;
+  top: 120px;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: inherit;
+  height: 40px;
+  display: flex;
+}
+
+.cardProfile .ds-info .pens,
+.cardProfile .ds-info .projects,
+.cardProfile .ds-info .posts {
+  position: relative;
+  left: -300px;
+  width: calc(250px / 3);
+  text-align: center;
+  color: white;
+  animation: fadeInMove 2s;
+  animation-fill-mode: forwards;
+}
+
+.cardProfile .ds-info .pens h6,
+.cardProfile .ds-info .projects h6,
+.cardProfile .ds-info .posts h6 {
+  text-transform: uppercase;
+  color: crimson;
+}
+
+.cardProfile .ds-info .pens p,
+.cardProfile .ds-info .projects p,
+.cardProfile .ds-info .posts p {
+  font-size: 12px;
+}
+
+.cardProfile .ds-info .ds:nth-of-type(2) {
+  animation-delay: 0.5s;
+}
+
+.cardProfile .ds-info .ds:nth-of-type(1) {
+  animation-delay: 1s;
+}
+
+.cardProfile .ds-skill {
+  position: absolute;
+  margin: auto;
+  bottom: 10px;
+  right: 0;
+  left: 0;
+  width: 200px;
+  height: 100px;
+  animation: mvBottom 1.5s;
+}
+
+.cardProfile .ds-skill h6 {
+  margin-bottom: 5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: crimson;
+}
+
+.cardProfile .ds-skill .skill h6 {
+  font-weight: 400;
+  font-size: 8px;
+  letter-spacing: 0.05em;
+  margin: 4px 0;
+  color: white;
+}
+
+.cardProfile .ds-skill .skill .fab {
+  color: crimson;
+  font-size: 14px;
+}
+
+.cardProfile .ds-skill .skill .bar {
+  height: 5px;
+  background: crimson;
+  text-align: right;
+  padding-top: 5px;
+  animation: fadeIn 5s;
+}
+
+.cardProfile .ds-skill .skill .bar:hover {
+  background: white;
+}
+
+.cardProfile .ds-skill .skill .bar-html {
+  width: 95%;
+  animation: htmlSkill 1s;
+  animation-delay: 0.4s;
+}
+
+.cardProfile .ds-skill .skill .bar-css {
+  width: 90%;
+  animation: cssSkill 2s;
+  animation-delay: 0.4s;
+}
+
+.cardProfile .ds-skill .skill .bar-js {
+  width: 75%;
+  animation: jsSkill 3s;
+  animation-delay: 0.4s;
+}
+
+@keyframes fadeInMove {
+  0% {
+    opacity: 0;
+    left: -300px;
+  }
+
+  100% {
+    opacity: 1;
+    left: 0;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes htmlSkill {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 95%;
+  }
+}
+
+@keyframes cssSkill {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 90%;
+  }
+}
+
+@keyframes jsSkill {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 75%;
+  }
+}
+
+@keyframes mvBottom {
+  0% {
+    bottom: -150px;
+  }
+
+  100% {
+    bottom: 10px;
+  }
+}
+
+@keyframes mvTop {
+  0% {
+    top: -150px;
+  }
+
+  100% {
+    top: 40px;
+  }
+}
+
+@keyframes dsTop {
+  0% {
+    top: -150px;
+  }
+
+  100% {
+    top: 0;
+  }
+}
+
+.following {
+  color: white;
+  background: crimson;
+}
+
+.post-card {
+  width: 100%;
+  background: #181b20;
+  border: 1px solid rgb(84, 90, 106);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+}
+
+.avatarName {
+  color: #fff;
+}
+
+.avatar {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  background: linear-gradient(to top left, blueviolet, rgb(73, 31, 112));
+}
+
+.title {
+  font-size: 20px;
+  line-height: 22px;
+  font-weight: 600;
+  margin-top: 10px;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.35s ease-in;
+}
+
+.title:hover {
+  text-decoration: underline;
+  color: blueviolet;
+}
+
+.datetime {
+  font-size: 12px;
+  color: rgb(168, 179, 207);
+  margin: 10px 0;
+}
+
+.image-preview {
+  flex: 1;
+  min-height: 150px;
+  width: 100%;
+  border-radius: 20px;
+  background: linear-gradient(to top left, blueviolet, rgb(73, 31, 112));
+  margin-bottom: 4px;
+}
+
+.comment-like {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: aliceblue;
+  padding: 2px 0;
+}
+
+.comment-like span {
+  cursor: pointer;
+  height: 40px;
+  width: 80px;
+  padding: 0 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  border-radius: 10px;
+  background-color: transparent;
+  transition: all 0.15s ease;
+}
+
+.comment-like span:hover {
+  background-color: #002f50;
+}
+
+.comment-like span svg {
+  fill: #fff;
+  margin-right: 2px;
+}
+
+.searchPost {
+  width: 97%;
+}
+
+.like-button {
+  position: relative;
+  display: inline-block;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 20px;
+  text-align: center;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.like-button .like-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background-image: url('./../../../assets/imgs/hollowHeart.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.like-button.clicked .like-icon:before,
+.like-button.clicked .like-icon:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+.iconNumber {
+  font-family: var(--font-family);
+  text-align: center;
+  color: #fff;
+}
+
+
+.cardComments {
+  width: 100%;
+  background-color: #1a1d21;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.chat-header {
+  background-color: #262f3f;
+  color: #fff;
+  padding: 10px;
+  font-size: 18px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.chat-window {
+  height: 220px;
+  overflow-y: scroll;
+}
+
+.message-list {
+  color: aliceblue;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.chat-input {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.message-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 5px;
+  font-size: 14px;
+}
+
+.send-button {
+  border: none;
+  outline: none;
+  background-color: #1a2538;
+  color: #fff;
+  font-size: 14px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.send-button:hover {
+  background-color: #739ce4;
+  color: rgb(0, 0, 0);
+  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+}
+
+.modal-content,
+.modal-dialog {
+  color: white;
+  background-color: #1a1d21 !important;
+}
+
+input,select,option{
+  color: #000;
+}

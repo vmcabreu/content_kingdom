@@ -1,5 +1,5 @@
 <div class="mainContainer container">
-  <div class="content m-2"  >
+  <div class="content m-2">
     <app-posts></app-posts>
   </div>
   <div class="otherContent d-flex flex-column gap-4 p-3">
@@ -7,7 +7,10 @@
       <h3>Nuevos usuarios</h3>
       <p-scrollPanel>
         <ng-container *ngFor="let newUser of newUsuarios">
-          <p>{{newUser.usuario}}</p>
+          <div class="d-flex justify-content-start align-items-center gap-2">
+            <img class="avatar" src="./../../../assets/imgs/defaultPic.png" alt="">
+            <a routerLink="/profile/{{newUser.id}}" style="text-align: center;">{{newUser.usuario}}</a>
+          </div>
         </ng-container>
       </p-scrollPanel>
     </div>
@@ -16,7 +19,9 @@
       <p-scrollPanel [style]="{ width: '100%', height: '150px'}">
         <div class="post-card" *ngFor="let publicacion of topPublicaciones">
           <div class="d-flex justify-content-start align-items-center">
-            <div class="avatar"></div>
+            <div class="avatar">
+              <img class="avatar" src="./../../../assets/imgs/defaultPic.png" alt="">
+            </div>
             <div class="avatarName p-2">{{getUserName(publicacion.id_usuario)}}</div>
           </div>
           <p class="description">{{publicacion.mensaje}}</p>
@@ -25,7 +30,9 @@
             <span>
               <div class='large-font text-center top-20 d-flex'>
                 <button class="like-button">
-                  <span class="pi pi-heart gap-1"><div class="iconNumber">{{publicacion.megusta}}</div></span>
+                  <span class="pi pi-heart gap-1">
+                    <div class="iconNumber">{{publicacion.megusta}}</div>
+                  </span>
                 </button>
               </div>
             </span>
