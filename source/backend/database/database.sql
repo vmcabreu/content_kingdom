@@ -24,6 +24,12 @@ CREATE TABLE IF NOT EXISTS videojuegos (
   PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
+CREATE TABLE IF NOT EXISTS etiquetas (
+  id INT auto_increment,
+  nombre varchar(50) NOT NULL,
+  PRIMARY KEY(id)
+) ENGINE=InnoDB;
+
 CREATE TABLE IF NOT EXISTS perfil (
   id INT auto_increment,
   canales TEXT,
