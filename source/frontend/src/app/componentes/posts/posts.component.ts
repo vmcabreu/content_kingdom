@@ -126,20 +126,19 @@ export class PostsComponent implements OnInit {
   }
 
   deletePost(postID:number){
-    this.postService.deleteComentario(postID).subscribe(() => {
-      this.getCommentsNumber();
-      this.getCommentsByPostId(this.selectedPost);
-      Swal.fire({
-        title: '¡Comentario borrado con éxito!',
-        icon: 'success',
-        timerProgressBar: true,
-      }).then(() => {
-        this.getCommentsNumber();
-        this.getCommentsByPostId(this.selectedPost);
-        window.location.reload();
-      });
-    });
-  }
+    this.postService.deletePublicacion(postID).subscribe(response => {
+      if(response.status === 200){
+        Swal.fire({
+          title: '¡Publicacion borrada con éxito!',
+          icon: 'success',
+          timerProgressBar: true,
+        }).then(() => {
+          this.refreshPublicaciones()
+        });
+      }
+    })
+
+    }
 
   addPublicacion() {
     this.newPublicacion.id_usuario = this.usuario.id;

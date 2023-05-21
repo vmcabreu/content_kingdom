@@ -52,6 +52,10 @@ export class PostService {
     return this.http.delete<any>(`${this.url}posts/comment.php?id=${id}`);
   }
 
+  deletePublicacion(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.url}posts/post.php?id=${id}`);
+  }
+
 
   addPublicacion(publicacion: Publicacion): Observable<any> {
     return this.http.post(`${this.url}posts/post.php`, publicacion, { responseType: "text" }).pipe(tap(() => {

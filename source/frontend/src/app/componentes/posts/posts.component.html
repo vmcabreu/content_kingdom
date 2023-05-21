@@ -9,9 +9,9 @@
     <div class="post-card" *ngFor="let post of publicaciones">
       <div class="d-flex justify-content-between align-items-center">
         <div class="d-flex">
-        <div class="avatar"></div>
-        <div class="avatarName p-2">{{ getUserName(post.id_usuario) }}</div>
-      </div>
+          <div class="avatar"></div>
+          <div class="avatarName p-2">{{ getUserName(post.id_usuario) }}</div>
+        </div>
         <div>
           <div *ngIf="post.id_usuario == usuario.id">
             <button class="pi pi-trash p-3 deleteButton" (click)="deletePost(post.id)"></button>
@@ -51,10 +51,10 @@
               <li *ngFor="let comentarios of postComentarios">
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="d-flex align-items-center">
-                  <div class="avatar"></div>
-                  <div class="avatarName p-2">{{ getUserName(comentarios.id_usuario) }}</div>
-                  <div>{{comentarios.comentario}}</div>
-                </div>
+                    <div class="avatar"></div>
+                    <div class="avatarName p-2">{{ getUserName(comentarios.id_usuario) }}</div>
+                    <div>{{comentarios.comentario}}</div>
+                  </div>
                   <div *ngIf="comentarios.id_usuario == usuario.id">
                     <button class="pi pi-trash p-3 deleteButton" (click)="deleteComentario(comentarios.id)"></button>
                   </div>

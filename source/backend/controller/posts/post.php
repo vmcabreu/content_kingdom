@@ -56,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $id = intval($_GET['id']);
         $respuestaDelete = DAOPublicacion::borrarPublicacion($id);
         http_response_code($respuestaDelete > 0 ? 200 : 422);
+        echo json_encode(array("respuesta" => $respuestaDelete));
         return;
     }
 }
