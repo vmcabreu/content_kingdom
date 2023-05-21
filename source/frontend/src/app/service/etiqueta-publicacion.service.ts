@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { EtiquetasPublicacion } from '../model/etiqueta-publicacion.model';
 
 @Injectable({
   providedIn: 'root'
@@ -34,4 +35,7 @@ export class EtiquetaPublicacionService {
     return this.http.post<any>(`${this.url}`, tagPost)
   }
 
+  addTagPostList(tagPost: EtiquetasPublicacion[]): Observable<any> {
+    return this.http.post<any>(`${this.url}`, tagPost)
+  }
 }

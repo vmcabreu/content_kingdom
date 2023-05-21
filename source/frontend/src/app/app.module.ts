@@ -29,6 +29,7 @@ import { Card, CardModule } from 'primeng/card';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { GamePostsComponent } from './componentes/game-posts/game-posts.component';
 import { CommunityComponent } from './componentes/community/community.component';
+import { ChipModule } from 'primeng/chip';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { CommunityComponent } from './componentes/community/community.component'
     BrowserModule,
     BrowserAnimationsModule,
     CardModule,
+    ChipModule,
     HttpClientModule,
     ScrollPanelModule,
     ButtonModule,

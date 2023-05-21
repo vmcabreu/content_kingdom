@@ -1,4 +1,4 @@
-class AmigosUsuarios {
+export class AmigosUsuarios {
   usuario_id: number;
   amigo_id: number;
   fecha_amistad: Date;

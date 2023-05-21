@@ -1,4 +1,4 @@
-class EtiquetasPublicacion {
+export class EtiquetasPublicacion {
   id_etiqueta: number;
   id_publicacion: number;
 

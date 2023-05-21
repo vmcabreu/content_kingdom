@@ -108,9 +108,15 @@
               <option *ngFor="let item of plataformas" value="{{item}}">{{item}}</option>
             </select>
             <label for="etiqueta">Seleccionar Etiquetas</label>
-            <select class="form-select" name="etiqueta">
-              <option *ngFor="let etiqueta of etiquetas" value="{{etiqueta.nombre}}">{{etiqueta.nombre}}</option>
+            <div class="d-flex">
+            <select class="form-select" name="etiqueta" [(ngModel)]="newEtiqueta">
+              <option *ngFor="let etiqueta of etiquetas" [ngValue]="etiqueta">{{etiqueta.nombre}}</option>
             </select>
+            <button type="button" class="btn btn-primary" (click)="addTagToList(newEtiqueta)">+</button>
+          </div>
+          <div class="d-flex gap-1 p-2">
+              <p-chip *ngFor="let item of tagsSelected" label="{{item.nombre}}"></p-chip>
+          </div>
             <div>
               <label for="juegoSelect">Seleccionar Juego</label>
               <select class="form-select" name="juegoSelect" [(ngModel)]="newPublicacion.id_videojuego">

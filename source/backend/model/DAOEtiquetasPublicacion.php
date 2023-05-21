@@ -16,13 +16,26 @@ class DAOEtiquetaPublicacion
 
     public static function getEtiquetaPostFromPost(int $id, int $limit = 10000)
     {
-        $stmt = BaseDAO::consulta(" SELECT * FROM etiquetasPublicacion WHERE id_publicacion='$id' LIMIT $limit");
+        $stmt = BaseDAO::consulta("SELECT etiquetas.nombre FROM etiquetasPublicacion INNER JOIN etiquetas ON etiquetasPublicacion.id_etiqueta = etiquetas.id WHERE etiquetasPublicacion.id_publicacion = '$id'
+        LIMIT $limit");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function addEtiqueta(EtiquetaPublicacion $tagPost): int
     {
         $sql = "INSERT INTO etiquetasPublicacion VALUES ('$tagPost->id_etiqueta','$tagPost->id_publicacion')";
+        return BaseDAO::consulta($sql);
+    }
+
+    public static function addPlataformaList(array $tagPost): int
+    {
+        $values = [];
+        foreach ($tagPost as $tag) {
+            $id_etiqueta = $tag->id_etiqueta;
+            $id_publicacion = $tag->id_publicacion;
+            $values[] = "('$id_etiqueta','$id_publicacion')";
+        }
+        $sql = "INSERT INTO etiquetasPublicacion VALUES " . implode(',', $values);
         return BaseDAO::consulta($sql);
     }
 

@@ -14,6 +14,8 @@ import { UsuarioService } from 'src/app/service/usuario.service';
 import { VideojuegoService } from 'src/app/service/videojuego.service';
 import Swal from 'sweetalert2';
 import { Like } from 'src/app/model/like.model';
+import { EtiquetaPublicacionService } from 'src/app/service/etiqueta-publicacion.service';
+import { EtiquetasPublicacion } from 'src/app/model/etiqueta-publicacion.model';
 
 @Component({
   selector: 'app-posts',
@@ -37,9 +39,10 @@ export class PostsComponent implements OnInit {
   etiquetas: Etiqueta[] = [];
   plataformas: string[] = ["Twitch", "YouTube", "TikTok", "Instagram"];
   listaLikes: Like[] = [];
-  likesMap: {
-    [postId: number]: boolean
-  } = {};
+  likesMap: {[postId: number]: boolean} = {};
+  newEtiqueta: Etiqueta;
+  tagsSelected: Etiqueta[]=[];
+  newListEtiquetas: EtiquetasPublicacion[]=[];
 
 
 
@@ -49,6 +52,7 @@ export class PostsComponent implements OnInit {
     private jwt: JwtService,
     private userService: UsuarioService,
     private likeService: LikesService,
+    private tagService: EtiquetaPublicacionService,
     private router: Router
   ) { }
 
@@ -77,35 +81,43 @@ export class PostsComponent implements OnInit {
     });
   }
 
-checkIfIsLike(postId: number) {
-  return this.likesMap[postId] || false;
-}
-
-setLike(id: number) {
-  let post = this.publicaciones.find(element => element.id === id);
-  if (!this.checkIfIsLike(id)) {
-    post.megusta++;
-    this.likesMap[id] = true;
-    this.likeService.setLikes(this.usuario.id, id).subscribe();
+  getEtiquetasFromPost(id: number) {
+    this.tagService.getTagFromPost(id).subscribe()
   }
-}
 
-unLike(id: number) {
-  let post = this.publicaciones.find(element => element.id === id);
-  if (this.checkIfIsLike(id)) {
-    post.megusta--;
-    this.likesMap[id] = false;
-    this.likeService.unLike(this.usuario.id, id).subscribe();
+  getJuegoFromPost(id: number) {
+    return this.listaVideojuegos.find(element => element.id === id).nombre
   }
-}
 
-toggleLike(id: number) {
-  if (this.checkIfIsLike(id)) {
-    this.unLike(id);
-  } else {
-    this.setLike(id);
+  checkIfIsLike(postId: number) {
+    return this.likesMap[postId] || false;
   }
-}
+
+  setLike(id: number) {
+    let post = this.publicaciones.find(element => element.id === id);
+    if (!this.checkIfIsLike(id)) {
+      post.megusta++;
+      this.likesMap[id] = true;
+      this.likeService.setLikes(this.usuario.id, id).subscribe();
+    }
+  }
+
+  unLike(id: number) {
+    let post = this.publicaciones.find(element => element.id === id);
+    if (this.checkIfIsLike(id)) {
+      post.megusta--;
+      this.likesMap[id] = false;
+      this.likeService.unLike(this.usuario.id, id).subscribe();
+    }
+  }
+
+  toggleLike(id: number) {
+    if (this.checkIfIsLike(id)) {
+      this.unLike(id);
+    } else {
+      this.setLike(id);
+    }
+  }
 
 
   getPublicaciones() {
@@ -146,6 +158,7 @@ toggleLike(id: number) {
     this.newPublicacion.id_videojuego = Number(this.newPublicacion.id_videojuego);
     this.postService.addPublicacion(this.newPublicacion).subscribe(() => {
       this.refreshData();
+      this.addEtiquetasForPost(this.publicaciones[0].id);
       Swal.fire({
         title: '¡Has publicado con éxito!',
         icon: 'success',
@@ -154,6 +167,20 @@ toggleLike(id: number) {
         this.refreshData();
       });
     });
+  }
+
+  addTagToList(etiqueta: Etiqueta){
+    if (!this.tagsSelected.find(element => element.id === etiqueta.id)) {
+      this.newListEtiquetas.push(new EtiquetasPublicacion(etiqueta.id))
+      this.tagsSelected.push(etiqueta);
+    }
+  }
+
+  addEtiquetasForPost(id:number){
+    this.newListEtiquetas.forEach(element => {
+      element.id_publicacion = id
+    });
+    this.tagService.addTagPostList(this.newListEtiquetas).subscribe()
   }
 
   refreshDataAndComments() {

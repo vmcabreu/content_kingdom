@@ -1,4 +1,4 @@
-class Plataforma {
+export class Plataforma {
   id: number;
   nombre: string;
   enlace: string;
