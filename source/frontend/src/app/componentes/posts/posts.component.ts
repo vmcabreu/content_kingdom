@@ -177,8 +177,8 @@ export class PostsComponent implements OnInit {
   }
 
   addEtiquetasForPost(){
-    this.userService.getUserList().subscribe((data:Usuario[]) =>{
-      let id = data[data.length-1].id
+    this.postService.getPublicaciones().subscribe((data:Publicacion[]) =>{
+      let id = data[0].id
       this.newListEtiquetas.forEach(element => {
         element.id_publicacion = id
       });
