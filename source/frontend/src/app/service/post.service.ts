@@ -48,9 +48,10 @@ export class PostService {
     return this.http.get<any>(`${this.url}posts/comment.php?listType=number`)
   }
 
-  deleteComentrio(id:number): Observable<any> {
-    return this.http.delete<any>(`${this.url}posts/comment.php`)
+  deleteComentario(id: number): Observable<any> {
+    return this.http.delete(`${this.url}posts/comment.php?id=${id}`, { responseType: "text" });
   }
+
 
   addPublicacion(publicacion: Publicacion): Observable<any> {
     return this.http.post(`${this.url}posts/post.php`, publicacion, { responseType: "text" }).pipe(tap(() => {

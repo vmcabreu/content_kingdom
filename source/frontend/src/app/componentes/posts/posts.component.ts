@@ -66,6 +66,7 @@ export class PostsComponent implements OnInit {
     this.comentario.id_usuario=this.usuario.id;
     this.postService.getComentariosFromPostId(id).subscribe((data: Comentario[]) => {
       this.postComentarios = data;
+
     })
   }
 
@@ -105,14 +106,14 @@ export class PostsComponent implements OnInit {
   }
 
   deleteComentario(postID:number){
-    this.postService.deleteComentrio(postID).subscribe(() => {
-      this.refreshPublicaciones();
+    this.postService.deleteComentario(postID).subscribe(() => {
+      this.getCommentsByPostId(this.comentario.id_publicacion);
       Swal.fire({
         title: '¡Comentario borrado con éxito!',
         icon: 'success',
         timerProgressBar: true,
       }).then(() => {
-        this.refreshPublicaciones();
+        this.getCommentsByPostId(this.comentario.id_publicacion);
       });
     });
   }

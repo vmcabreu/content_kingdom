@@ -59,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_GET['id'])) {
         $id = intval($_GET['id']);
         $respuestaDelete = DAOComentario::borrarComentario($id);
+        header("Content-Type: text/plain");
         http_response_code($respuestaDelete > 0 ? 200 : 422);
         return;
     }
