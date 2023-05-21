@@ -37,6 +37,10 @@ export class PostService {
     return this.http.get<Publicacion[]>(`${this.url}posts/post.php?listType=likes`)
   }
 
+  getPublicacionesMeGustaPorUsuario(id:number): Observable<Publicacion[]> {
+    return this.http.get<Publicacion[]>(`${this.url}posts/post.php?listType=likesUser&id=${id}`)
+  }
+
   getPublicacionesFromGameId(idJuego: number): Observable<Publicacion[]> {
     return this.http.get<Publicacion[]>(`${this.url}posts/post.php?idJuego=${idJuego}`).pipe(tap(() => {
       this.refresh$.next()

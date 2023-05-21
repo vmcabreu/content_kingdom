@@ -28,6 +28,7 @@ export class PerfilComponent {
   usuario: Usuario;
   ruta: string[] = this.router.url.split("/")
   listaPublicaciones: Publicacion[] = [];
+  listaGustados: Publicacion[] = [];
   perfil: Perfil = new Perfil;
   items: MenuItem[];
   comentario: Comentario = new Comentario;
@@ -58,6 +59,7 @@ export class PerfilComponent {
     this.getPerfil();
     this.getPlataformaByUsuarioId();
     this.getListaAmigos();
+    this.getPostGustados();
   }
 
   onActiveItemChange(event) {
@@ -104,6 +106,11 @@ export class PerfilComponent {
     return this.listaPublicaciones.length
   }
 
+  getPostGustados(){
+    this.postService.getPublicacionesMeGustaPorUsuario(this.usuario.id).subscribe((data: Publicacion[]) =>{
+      this.listaGustados=data;
+    })
+  }
 
   getListaAmigos() {
     this.friendService.getAmigosFromUsuario(this.usuario.id).subscribe((data: AmigosUsuarios[])=>{

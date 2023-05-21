@@ -21,14 +21,14 @@ class DAOPublicacion
 
     public static function getPublicacionByUsuario(int $id)
     {
-            $stmt = BaseDAO::consulta("SELECT * FROM publicaciones WHERE id_usuario='$id'");
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = BaseDAO::consulta("SELECT * FROM publicaciones WHERE id_usuario='$id'");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function getPublicacionByVideojuego(int $id)
     {
-            $stmt = BaseDAO::consulta("SELECT * FROM publicaciones WHERE id_videojuego='$id'");
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = BaseDAO::consulta("SELECT * FROM publicaciones WHERE id_videojuego='$id'");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function getPublicacionByMegusta(int $limit = 10)
@@ -43,20 +43,27 @@ class DAOPublicacion
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function listaPostMeGustaByUser(int $id)
+    {
+        $stmt = BaseDAO::consulta("SELECT p.id, p.id_usuario, p.id_videojuego, p.fecha, p.megusta, p.mensaje, p.adjunto, p.plataforma
+        FROM publicaciones p
+        INNER JOIN megusta m ON p.id = m.id_publicacion
+        WHERE m.id_usuario = $id
+        ");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public static function aniadirPublicacion(Publicacion $post): int
     {
         $sql = "INSERT INTO publicaciones VALUES (null,'$post->id_usuario','$post->id_videojuego','$post->fecha','$post->megusta','$post->mensaje','$post->adjunto','$post->plataforma')";
         return BaseDAO::consulta($sql);
     }
 
-    
+
 
     public static function borrarPublicacion(int $id): int
     {
         $sql = "DELETE FROM publicaciones WHERE id=$id";
         return BaseDAO::consulta($sql);
     }
-
-    
-
 }
