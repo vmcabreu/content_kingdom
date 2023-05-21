@@ -107,6 +107,28 @@ BEGIN
 END $$
 DELIMITER ;
 
+DELIMITER //
+
+CREATE TRIGGER trg_megusta_insert
+AFTER INSERT ON megusta
+FOR EACH ROW
+BEGIN
+    UPDATE publicaciones
+    SET megusta = megusta + 1
+    WHERE id = NEW.id_publicacion;
+END //
+
+CREATE TRIGGER trg_megusta_delete
+AFTER DELETE ON megusta
+FOR EACH ROW
+BEGIN
+    UPDATE publicaciones
+    SET megusta = megusta - 1
+    WHERE id = OLD.id_publicacion;
+END //
+
+DELIMITER ;
+
 INSERT INTO etiquetas (nombre) VALUES
   ('Meme'),
   ('Gameplay'),

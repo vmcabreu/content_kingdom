@@ -28,11 +28,21 @@
       <div class="comment-like">
         <span>
           <div class="large-font text-center top-20 d-flex">
-            <button class="like-button d-flex" [ngClass]="{ 'clicked': isClicked }" (click)="toggleLike()">
-              <span class="pi pi-heart gap-1">
-                <div class="iconNumber">{{ post.megusta }}</div>
-              </span>
-            </button>
+            <div *ngIf="checkIfIsLike(post.id);then liked else noLiked"></div>
+            <ng-template #liked>
+              <button class="like-button d-flex" (click)="unLike(post.id)" >
+                <span class="pi pi-heart-fill gap-1" style="color: red">
+                  <div class="iconNumber">{{ post.megusta }}</div>
+                </span>
+              </button>
+            </ng-template>
+            <ng-template #noLiked>
+              <button class="like-button d-flex" (click)="setLike(post.id)" >
+                <span class="pi pi-heart gap-1">
+                  <div class="iconNumber">{{ post.megusta }}</div>
+                </span>
+              </button>
+            </ng-template>
           </div>
         </span>
         <span class="pi pi-comments gap-1" (click)="getCommentsByPostId(post.id)" data-bs-toggle="modal"

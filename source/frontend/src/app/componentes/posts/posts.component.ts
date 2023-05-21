@@ -73,6 +73,24 @@ export class PostsComponent implements OnInit {
     })
   }
 
+  checkIfIsLike(id:number){
+    return this.listaLikes.find(element => element.id_usuario === this.usuario.id && element.id_publicacion === id );
+  }
+
+  setLike(id:number){
+    this.likeService.setLikes(this.usuario.id,id).subscribe(() => {
+     this.getLikes()
+     this.getPublicaciones();
+    })
+  }
+
+  unLike(id:number){
+    this.likeService.unLike(this.usuario.id,id).subscribe(() => {
+      this.getLikes()
+      this.getPublicaciones();
+     })
+  }
+
 
   getPublicaciones() {
     this.postService.getPublicaciones().subscribe((data: Publicacion[]) => {

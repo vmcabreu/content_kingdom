@@ -8,7 +8,7 @@ import { Like } from '../model/like.model';
 })
 export class LikesService {
 
-  url: String = "http://contentkingdom.alu6618.arkania.es/api/controller/";
+  url: String = "http://contentkingdom.alu6618.arkania.es/api/controller";
 
   private refresh$ = new Subject<void>();
 
@@ -31,8 +31,8 @@ export class LikesService {
   }
 
   setLikes(id: number, post: number): Observable<any> {
-    const body = { id_publicacion: post, id_usuarios: id };
-    return this.http.post<any>(`${this.url}/likes/list.php`, body);
+    let like:Like = new Like(post,id);
+    return this.http.post<any>(`${this.url}/likes/list.php`, like);
   }
 
 

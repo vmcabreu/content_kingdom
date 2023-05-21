@@ -30,7 +30,7 @@ class DAOLikes
 
     public static function deleteLike(int $id, int $post): int
     {
-        $sql = "DELETE FROM megusta WHERE id_publicacion='$id' AND id_usuario='$post'";
+        $sql = "DELETE FROM megusta WHERE id_publicacion='$post' AND id_usuario='$id'";
         return BaseDAO::consulta($sql);
     }
 }

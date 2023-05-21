@@ -57,4 +57,6 @@ class DAOPublicacion
         return BaseDAO::consulta($sql);
     }
 
+    
+
 }
