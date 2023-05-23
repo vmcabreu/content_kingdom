@@ -171,24 +171,13 @@ export class PostsComponent implements OnInit {
     });
   }
 
-  onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-    this.newPublicacion.img = file;
-  }
+
 
   addPublicacion() {
     this.newPublicacion.id_usuario = this.usuario.id;
     this.newPublicacion.fecha = this.formatFecha();
     this.newPublicacion.id_videojuego = Number(this.newPublicacion.id_videojuego);
-    const formData = new FormData();
-    formData.append('id_usuario', this.newPublicacion.id_usuario.toString());
-    formData.append('id_videojuego', this.newPublicacion.id_videojuego.toString());
-    formData.append('fecha', this.newPublicacion.fecha);
-    formData.append('megusta', this.newPublicacion.megusta.toString());
-    formData.append('mensaje', this.newPublicacion.mensaje);
-    formData.append('adjunto', this.newPublicacion.img, this.newPublicacion.img.name);
-    formData.append('plataforma', this.newPublicacion.plataforma);
-    this.postService.addPublicacion(formData).subscribe(() => {
+    this.postService.addPublicacion(this.newPublicacion).subscribe(() => {
       this.refreshData();
       Swal.fire({
         title: '¡Has publicado con éxito!',
