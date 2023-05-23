@@ -186,8 +186,8 @@ export class PostsComponent implements OnInit {
         background: '#151515',
         color: '#fff'
       }).then(() => {
-        this.refreshData();
         this.addEtiquetasForPost();
+        this.refreshData();
       });
     });
   }
