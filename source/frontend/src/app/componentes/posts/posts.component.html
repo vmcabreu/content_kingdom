@@ -27,11 +27,11 @@
       </div>
       <span class="datetime">{{ post.fecha }} {{getJuegoFromPost(post.id_videojuego)}} </span>
     </div>
-      <!--
       <div *ngIf="post.adjunto !== ''">
-        <div class="image-preview"></div>
+        <div class="image-preview">
+          <img [src]="post.adjunto" alt="">
+        </div>
       </div>
-      -->
       <div class="comment-like">
         <span>
           <div class="large-font text-center top-20 d-flex">

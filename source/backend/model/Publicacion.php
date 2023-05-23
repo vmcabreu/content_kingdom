@@ -30,18 +30,20 @@ class Publicacion
         public static function crearPublicacion(array $datos): Publicacion
         {
             $objeto = new Publicacion();
-            foreach ($datos as $atributo => $valor) {
-                if ($atributo === 'adjunto') {
-                    $nombreArchivo = $_FILES['adjunto']['name'];
-                    $rutaTemporal = $_FILES['adjunto']['tmp_name'];
-                    $rutaDestino = '/home/victor/proyecto_final/server/' . $nombreArchivo;
-                    move_uploaded_file($rutaTemporal, $rutaDestino);
-                    $objeto->$atributo = $rutaDestino;
-                } else {
-                    // Asignar los demás atributos
-                    $objeto->$atributo = $valor;
-                }
-            }
+
+            $nombreArchivo = $_FILES['img']['name'];
+            $rutaTemporal = $_FILES['img']['tmp_name'];
+            $rutaDestino = '/home/victor/proyecto_final/server/' . $nombreArchivo;
+            move_uploaded_file($rutaTemporal, $rutaDestino);
+            $objeto->adjunto = $rutaDestino;
+
+            $objeto->id = $datos['id'];
+            $objeto->id_usuario = $datos['id_usuario'];
+            $objeto->id_videojuego = $datos['id_videojuego'];
+            $objeto->fecha = $datos['fecha'];
+            $objeto->megusta = $datos['megusta'];
+            $objeto->mensaje = $datos['mensaje'];
+            $objeto->plataforma = $datos['plataforma'];
             return $objeto;
         }
 
