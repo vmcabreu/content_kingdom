@@ -1,8 +1,27 @@
 <?php
 define("PROJECT_ROOT_PATH", __DIR__ . "/../");
-// include main configuration file 
 require_once PROJECT_ROOT_PATH . "/inc/config.php";
-// include the base controller file 
-require_once PROJECT_ROOT_PATH . "/controller/API/ControladorBase.php";
-// include the use model file 
+require_once PROJECT_ROOT_PATH . "/inc/cors.php";
+require_once PROJECT_ROOT_PATH . "/model/BaseDAO.php";
 require_once PROJECT_ROOT_PATH . "/model/DAOUsuario.php";
+require_once PROJECT_ROOT_PATH . "/model/DAOPerfil.php";
+require_once PROJECT_ROOT_PATH . "/model/DAOPublicacion.php";
+require_once PROJECT_ROOT_PATH . "/model/DAOVideojuego.php";
+require_once PROJECT_ROOT_PATH . "/model/DAOComentario.php";
+require_once PROJECT_ROOT_PATH . "/model/DAOEtiqueta.php";
+require_once PROJECT_ROOT_PATH . "/model/DAOLikes.php";
+require_once PROJECT_ROOT_PATH . "/model/DAOAmigosUsuario.php";
+require_once PROJECT_ROOT_PATH . "/model/DAOEtiquetasPublicacion.php";
+require_once PROJECT_ROOT_PATH . "/model/DAOPlataforma.php";
+require_once PROJECT_ROOT_PATH . "/model/Token.php";
+require_once PROJECT_ROOT_PATH . "/model/Usuario.php";
+require_once PROJECT_ROOT_PATH . "/model/Etiqueta.php";
+require_once PROJECT_ROOT_PATH . "/model/Comentario.php";
+require_once PROJECT_ROOT_PATH . "/model/Likes.php";
+require_once PROJECT_ROOT_PATH . "/model/Perfil.php";
+require_once PROJECT_ROOT_PATH . "/model/Publicacion.php";
+require_once PROJECT_ROOT_PATH . "/model/Videojuego.php";
+require_once PROJECT_ROOT_PATH . "/model/AmigosUsuario.php";
+require_once PROJECT_ROOT_PATH . "/model/EtiquetasPublicacion.php";
+require_once PROJECT_ROOT_PATH . "/model/Plataforma.php";
+require_once PROJECT_ROOT_PATH . "/vendor/autoload.php";

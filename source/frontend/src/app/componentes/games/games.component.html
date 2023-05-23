@@ -1,1 +1,41 @@
-<p>games works!</p>
+<div class="container responsiveList">
+  <div class="d-flex flex-column flex-md-row  justify-content-evenly justify-content-center align-items-center filtradoContainer gap-4">
+    <label for="" class="form-label">Nombre:</label>
+    <input type="text" class="form-control" [(ngModel)]="selectedItem" (input)="filterGame($event)" placeholder="Nombre del juego..."/>
+    <label for="" class="form-label">Consola:</label>
+    <select [(ngModel)]="selectedConsola" (change)="filterConsole()"  class="form-select" aria-label="Default select example">
+      <option value="">Todas las consolas</option>
+      <option *ngFor="let consola of consolas" [value]="consola.label">{{ consola.label }}</option>
+    </select>
+  </div>
+  <div *ngIf="checkIfFilterOn(); else listaNormal">
+    <div class="container d-flex flex-wrap p-3 gap-2">
+      <div *ngFor="let juego of videojuegosFiltrados" class="cardGame" [routerLink]="['/games/', juego.id]">
+        <div class="cardGame-details d-flex flex-column justify-content-between">
+          <img class="cardGame-img" src="{{juego.imagen}}" />
+          <p class="text-titleGame">{{juego.nombre}}</p>
+          <p class="text-bodyGame align-self-end">
+            <img class="gameIcon" *ngIf="iconPlataforma(juego.plataforma)" [src]="iconPlataforma(juego.plataforma)"
+              alt="Etiqueta" />
+            {{juego.plataforma}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #listaNormal>
+    <div class="container d-flex flex-wrap p-3 gap-2">
+      <div *ngFor="let juego of listaVideojuegos" class="cardGame" [routerLink]="['/games/', juego.id]">
+        <div class="cardGame-details d-flex flex-column justify-content-between">
+          <img class="cardGame-img" src="{{juego.imagen}}" />
+          <p class="text-titleGame">{{juego.nombre}}</p>
+          <p class="text-bodyGame align-self-end">
+            <img class="gameIcon" *ngIf="iconPlataforma(juego.plataforma)" [src]="iconPlataforma(juego.plataforma)"
+              alt="Etiqueta" />
+            {{juego.plataforma}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

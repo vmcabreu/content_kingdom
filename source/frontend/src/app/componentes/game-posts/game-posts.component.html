@@ -1,0 +1,102 @@
+<div class="container p-3">
+  <div class="gameBackground d-flex flex-column gap-4">
+    <h1 class="fontStyling">{{juego.nombre}}</h1>
+    <div class="d-flex flex-column flex-md-row">
+      <img class="juegoImg" src="{{juego.imagen}}" alt="">
+      <div class="p-3">
+        <h2 class="fontStyling">Plataforma</h2>
+        <p>{{juego.plataforma}}</p>
+        <h2 class="fontStyling">Fecha Lanzamiento</h2>
+        <p>{{juego.fecha_lanzamiento}}</p>
+        <h2 class="fontStyling">Género</h2>
+        <p>{{juego.genero}}</p>
+        <h2 class="fontStyling">Desarrolladores</h2>
+        <p>{{juego.desarrolladores}}</p>
+      </div>
+    </div>
+    <div class="p-3">
+      <h2 class="fontStyling">Publicaciones sobre {{juego.nombre}}</h2>
+      <div>
+        <div *ngIf="listaPublicaciones.length == 0">
+          No existe ninguna publicación ¡Añade una!
+        </div>
+        <div class="post-card" *ngFor="let post of listaPublicaciones">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex">
+              <img class="avatar" src="./../../../assets/imgs/defaultPic.png" alt="">
+              <div class="avatarName p-2">{{ getUserName(post.id_usuario) }}</div>
+            </div>
+            <div>
+              <div *ngIf="post.id_usuario == usuario.id">
+                <button class="pi pi-trash p-3 deleteButton" (click)="deletePost(post.id)"></button>
+              </div>
+            </div>
+          </div>
+          <p class="description">{{ post.mensaje }}</p>
+          <span class="datetime">{{ post.fecha }}</span>
+          <!--
+          <div *ngIf="post.adjunto !== ''">
+            <div class="image-preview"></div>
+          </div>
+          -->
+          <div class="comment-like">
+            <span>
+              <div class="large-font text-center top-20 d-flex">
+                <button class="like-button d-flex">
+                  <span class="pi pi-heart gap-1" style="color: aliceblue;">
+                    <div class="iconNumber">{{ post.megusta }}</div>
+                  </span>
+                </button>
+              </div>
+            </span>
+            <span class="pi pi-comments gap-1" (click)="getCommentsByPostId(post.id)" data-bs-toggle="modal"
+              data-bs-target="#addComment">{{getNumberOfPosts(post.id)}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="addComment" tabindex="-1" aria-hidden="true" aria-labelledby="addCommentLabel">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="cardComments">
+          <div class="chat-header" id="addCommentLabel">Comentarios
+            <button class="trasparentButton" data-bs-dismiss="modal" aria-label="Close">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-octagon"
+                viewBox="0 0 16 16">
+                <path
+                  d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z" />
+                <path
+                  d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+              </svg>
+            </button>
+          </div>
+          <div class="chat-window">
+            <ul class="message-list">
+              <li *ngFor="let comentarios of postComentarios">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="d-flex align-items-center">
+                    <div class="avatar"></div>
+                    <div class="avatarName p-2">{{ getUserName(comentarios.id_usuario) }}</div>
+                    <div>{{comentarios.comentario}}</div>
+                  </div>
+                  <div *ngIf="comentarios.id_usuario == usuario.id">
+                    <button class="pi pi-trash p-3 deleteButton" (click)="deleteComentario(comentarios.id)"></button>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chat-input">
+            <input [(ngModel)]="comentario.comentario" type="text" class="message-input"
+              placeholder="Type your message here">
+            <button class="send-button" (click)="addComentario()">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

@@ -1,94 +1,101 @@
 <?php
-require_once PROJECT_ROOT_PATH . "/model/BaseDAO.php";
+require_once(__DIR__ . "/../inc/bootstrap.php");
 
-class DAOUsuario extends BaseDAO
+
+class DAOUsuario
 {
-    /**
-     * Comprueba si existe un usuario en la base de datos.
-     * @param {string} nombre - El nombre del usuario.
-     * @param {string} email - La dirección de correo electrónico del usuario.
-     * @returns el número de filas que coinciden con la consulta.
-     */
-    public static function comprobarUsuario(string $nombre, string $email): bool|array
+
+    public static function validarLogin(string $passwd, string $user)
     {
-        return BaseDAO::consulta("SELECT * FROM usuarios WHERE usuario='$nombre' OR email='$email'");
+        $stmt = BaseDAO::consulta("SELECT * FROM usuarios WHERE usuario='$user' LIMIT 1");
+        if ($stmt->rowCount() > 0) {
+            $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+            return password_verify($passwd, $usuario["passwd"]);
+        }
+        return false;
     }
 
-
-
-    /**
-     * Devuelve verdadero si el usuario existe en la base de datos, falso en caso contrario
-     * 
-     * @param string nombre cadena
-     * @param string passwd ' O 1=1 -- -
-     * 
-     * @return bool Un valor booleano.
-     */
-    public static function validLogUsuario(string $nombre, string $passwd): bool
+    public static function loginGetUser(string $passwd, string $user)
     {
-        return BaseDAO::consulta("SELECT * FROM usuarios WHERE usuario='$nombre' OR passwd='$passwd'");
-    }
-
-    /**
-     * Agrega un usuario a la base de datos.
-     * @param {Usuario} usuario - El nombre de usuario
-     * @returns un valor booleano.
-     */
-    public static function aniadirUsuario(Usuario $usuario): bool|mysqli_result
-    {
-        if (self::comprobarUsuario($usuario->usuario, $usuario->email)) {
-            $sql = "INSERT INTO usuarios VALUES (null,'$usuario->usuario','$usuario->passwd',
-            $usuario->email)";
-            return BaseDAO::consulta($sql);
-        } else {
-            return false;
+        $stmt = BaseDAO::consulta("SELECT * FROM usuarios WHERE usuario='$user' LIMIT 1");
+        if ($stmt->rowCount() > 0) {
+            $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (password_verify($passwd, $usuario["passwd"])) {
+                return new Usuario($usuario['id'], $usuario['usuario'], $usuario['passwd'], $usuario['email']);;
+            }
         }
     }
 
-    /**
-     * Actualiza los datos del usuario en la base de datos.
-     * @param {Usuario} usuario - El nombre de usuario
-     * @returns Un valor booleano.
-     */
-    public static function modificarUsuario(Usuario $usuario): bool|mysqli_result
+    public static function comprobarUsuario(string $nombre, string $email): array
+    {
+        $stmt = BaseDAO::consulta("SELECT * FROM usuarios WHERE usuario='$nombre' OR email='$email'");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+    public static function aniadirUsuario(Usuario $usuario): int|bool
+    {
+        $resultado = self::comprobarUsuario($usuario->usuario, $usuario->email);
+        if (count($resultado) > 0) {
+            return false;
+        } else {
+            $sql = "INSERT INTO usuarios VALUES (null,'$usuario->usuario','$usuario->passwd',
+            '$usuario->email')";
+            return BaseDAO::consulta($sql);
+        }
+    }
+
+
+    public static function modificarUsuario(Usuario $usuario): int
     {
         $sql = "UPDATE usuarios SET usuario = '$usuario->usuario',passwd = '$usuario->passwd',
-        email = $usuario->email  WHERE id = $usuario->id";
+        email = '$usuario->email'  WHERE id = $usuario->id";
         return BaseDAO::consulta($sql);
     }
 
-    /**
-     * Devuelve un objeto de usuario si el usuario existe, o nulo si el usuario no existe
-     * @param {int} id - El id del usuario que desea buscar.
-     * @returns un objeto Usuario.
-     */
-    public static function buscarUsuario(int $id): ?Usuario
+
+    public static function buscarUsuario(int $id, int $limite = 100, int $offset = 0): ?array
     {
-        $resultado = BaseDAO::consulta("SELECT * FROM usuarios WHERE id='$id'");
-        if ($resultado->num_rows == 0) {
-            return null;
-        }
-        return Usuario::crearUsuario($resultado->fetch_assoc());
+        $respuesta = array();
+        do {
+            $resultado = BaseDAO::consulta("SELECT * FROM usuarios WHERE id='$id' LIMIT $limite OFFSET $offset");
+            $filas = $resultado->fetchAll(PDO::FETCH_ASSOC);
+            $respuesta = array_merge($respuesta, $filas);
+            $offset += $limite;
+        } while (!empty($filas));
+        return empty($respuesta) ? null : $respuesta;
     }
 
+    public static function getListaUsuarios(){
+        $stmt = BaseDAO::consulta("SELECT * FROM usuarios");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getNuevosUsuarios(int $limit=10){
+        $stmt = BaseDAO::consulta(" SELECT * FROM usuarios ORDER BY id DESC LIMIT $limit");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function buscarUsuarioID(int $id)
+    {
+            $stmt = BaseDAO::consulta("SELECT * FROM usuarios WHERE id='$id' LIMIT 1");
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function buscarUsuarioUsuario(string $usuario)
+    {
+            $stmt = BaseDAO::consulta("SELECT * FROM usuarios WHERE usuario='$usuario'");
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 
     /**
      * Elimina un usuario de la base de datos.
      * @param {int} id - El id del usuario a eliminar.
      * @returns Un valor booleano.
      */
-    public static function borrarUsuario(int $id): bool
+    public static function borrarUsuario(int $id): int
     {
         $sql = "DELETE FROM usuarios WHERE id = '$id'";
         return BaseDAO::consulta($sql);
-    }
-
-    public static function loginUsuario(string $nombre, string $passwd)
-    {
-        if (self::validLogUsuario($nombre, $passwd)) {
-            $_SESSION['logged'] = [$nombre, $passwd, true];
-        } else {
-            $_SESSION['logged'] = [$nombre, $passwd, false];
-        }
     }
 }

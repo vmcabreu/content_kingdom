@@ -1,0 +1,265 @@
+* {
+  color: #fff;
+}
+
+.iconNumber {
+  font-family: var(--font-family);
+  text-align: center;
+}
+
+
+.mainContainer {
+  display: grid;
+  grid-template-columns: 1.7fr 1.3fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "content otherContent";
+}
+
+.menu {
+  grid-area: menu;
+  background-color: #0e0f12;
+  border-right: #fff;
+}
+
+.content {
+  grid-area: content;
+  background-color: #0e0f12;
+  border-radius: 0.8rem;
+  padding: 1.2rem;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+}
+
+.otherContent {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "bestPosts"
+    "newUsers";
+  grid-area: otherContent;
+}
+
+.bestPosts {
+  grid-area: bestPosts;
+}
+
+.newUsers {
+  grid-area: newUsers;
+}
+
+
+.newUsers,
+.bestPosts {
+  width: 100%;
+}
+
+.newUsers {
+  background-color: #0e0f12;
+  border-radius: 0.8rem;
+  padding: 1.2rem;
+  height: 50vh;
+  overflow: auto;
+}
+
+.bestPosts {
+  background-color: #0e0f12;
+  border-radius: 0.8rem;
+  padding: 1.2rem;
+  height: 50vh;
+  overflow: auto;
+}
+
+@media (max-width: 768px) {
+
+  .mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  }
+
+  .content {
+    display: flex;
+    justify-content: center;
+    background-color: #0e0f12;
+    border-radius: 0.8rem;
+    overflow: hidden;
+  }
+
+
+}
+
+
+.subCards {
+  height: 200px;
+  overflow-y: auto;
+}
+
+.post-card {
+  width: 100%;
+  background: lightgrey;
+  background-color: #1a1d21;
+  border: 1px solid rgb(84 90 106);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+}
+
+.avatarName {
+  color: rgb(255, 255, 255);
+}
+
+.avatar {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  background-color: blueviolet;
+  background-image: linear-gradient(to top left, blueviolet, rgb(73, 31, 112));
+}
+
+.title {
+  font-size: 20px;
+  line-height: 22px;
+  font-weight: 600;
+  margin-top: 10px;
+  color: #fff;
+  text-decoration: none;
+  transition: all .35s ease-in;
+}
+
+.title:hover {
+  text-decoration: underline blueviolet;
+}
+
+.datetime {
+  font-size: 12px;
+  color: rgb(168 179 207);
+  margin: 10px 0;
+}
+
+.image-preview {
+  flex: 1;
+  min-height: 150px;
+  width: 100%;
+  border-radius: 20px;
+  background-color: blueviolet;
+  background-image: linear-gradient(to top left, blueviolet, rgb(73, 31, 112));
+  margin-bottom: 4px;
+}
+
+.comment-like {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: aliceblue;
+  padding: 2px 0;
+}
+
+.comment-like span {
+  cursor: pointer;
+  height: 40px;
+  width: 50px;
+  padding: 0 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  border-radius: 10px;
+  background-color: transparent;
+  transition: all .15s ease;
+}
+
+.comment-like span:hover {
+  background-color: #002f50;
+}
+
+.comment-like span svg {
+  fill: rgb(255, 255, 255);
+  margin-right: 2px;
+}
+
+.searchPost {
+  width: 97%;
+}
+
+.like-button {
+  position: relative;
+  display: inline-block;
+  padding: 8px 16px;
+  border: 0px solid #ddd;
+  border-radius: 20px;
+  background-color: #ffffff00;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+
+.like-button .like-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background-image: url('./../../../assets/imgs/hollowHeart.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.like-button.clicked .like-icon:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.like-button.clicked .like-icon:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('./../../../assets/imgs/redHeart.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.like-button.clicked .like-icon:before {
+  opacity: 1;
+}
+
+.like-button.clicked .like-icon:after {
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .mainContainer {
+    grid-template-columns: 1.7fr 1.3fr;
+    grid-template-areas: "content otherContent";
+  }
+
+  .otherContent {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "bestPosts" "newUsers";
+  }
+
+  .newUsers,
+  .bestPosts {
+    margin-left: 0;
+  }
+}

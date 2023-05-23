@@ -1,0 +1,27 @@
+<div class="container-fluid container-md p-3">
+  <div  class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-4">
+    <div class="cardProfile d-flex flex-column align-items-center" *ngFor="let user of listaUsuario">
+      <div class="ds-top"></div>
+      <div class="avatar-holder">
+        <img src="./../../../assets/imgs/defaultPic.png">
+      </div>
+      <div class="name">
+        <a routerLink="/profile/{{user.id}}">{{user.usuario}}</a>
+        <h6 title="Followers"></h6>
+      </div>
+    <!--
+      <div  *ngIf="checkIfIsAdded(user.id); then added else noAdded"></div>
+      <ng-template #added>
+        <div class="button">
+          <a  class="btn" (click)="toggleLike(user.id)">Unfollow<i class="fas fa-user-plus"></i></a>
+        </div>
+      </ng-template>
+      <ng-template #noAdded>
+        <div class="button">
+          <a  class="btn" (click)="toggleLike(user.id)">Follow <i class="fas fa-user-plus"></i></a>
+        </div>
+      </ng-template>
+      -->
+    </div>
+  </div>
+</div>

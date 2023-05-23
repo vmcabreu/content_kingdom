@@ -1,2 +1,48 @@
-<p>header works!</p>
-<a routerLink="/login">Iniciar Sesión</a>
+<ng-container *ngIf="usuario; else isGuest">
+  <div class="container-fluid d-flex flex-column align-items-center justify-content-around navigation">
+    <a class="navbar-brand d-flex align-items-center" routerLink="/"><img src="./../../../assets/imgs/CKLogo.png"
+        class="logo"></a>
+    <button routerLink="/games" type="button" class="iconButton" data-toggle="tooltip" data-placement="top"
+      title="Explora las publicaciones de estos juegos">
+      <img alt="buttonIcon" src="/assets/imgs/joystickicon.png" style="filter: invert(100%)">
+    </button>
+    <button routerLink="/community" type="button" class="iconButton" data-toggle="tooltip" data-placement="top" title="Explora la comunidad">
+      <img alt="buttonIcon" src="/assets/imgs/groupIcon.png" style="filter: invert(100%)">
+    </button>
+    <button routerLink="/explore" type="button" class="iconButton p-2" data-toggle="tooltip" data-placement="top"
+      title="Explora todas las publicaciones">
+      <i class="pi pi-compass buttonIcon" style="filter: invert(100%)"></i>
+    </button>
+    <div class="dropdown dropend justify-content-start">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <img class="profilepic" src="./../../../assets/imgs/defaultPic.png" alt="">
+      </button>
+      <ul class="dropdown-menu account">
+        <li><a class="dropdown-item" routerLink="/profile">Perfil</a></li>
+        <li><a class="dropdown-item" routerLink="/account">Mi cuenta</a></li>
+        <li class="p-2"><button class="btn headerButton dropdown-item" (click)="logOut()">Cerrar Sesión</button></li>
+      </ul>
+    </div>
+    <div class="collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Publicaciones</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Juegos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Explorar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #isGuest>
+  <div class="container-fluid d-flex flex-column align-items-center navigation">
+    <a class="navbar-brand d-flex align-items-center" routerLink="/"><img src="./../../../assets/imgs/CKLogo.png"
+        class="logo"></a>
+    <a routerLink="/login" class="headerButton">Login</a>
+  </div>
+</ng-template>

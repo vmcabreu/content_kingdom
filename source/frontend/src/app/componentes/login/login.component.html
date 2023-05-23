@@ -1,8 +1,33 @@
-<form action="">
-  <label for="username">Usuario</label>
-    <input type="text" name="username" id="username">
-  <label for="passwd">Contraseña:</label>
-    <input type="password" id="passwd" name="passwd">
-    <button type="submit">Acceder</button>
-</form>
-<a routerLink="/register">¿No tienes una cuenta? ¡Regístrate!</a>
+<div class="login-box">
+  <form action="#" method="post" (submit)="login()">
+    <h3>Iniciar sesión</h3>
+    <div class="user-box gap-2">
+      <input type="text" [(ngModel)]="nombre" name="name" required="">
+      <label>Usuario</label>
+    </div>
+    <div class="user-box">
+      <input type="password" [(ngModel)]="passwd" name="passwrd" required="">
+      <label>Contraseña</label>
+    </div>
+    <div class="d-flex justify-content-between align-items-center">
+      <button type="submit">
+        Iniciar sesión
+        <span></span>
+      </button>
+      <a routerLink="/register">
+      <button>
+        Registrarse
+        <span></span>
+      </button>
+    </a>
+    </div>
+    <div class="d-flex justify-content-center">
+    <a routerLink="/">
+      <button>
+        Volver al inicio
+        <span></span>
+      </button>
+    </a>
+  </div>
+  </form>
+</div>

@@ -1,3 +1,48 @@
-<app-header></app-header>
-<p>index work</p>
-<app-footer></app-footer>
+<div class="mainContainer container">
+  <div class="content m-2">
+     <app-posts *ngIf="this.usuario != null"></app-posts>
+     <div *ngIf="this.usuario == null" class="d-flex flex-column justify-content-center align-items-center">
+     <img src="./../../../assets/imgs/CKLogo.png" alt="" style="width: 400px;">
+     <h2>¡Bienvenido a Content Kingdom!</h2>
+    </div>
+  </div>
+  <div class="otherContent d-flex flex-column align-items-center justify-content-center gap-4 p-3">
+    <div class="newUsers">
+      <h3>Nuevos usuarios</h3>
+      <p-scrollPanel>
+        <ng-container *ngFor="let newUser of newUsuarios">
+          <div class="d-flex justify-content-start align-items-center gap-2">
+            <img class="avatar" src="./../../../assets/imgs/defaultPic.png" alt="">
+            <a routerLink="/profile/{{newUser.id}}" style="text-align: center;">{{newUser.usuario}}</a>
+          </div>
+        </ng-container>
+      </p-scrollPanel>
+    </div>
+    <div class="bestPosts container-fluid d-flex flex-column">
+      <h3>Top 10 Publicaciones</h3>
+      <p-scrollPanel >
+        <div class="post-card" *ngFor="let publicacion of topPublicaciones">
+          <div class="d-flex justify-content-start align-items-center">
+            <div class="avatar">
+              <img class="avatar" src="./../../../assets/imgs/defaultPic.png" alt="">
+            </div>
+            <div class="avatarName p-2">{{getUserName(publicacion.id_usuario)}}</div>
+          </div>
+          <p class="description">{{publicacion.mensaje}}</p>
+          <span class="datetime">{{publicacion.fecha}}</span>
+          <div class="comment-like">
+            <span>
+              <div class='large-font text-center top-20 d-flex'>
+                <button class="like-button">
+                  <span class="pi pi-heart gap-1">
+                    <div class="iconNumber">{{publicacion.megusta}}</div>
+                  </span>
+                </button>
+              </div>
+            </span>
+          </div>
+        </div>
+      </p-scrollPanel>
+    </div>
+  </div>
+</div>

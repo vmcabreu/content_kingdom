@@ -1,0 +1,12 @@
+.avatar{
+  width: 100px;
+  border: 2px solid rgb(43, 128, 226);
+  border-radius: 200px;
+}
+
+.container{
+  color: white;
+  background: #0e0f12;
+  border-radius: 8px;
+  padding: 16px;
+}
