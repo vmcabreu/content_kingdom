@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoginService } from 'src/app/service/login.service';
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     private loginService: LoginService,
     private http: HttpClient,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.userLogged();
@@ -32,20 +32,23 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.loginService.loginPostUser(this.nombre, this.passwd).subscribe(response => {
-      if (response.status === 200) {
-        this.loginService.loginGetUser(this.nombre, this.passwd).subscribe((data: any) => {
+    this.loginService.loginPostUser(this.nombre, this.passwd).subscribe({
+      next: (res: any) => {
+        this.loginService.loginGetUser(this.nombre, this.passwd).subscribe({
+          next: (data: any) => {
           localStorage.setItem('token', data.token);
           this.loginSuccess();
-        });
-      } else {
-        Swal.fire({
-          title: 'Credenciales inválidas',
-          icon: 'error',
-          timerProgressBar: true,
-          background: '#151515',
-          color: '#fff'
-        });
+        },
+        error: (error: HttpErrorResponse) => {
+          Swal.fire({
+            title: 'Credenciales inválidas',
+            icon: 'error',
+            timerProgressBar: true,
+            background: '#151515',
+            color: '#fff'
+          });
+        }
+        })
       }
     });
   }

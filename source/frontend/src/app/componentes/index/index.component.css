@@ -57,7 +57,6 @@
 .newUsers,
 .bestPosts {
   width: 100%;
-  margin-left: 1.5rem;
 }
 
 .newUsers {
@@ -65,7 +64,7 @@
   border-radius: 0.8rem;
   padding: 1.2rem;
   height: 50vh;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .bestPosts {
@@ -75,6 +74,27 @@
   height: 50vh;
   overflow: auto;
 }
+
+@media (max-width: 768px) {
+
+  .mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  }
+
+  .content {
+    display: flex;
+    justify-content: center;
+    background-color: #0e0f12;
+    border-radius: 0.8rem;
+    overflow: hidden;
+  }
+
+
+}
+
 
 .subCards {
   height: 200px;

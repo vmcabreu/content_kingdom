@@ -4,11 +4,27 @@
 .containerPosts{
   margin-top: 80px;
 }
+.modal-dialog,.modal-content,.modal{
+  z-index: 9999 !important;
+}
+
+@media (max-width: 768px) {
+
+  .modal-dialog,.modal-content,.modal{
+    z-index: 9999 !important;
+  }
+
+  .filtradoContainer{
+    width: 90vw !important;
+    padding-top: 50px !important;
+  }
+
+  }
 
 .filtradoContainer{
-  position: fixed;
-  z-index: 9999;
-  width: 85vw;
+  position: absolute;
+  z-index: 9997;
+  width: 90vw;
   border-radius: 20px;
   background: #0e0f12;
   padding: 2.8rem;

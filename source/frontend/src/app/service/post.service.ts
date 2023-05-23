@@ -75,7 +75,7 @@ export class PostService {
     }));
   }
 
-  addPublicacion(publicacion: Publicacion): Observable<any> {
+  addPublicacion(publicacion: any): Observable<any> {
     return this.http.post(`${this.url}posts/post.php`, publicacion, { responseType: "text" }).pipe(tap(() => {
       this.refresh$.next()
     }))

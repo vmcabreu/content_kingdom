@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -35,8 +36,8 @@ export class RegisterComponent {
   }
 
   register() {
-    this.registerService.registerUser(this.newUser).subscribe(response => {
-      if (response.status == 200) {
+    this.registerService.registerUser(this.newUser).subscribe({
+      next: (res:any)=>{
           Swal.fire({
             title: '¡Registro correcto!',
             icon: 'success',
@@ -46,6 +47,16 @@ export class RegisterComponent {
           }).then((result) => {
             this.router.navigateByUrl("/login");
           })
+      },
+      error: (error:HttpErrorResponse)=>{
+        Swal.fire({
+          title: '¡Registro fallido!',
+          text: 'El usuario ya existe',
+          icon: 'error',
+          timerProgressBar: true,
+          background: '#151515',
+          color: '#fff'
+        })
       }
     });
   }

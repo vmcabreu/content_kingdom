@@ -1,31 +1,25 @@
 <div class="containerMain">
-  <div class="profile-menu ">
-    <div class="cardProfile">
-      <div class="ds-top"></div>
+  <div class="profile-menu d-flex flex-column align-items-center justify-content-around" >
       <div class="avatar-holder">
-        <img src="./../../../assets/imgs/defaultPic.png">
+        <img class="avatarPic" src="./../../../assets/imgs/defaultPic.png">
       </div>
-      <div class="name">
-        <a>{{usuario.usuario}}</a>
-        <h6 title="Followers"></h6>
-      </div>
-      <div class="button">
-        <a href="#" class="btn" onmousedown="follow();">Follow <i class="fas fa-user-plus"></i></a>
+      <div class="usernameStyle">
+        <h4>{{usuario.usuario}}</h4>
       </div>
       <div class="ds-info">
-        <div class="ds posts">
-          <h6 title="Number of posts">Posts <i class="fas fa-comments"></i></h6>
+        <div class="d-flex flex-column align-items-center">
+          <h6 title="Number of posts">Posts <i class="pi pi-comments"></i></h6>
           <p>{{getNumberPosts()}}</p>
         </div>
       </div>
-    </div>
   </div>
-
   <div class="profile-settings">
     <div class="container">
-      <div class="cardProfile" style="width: fit-content;">
+      <div style="width: fit-content;">
+        <div style="width: 100%;">
         <p-tabMenu [model]="items" [activeItem]="activeItem"
           (activeItemChange)="onActiveItemChange($event)"></p-tabMenu>
+        </div>
         <div *ngIf="activeItem.label == 'Biografia'">
           <div *ngIf="perfil.biografica != undefined"
             class="d-flex flex-column justify-content-center align-items-center">
@@ -180,70 +174,71 @@
       </div>
     </div>
   </div>
-  <div class="modal fade" id="addComment" tabindex="-1" aria-hidden="true" aria-labelledby="addCommentLabel">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="cardComments">
-          <div class="chat-header d-flex justify-content-between" id="addCommentLabel">Comentarios
-            <button class="trasparentButton" data-bs-dismiss="modal" aria-label="Close">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-octagon"
-                viewBox="0 0 16 16">
-                <path
-                  d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z" />
-                <path
-                  d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-              </svg>
-            </button>
-          </div>
-          <div class="chat-window">
-            <ul class="message-list">
-              <li *ngFor="let comentarios of postComentarios">
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="d-flex align-items-center">
-                    <div class="avatar"></div>
-                    <div class="avatarName p-2">{{ getUserName(comentarios.id_usuario) }}</div>
-                    <div>{{comentarios.comentario}}</div>
-                  </div>
-                  <div *ngIf="comentarios.id_usuario == usuario.id">
-                    <button class="pi pi-trash p-3 deleteButton" (click)="deleteComentario(comentarios.id)"></button>
-                  </div>
+</div>
+
+<div class="modal fade" id="addComment" tabindex="-1" aria-hidden="true" aria-labelledby="addCommentLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="cardComments">
+        <div class="chat-header d-flex justify-content-between" id="addCommentLabel">Comentarios
+          <button class="trasparentButton" data-bs-dismiss="modal" aria-label="Close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-octagon"
+              viewBox="0 0 16 16">
+              <path
+                d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z" />
+              <path
+                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+            </svg>
+          </button>
+        </div>
+        <div class="chat-window">
+          <ul class="message-list">
+            <li *ngFor="let comentarios of postComentarios">
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                  <div class="avatar"></div>
+                  <div class="avatarName p-2">{{ getUserName(comentarios.id_usuario) }}</div>
+                  <div>{{comentarios.comentario}}</div>
                 </div>
-              </li>
-            </ul>
-          </div>
-          <div class="chat-input">
-            <input [(ngModel)]="comentario.comentario" type="text" class="message-input"
-              placeholder="Type your message here">
-            <button class="send-button" (click)="addComentario()">Send</button>
-          </div>
+                <div *ngIf="comentarios.id_usuario == usuario.id">
+                  <button class="pi pi-trash p-3 deleteButton" (click)="deleteComentario(comentarios.id)"></button>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="chat-input">
+          <input [(ngModel)]="comentario.comentario" type="text" class="message-input"
+            placeholder="Type your message here">
+          <button class="send-button" (click)="addComentario()">Send</button>
         </div>
       </div>
     </div>
-
   </div>
 
+</div>
 
-  <div class="modal fade" id="addPlataforma" tabindex="-1" aria-labelledby="addPlataformaLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header" id="addCommentLabel">
-          <h1 class="modal-title fs-5 p-2" id="addPlataformaLabel">Añadir una plataforma</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body  p-2">
-          <form (submit)="addCanal()" class="gap-2">
-            <label for="plataforma">Seleccionar plataforma</label>
-            <select class="form-select" name="plataforma" [(ngModel)]="newPlataforma.nombre">
-              <option *ngFor="let item of plataformas" value="{{item}}">{{item}}</option>
-            </select>
-            <label for="mensaje">Enlace</label>
-            <input type="text" name="mensaje" [(ngModel)]="newPlataforma.enlace" class="form-control" id="mensaje"
-              cols="30" rows="5" />
-            <button type="submit" class="btn btn-primary p-2" data-bs-dismiss="modal" aria-label="Close">Añadir</button>
-          </form>
-        </div>
-        <div class="modal-footer"></div>
+
+<div class="modal fade" id="addPlataforma" tabindex="-1" aria-labelledby="addPlataformaLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" id="addCommentLabel">
+        <h1 class="modal-title fs-5 p-2" id="addPlataformaLabel">Añadir una plataforma</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      <div class="modal-body  p-2">
+        <form (submit)="addCanal()" class="gap-2">
+          <label for="plataforma">Seleccionar plataforma</label>
+          <select class="form-select" name="plataforma" [(ngModel)]="newPlataforma.nombre">
+            <option *ngFor="let item of plataformas" value="{{item}}">{{item}}</option>
+          </select>
+          <label for="mensaje">Enlace</label>
+          <input type="text" name="mensaje" [(ngModel)]="newPlataforma.enlace" class="form-control" id="mensaje"
+            cols="30" rows="5" />
+          <button type="submit" class="btn btn-primary p-2" data-bs-dismiss="modal" aria-label="Close">Añadir</button>
+        </form>
+      </div>
+      <div class="modal-footer"></div>
     </div>
   </div>
 </div>

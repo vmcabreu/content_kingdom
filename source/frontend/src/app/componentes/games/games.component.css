@@ -1,12 +1,25 @@
 .gameIcon{
   width: 20px;
 }
+
 .filtradoContainer{
   border-radius: 20px;
   background: #0e0f12;
   padding: 1.8rem;
   color: rgb(255, 255, 255);
 }
+
+@media (max-width: 768px) {
+  .filtradoContainer{
+    border-radius: 20px;
+    background: #0e0f12;
+    padding: 1.8rem;
+    color: rgb(255, 255, 255);
+  }
+
+
+}
+
 
 .routerButton{
   background-color: transparent;

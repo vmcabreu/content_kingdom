@@ -31,7 +31,16 @@ class Publicacion
         {
             $objeto = new Publicacion();
             foreach ($datos as $atributo => $valor) {
-                $objeto->$atributo = $valor;
+                if ($atributo === 'adjunto') {
+                    $nombreArchivo = $_FILES['adjunto']['name'];
+                    $rutaTemporal = $_FILES['adjunto']['tmp_name'];
+                    $rutaDestino = '/home/victor/proyecto_final/server/' . $nombreArchivo;
+                    move_uploaded_file($rutaTemporal, $rutaDestino);
+                    $objeto->$atributo = $rutaDestino;
+                } else {
+                    // Asignar los demás atributos
+                    $objeto->$atributo = $valor;
+                }
             }
             return $objeto;
         }

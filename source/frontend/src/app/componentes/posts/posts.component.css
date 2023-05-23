@@ -2,6 +2,14 @@
   color: #fff;
 }
 
+@media (max-width: 768px) {
+
+.modal-dialog,.modal-content,.modal{
+  z-index: 9999 !important;
+}
+
+}
+
 .likedMG {
   color: red;
 }
@@ -144,7 +152,6 @@
   transform: translate(-50%, -50%);
   width: 20px;
   height: 20px;
-  background-image: url('./../../../assets/imgs/hollowHeart.png');
   background-size: contain;
   background-repeat: no-repeat;
 }

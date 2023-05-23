@@ -37,6 +37,7 @@ export class UserProfileComponent {
   commentsNumber: any[] = [];
   selectedPost: number;
   postComentarios: Comentario[] = [];
+  listaGustados: Publicacion[] = [];
   listaUsuario: Usuario[] = [];
   listaAmigos: AmigosUsuarios[] = [];
   listaPlataforma: Plataforma[] = [];
@@ -65,6 +66,7 @@ export class UserProfileComponent {
       this.getPlataformaByUsuarioId();
       this.getListaAmigos();
       this.getUsuarios();
+      this.getPostGustados();
     })
   }
 
@@ -108,6 +110,12 @@ export class UserProfileComponent {
       }
     }
     return img;
+  }
+
+  getPostGustados(){
+    this.postService.getPublicacionesMeGustaPorUsuario(this.usuario.id).subscribe((data: Publicacion[]) =>{
+      this.listaGustados=data;
+    })
   }
 
   getNumberPosts() {

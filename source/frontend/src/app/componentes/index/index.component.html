@@ -6,7 +6,7 @@
      <h2>¡Bienvenido a Content Kingdom!</h2>
     </div>
   </div>
-  <div class="otherContent d-flex flex-column gap-4 p-3">
+  <div class="otherContent d-flex flex-column align-items-center justify-content-center gap-4 p-3">
     <div class="newUsers">
       <h3>Nuevos usuarios</h3>
       <p-scrollPanel>
@@ -18,9 +18,9 @@
         </ng-container>
       </p-scrollPanel>
     </div>
-    <div class="bestPosts d-flex flex-column">
-      <h3>Más gustados</h3>
-      <p-scrollPanel [style]="{ width: '100%', height: '150px'}">
+    <div class="bestPosts container-fluid d-flex flex-column">
+      <h3>Top 10 Publicaciones</h3>
+      <p-scrollPanel >
         <div class="post-card" *ngFor="let publicacion of topPublicaciones">
           <div class="d-flex justify-content-start align-items-center">
             <div class="avatar">

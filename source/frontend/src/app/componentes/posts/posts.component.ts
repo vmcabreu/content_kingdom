@@ -28,9 +28,10 @@ export class PostsComponent implements OnInit {
   publicaciones: Publicacion[] = [];
   topPublicaciones: Publicacion[] = [];
   listaVideojuegos: Videojuego[] = [];
+  listaGustados: Publicacion[]=[];
   juegoSelected: Videojuego = new Videojuego();
   suscription: Subscription;
-  usuario: Usuario;
+  usuario: Usuario = this.jwt.checkToken();
   commentsNumber: any[] = [];
   listaUsuario: Usuario[] = [];
   postComentarios: Comentario[] = [];
@@ -63,13 +64,11 @@ export class PostsComponent implements OnInit {
 
   initializeData() {
     this.getJuegos();
-    this.getUsuario();
     this.getUsuarios();
     this.getPublicaciones();
     this.getPublicacionesOrderLikes();
     this.getCommentsNumber();
     this.getEtiquetas();
-    this.getLikes();
     this.getEtiquetasFromPost();
   }
 
@@ -78,7 +77,11 @@ export class PostsComponent implements OnInit {
       this.listaLikes = data;
       this.likesMap = {};
       for (const like of data) {
-        this.likesMap[like.id_publicacion] = true;
+        if (like.id_usuario == this.usuario.id) {
+          this.likesMap[like.id_publicacion] = true;
+        }else{
+          this.likesMap[like.id_publicacion] = false;
+        }
       }
     });
   }
@@ -95,6 +98,19 @@ export class PostsComponent implements OnInit {
 
   checkIfIsLike(postId: number) {
     return this.likesMap[postId] || false;
+  }
+
+  getPostGustados(){
+    this.postService.getPublicacionesMeGustaPorUsuario(this.usuario.id).subscribe((data: Publicacion[]) =>{
+      this.listaGustados=data;
+      for (const item of this.publicaciones) {
+        if (data.find((i) => i.id === item.id)) {
+          this.likesMap[item.id] = true;
+        }else{
+          this.likesMap[item.id] = false;
+        }
+      }
+    })
   }
 
   setLike(id: number) {
@@ -129,6 +145,7 @@ export class PostsComponent implements OnInit {
   getPublicaciones() {
     this.postService.getPublicaciones().subscribe((data: Publicacion[]) => {
       this.publicaciones = data;
+          this.getLikes();
     });
   }
 
@@ -138,12 +155,6 @@ export class PostsComponent implements OnInit {
     });
   }
 
-  getUsuario() {
-    const token = localStorage.getItem('token');
-    if (token) {
-      this.usuario = this.jwt.decodeUsuario(token);
-    }
-  }
 
   deletePost(postID: number) {
     this.postService.deletePublicacion(postID).subscribe(() => {
@@ -160,11 +171,24 @@ export class PostsComponent implements OnInit {
     });
   }
 
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    this.newPublicacion.img = file;
+  }
+
   addPublicacion() {
     this.newPublicacion.id_usuario = this.usuario.id;
     this.newPublicacion.fecha = this.formatFecha();
     this.newPublicacion.id_videojuego = Number(this.newPublicacion.id_videojuego);
-    this.postService.addPublicacion(this.newPublicacion).subscribe(() => {
+    const formData = new FormData();
+    formData.append('id_usuario', this.newPublicacion.id_usuario.toString());
+    formData.append('id_videojuego', this.newPublicacion.id_videojuego.toString());
+    formData.append('fecha', this.newPublicacion.fecha);
+    formData.append('megusta', this.newPublicacion.megusta.toString());
+    formData.append('mensaje', this.newPublicacion.mensaje);
+    formData.append('adjunto', this.newPublicacion.img, this.newPublicacion.img.name);
+    formData.append('plataforma', this.newPublicacion.plataforma);
+    this.postService.addPublicacion(formData).subscribe(() => {
       this.refreshData();
       Swal.fire({
         title: '¡Has publicado con éxito!',

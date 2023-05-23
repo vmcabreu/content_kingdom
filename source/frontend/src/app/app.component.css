@@ -1,3 +1,7 @@
+@import "primeicons/primeicons.css";
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+
 .containerMenu {
   display: grid;
   grid-template-columns: 0.1fr 1.9fr;
@@ -8,6 +12,41 @@
     "menu index";
 }
 
+.mobileMenu {
+  display: none;
+}
+
+.pcMenu{
+  display: block;
+}
+
+.offcanvas{
+  width: 20% !important;
+  background-color: #0e0f12;
+}
+
+@media (max-width: 768px) {
+  .menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    grid-area: menu;
+    background-color: transparent !important;
+    height: 100%;
+    color: #fff;
+    z-index: 9998;
+  }
+
+  .mobileMenu {
+    display: block;
+  }
+
+  .pcMenu{
+    display: none;
+  }
+
+  }
+
 .menu {
   position: fixed;
   top: 0;
@@ -16,7 +55,7 @@
   background-color: #0e0f12;
   height: 100%;
   color: #fff;
-  z-index: 9999;
+  z-index: 9998;
 }
 
 .index {

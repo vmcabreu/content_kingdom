@@ -25,7 +25,7 @@
               "src/assets"
             ],
             "styles": [
-              "./src/styles.css",
+              "src/styles.css",
               "primeng/resources/themes/bootstrap4-light-blue/theme.css",
               "primeng/resources/themes/bootstrap4-light-purple/theme.css",
               "primeng/resources/themes/bootstrap4-dark-blue/theme.css",
