@@ -2,6 +2,7 @@
 require_once(__DIR__ . "/../inc/bootstrap.php");
 
 use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 class Token
 {
@@ -15,22 +16,26 @@ class Token
 
     public static function generarTokenLog(Usuario $usuario): string
     {
-        $payload = array(
-            "iss" => "http://contentkingdom.alu6618.arkania.es/api/controller/login/loginv2.php",
-            "aud" => "http://contentkingdom.alu6618.arkania.es/login",
-            "iat" => time(),
+        $data= array(
             "id" => $usuario->id,
             "nombre" => $usuario->usuario,
             "email" => $usuario->email
         );
+        $payload = array(
+            "iss" => "https://contentkingdom.alu6618.arkania.es/api",
+            "aud" => "https://contentkingdom.alu6618.arkania.es",
+            "iat" => time(),
+            "exp" => time() + 604800,
+            "data" => $data
+        );
         return JWT::encode($payload, AUTHKEY, "HS256");
     }
 
-    function verifyToken($jwt)
+    public static function verifyToken($jwt)
     {
         try {
-            $token = JWT::decode($jwt, AUTHKEY, 'HS256');
-            return true;
+            $token = JWT::decode($jwt, new Key(AUTHKEY, 'HS256'));
+            return $token->data;
         } catch (\Exception $e) {
             return false;
         }
