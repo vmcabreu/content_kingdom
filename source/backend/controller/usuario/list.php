@@ -14,17 +14,17 @@ if (isset($headers['Authorization'])) {
             $id = intval($_GET['id']);
             $usuarioById = DAOUsuario::buscarUsuarioID($id);
             if ($usuarioById != null) {
-                echo json_encode($usuarioById);
+                echo json_encode($usuarioById,JSON_UNESCAPED_UNICODE);
             } else {
                 http_response_code(404);
                 echo json_encode(array("message" => "No se encontró el usuario con ID " . $id));
             }
         } else if (isset($_GET['list'])) {
             $param = $_GET['list'];
-            if ($param = "new") {
+            if ($param == "new") {
                 $listaNewUsuarios = DAOUsuario::getNuevosUsuarios();
                 if ($listaNewUsuarios != null) {
-                    echo json_encode($listaNewUsuarios);
+                    echo json_encode($listaNewUsuarios,JSON_UNESCAPED_UNICODE);
                 } else {
                     http_response_code(404);
                     echo json_encode(array("message" => "Error en base de datos"));
@@ -42,7 +42,7 @@ if (isset($headers['Authorization'])) {
         } else {
             $listaUsuarios = DAOUsuario::getListaUsuarios();
             if ($listaUsuarios != null) {
-                echo json_encode($listaUsuarios);
+                echo json_encode($listaUsuarios,JSON_UNESCAPED_UNICODE);
             } else {
                 http_response_code(404);
                 echo json_encode(array("message" => "Error en base de datos"));

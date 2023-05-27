@@ -15,7 +15,7 @@
                 $likesUsuario = DAOLikes::getLikesFromUsuarios($id);
                 if ($likesUsuario != null) {
                     http_response_code(200);
-                    echo json_encode($likesUsuario);
+                    echo json_encode($likesUsuario,JSON_UNESCAPED_UNICODE);
                 } else {
                     http_response_code(404);
                     echo json_encode(array("message" => "No se encontró likes del usuario con ID " . $id));
@@ -25,19 +25,19 @@
                 $likesPost = DAOLikes::getLikesFromPublicacion($post);
                 if ($likesPost != null) {
                     http_response_code(200);
-                    echo json_encode($likesPost);
+                    echo json_encode($likesPost,JSON_UNESCAPED_UNICODE);
                 } else {
                     http_response_code(404);
-                    echo json_encode(array("message" => "No se encontró likes de las publicaciones con ID " . $post));
+                    echo json_encode(array("message" => "No se encontró likes de las publicaciones con ID " . $post),JSON_UNESCAPED_UNICODE);
                 }
             } else {
                 $listLikes = DAOLikes::getListOfLikes();
                 if ($listLikes != null) {
                     http_response_code(200);
-                    echo json_encode($listLikes);
+                    echo json_encode($listLikes,JSON_UNESCAPED_UNICODE);
                 } else {
                     http_response_code(404);
-                    echo json_encode(array("message" => "No se encontró likes de las publicaciones"));
+                    echo json_encode(array("message" => "No se encontró likes de las publicaciones"),JSON_UNESCAPED_UNICODE);
                 }
             }
         } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -54,7 +54,7 @@
                 $post = intval($_GET['post']);
                 $respuestaDelete = DAOLikes::deleteLike($id, $post);
                 $httpCode = $respuestaDelete > 0 ? 200 : 422;
-                echo json_encode(array("respuesta" => $respuestaDelete));
+                echo json_encode(array("respuesta" => $respuestaDelete),JSON_UNESCAPED_UNICODE);
                 http_response_code($httpCode);
                 return;
             }

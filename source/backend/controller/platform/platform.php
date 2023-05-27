@@ -53,7 +53,7 @@ if (isset($headers['Authorization'])) {
             $id = intval($_GET['id']);
             $respuestaDelete = DAOPlataforma::deletePlataforma($id);
             $httpCode = $respuestaDelete > 0 ? 200 : 422;
-            echo json_encode(array("respuesta" => $respuestaDelete));
+            echo json_encode(array("respuesta" => $respuestaDelete),JSON_UNESCAPED_UNICODE);
             http_response_code($httpCode);
             return;
         }

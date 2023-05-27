@@ -64,7 +64,7 @@ if (isset($headers['Authorization'])) {
             $post = intval($_GET['post']);
             $respuestaDelete = DAOEtiquetaPublicacion::deleteEtiqueta($id, $post);
             $httpCode = $respuestaDelete > 0 ? 200 : 422;
-            echo json_encode(array("respuesta" => $respuestaDelete));
+            echo json_encode(array("respuesta" => $respuestaDelete),JSON_UNESCAPED_UNICODE);
             http_response_code($httpCode);
             return;
         }

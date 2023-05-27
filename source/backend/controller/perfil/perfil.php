@@ -15,10 +15,10 @@ if (isset($headers['Authorization'])) {
             $perfilById = DAOPerfil::getPerfilById($id, 1);
             if ($perfilById != null) {
                 http_response_code(200);
-                echo json_encode($perfilById);
+                echo json_encode($perfilById,JSON_UNESCAPED_UNICODE);
             } else {
                 http_response_code(404);
-                echo json_encode(array("message" => "No se encontró el perfil de usuario con ID " . $id));
+                echo json_encode(array("message" => "No se encontró el perfil de usuario con ID " . $id),JSON_UNESCAPED_UNICODE);
             }
         }
     } elseif ($_SERVER['REQUEST_METHOD'] == 'PUT') {

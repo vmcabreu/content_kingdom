@@ -11,7 +11,7 @@ if (isset($headers['Authorization'])) {
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $listEtiquetas = DAOEtiqueta::listEtiquetas();
         if ($listEtiquetas != null) {
-            echo json_encode($listEtiquetas);
+            echo json_encode($listEtiquetas,JSON_UNESCAPED_UNICODE);
         } else {
             http_response_code(404);
             echo json_encode(array("message" => "No se encontró el perfil de usuario con ID " . $id));
