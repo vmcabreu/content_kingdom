@@ -27,19 +27,7 @@ export class HeaderComponent {
   constructor(private jwt: JwtService,private perfilService: PerfilService, private router: Router) { }
 
   ngOnInit() {
-    this.getUsuario();
-  }
-
-  ngDoCheck(){
-    this.getUsuario();
-  }
-
-
-  getUsuario() {
-    let token = localStorage.getItem('token')
-    if (token !== "" && token !== undefined) {
-      this.usuario = this.jwt.decodeUsuario(token);
-    }
+    this.usuario = this.jwt.checkToken()
   }
 
   getPerfil(){
@@ -51,7 +39,6 @@ export class HeaderComponent {
 
   logOut(){
     let token = localStorage.setItem('token',"")
-    this.getUsuario()
     this.router.navigateByUrl("/login");
 
   }
