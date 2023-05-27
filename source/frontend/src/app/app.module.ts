@@ -33,6 +33,7 @@ import { ChipModule } from 'primeng/chip';
 import { UserProfileComponent } from './componentes/user-profile/user-profile.component';
 import { ListPostsComponent } from './componentes/list-posts/list-posts.component';
 import { AccountComponent } from './componentes/account/account.component';
+import { AuthInterceptor } from './service/auth.interceptor';
 
 
 @NgModule({
@@ -74,7 +75,9 @@ import { AccountComponent } from './componentes/account/account.component';
     AutoCompleteModule,
     TabMenuModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

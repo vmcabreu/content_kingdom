@@ -23,6 +23,7 @@ import { EtiquetasPublicacion } from 'src/app/model/etiqueta-publicacion.model';
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
+  newComentario :string;
   isClicked = false;
   newPublicacion: Publicacion = new Publicacion();
   publicaciones: Publicacion[] = [];
@@ -93,7 +94,8 @@ export class PostsComponent implements OnInit {
   }
 
   getJuegoFromPost(id: number) {
-    return this.listaVideojuegos.find(element => element.id === id).nombre
+    let videojuego =this.listaVideojuegos.find(element => element.id === id);
+    return videojuego.nombre
   }
 
   checkIfIsLike(postId: number) {
@@ -158,6 +160,7 @@ export class PostsComponent implements OnInit {
 
   deletePost(postID: number) {
     this.postService.deletePublicacion(postID).subscribe(() => {
+      this.publicaciones=this.publicaciones.filter(obj => obj.id !== postID);
       Swal.fire({
         title: '¡Publicacion borrada con éxito!',
         icon: 'success',
@@ -166,7 +169,6 @@ export class PostsComponent implements OnInit {
         color: '#fff'
       }).then(() => {
         this.refreshData();
-        window.location.reload();
       });
     });
   }
@@ -304,6 +306,13 @@ export class PostsComponent implements OnInit {
   }
 
   deleteComentario(postID: number) {
+    let id:number = 0;
+    for (let i = 0; i < this.postComentarios.length; i++) {
+      if (this.postComentarios[i].id == postID) {
+        id=i
+      }
+    }
+
     this.postService.deleteComentario(postID).subscribe(() => {
       this.refreshDataAndComments();
       Swal.fire({
@@ -314,7 +323,7 @@ export class PostsComponent implements OnInit {
         color: '#fff'
       }).then(() => {
         this.refreshDataAndComments();
-        window.location.reload();
+        this.postComentarios = this.postComentarios.filter(obj => obj.id !== postID);
       });
     });
   }

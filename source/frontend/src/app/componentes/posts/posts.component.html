@@ -87,11 +87,8 @@
             </ul>
           </div>
           <div class="chat-input">
-            <form (submit)="addComentario()">
-            <input [(ngModel)]="comentario.comentario" type="text" class="message-input"
-              placeholder="Type your message here" autofocus>
-            <button class="send-button" type="submit">Send</button>
-          </form>
+            <input  type="text" class="message-input" [(ngModel)]="comentario.comentario">
+            <button class="send-button" type="submit" (click)="addComentario()">Send</button>
           </div>
         </div>
       </div>
@@ -110,8 +107,7 @@
         <div class="modal-body">
           <form (submit)="addPublicacion()">
             <label for="mensaje">Contenido</label>
-            <input type="text" name="mensaje" [(ngModel)]="newPublicacion.mensaje" class="form-control" id="mensaje"
-              cols="30" rows="5" />
+            <input type="text" name="mensaje" [(ngModel)]="newPublicacion.mensaje" class="form-control" />
             <label for="plataforma">Seleccionar plataforma</label>
             <select class="form-select" name="plataforma" [(ngModel)]="newPublicacion.plataforma">
               <option *ngFor="let item of plataformas" value="{{item}}">{{item}}</option>
