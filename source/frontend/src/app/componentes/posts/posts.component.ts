@@ -188,6 +188,7 @@ export class PostsComponent implements OnInit {
         background: '#151515',
         color: '#fff'
       }).then(() => {
+        this.newPublicacion = new Publicacion();
         this.addEtiquetasForPost();
         this.refreshData();
       });
