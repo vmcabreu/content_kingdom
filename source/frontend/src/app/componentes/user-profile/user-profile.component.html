@@ -10,7 +10,7 @@
       <div class="d-flex flex-column align-items-center gap-2">
         <h6 title="Number of posts"><i class="pi pi-comments"></i> Posts: {{getNumberPosts()}}</h6>
         <div>
-          <p style="max-width: 50%;">{{perfil.biografica}}</p>
+          <p>{{perfil.biografica}}</p>
         </div>
       </div>
     </div>
@@ -118,7 +118,7 @@
           </ng-template>
           <ng-template #empty>
             <div class="d-flex justify-content-center align-items-center" style="color: aliceblue;">
-              <p class="p-3">Aun no has interactuado con otras publicaciones.</p>
+              <p class="p-3">Aun no ha interactuado con otras publicaciones.</p>
             </div>
           </ng-template>
         </div>
@@ -126,7 +126,7 @@
         <div *ngIf="activeItem == 'Canales'">
           <div *ngIf="listaPlataforma.length == 0;else showLista">
             <div class="d-flex flex-column justify-content-center align-items-center" style="color: aliceblue;">
-              <p class="p-3">No has añadido ningún canal, ¡Añadelo para que la comunidad sepa de tu contenido!</p>
+              <p class="p-3">Este usuaruio no ha añadido ningún canal.</p>
               <span data-bs-toggle="modal" data-bs-target="#addPlataforma"
                 style="cursor: pointer; font-weight: bold;">Añade aquí tu canal</span>
             </div>
@@ -154,7 +154,7 @@
         <div *ngIf="activeItem == 'Amigos'">
           <div *ngIf="listaAmigos.length == 0;else showAmigos"
             class="d-flex flex-column justify-content-center align-items-center" style="color: aliceblue;">
-            <p class="p-3">No has añadido a nadie a tu lista, ¡Busca en la comunidad para añadir a quien te caiga bien!
+            <p class="p-3">No ha añadido a nadie a su lista de amigos.
             </p>
             <a routerLink="/community" style="cursor: pointer; font-weight: bold;">Busca aquí</a>
           </div>
