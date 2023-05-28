@@ -9,7 +9,7 @@
     </select>
   </div>
   <div *ngIf="checkIfFilterOn(); else listaNormal">
-    <div class="container d-flex flex-wrap p-3 gap-2">
+    <div class="container d-flex p-3 gap-2">
       <div *ngFor="let juego of videojuegosFiltrados" class="cardGame" [routerLink]="['/games/', juego.id]">
         <div class="cardGame-details d-flex flex-column justify-content-between">
           <img class="cardGame-img" src="{{juego.imagen}}" />
@@ -24,8 +24,8 @@
     </div>
   </div>
   <ng-template #listaNormal>
-    <div class="container d-flex flex-wrap p-3 gap-2">
-      <div *ngFor="let juego of listaVideojuegos" class="cardGame" [routerLink]="['/games/', juego.id]">
+    <div class="container d-flex flex-wrap justify-content-evenly p-3 gap-2">
+      <div *ngFor="let juego of listaVideojuegos" class="cardGame " [routerLink]="['/games/', juego.id]">
         <div class="cardGame-details d-flex flex-column justify-content-between">
           <img class="cardGame-img" src="{{juego.imagen}}" />
           <p class="text-titleGame">{{juego.nombre}}</p>

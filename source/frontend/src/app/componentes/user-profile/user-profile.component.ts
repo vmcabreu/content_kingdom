@@ -33,7 +33,7 @@ export class UserProfileComponent {
   items: MenuItem[];
   comentario: Comentario = new Comentario;
   etiquetas: Etiqueta[] = [];
-  activeItem: MenuItem;
+  activeItem: string;
   commentsNumber: any[] = [];
   selectedPost: number;
   postComentarios: Comentario[] = [];
@@ -49,13 +49,13 @@ export class UserProfileComponent {
   ngOnInit() {
     this.getUsuario();
     this.items = [
-      { label: 'Biografia', icon: 'pi pi-fw pi-user' },
+      //{ label: 'Biografia', icon: 'pi pi-fw pi-user' },
       { label: 'Publicaciones', icon: 'pi pi-fw pi-comment' },
       { label: 'Gustados', icon: 'pi pi-fw pi-heart' },
       { label: 'Canales', icon: 'pi pi-fw pi-desktop' },
       { label: 'Amigos', icon: 'pi pi-fw pi-users' }
     ];
-    this.activeItem = this.items[0];
+    this.activeItem = this.items[0].label;
   }
 
   getUsuario(){
@@ -75,7 +75,7 @@ export class UserProfileComponent {
   }
 
   activateLast() {
-    this.activeItem = this.items[this.items.length - 1];
+    this.activeItem = this.items[this.items.length - 1].label;
   }
 
   getPlataformaByUsuarioId() {

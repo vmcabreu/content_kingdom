@@ -68,13 +68,13 @@ if (isset($headers['Authorization'])) {
         $publicacion = Publicacion::crearPublicacion($data);
         $response = DAOPublicacion::aniadirPublicacion($publicacion);
         http_response_code($response > 0 ? 200 : 422);
-        echo json_encode(array("respuesta" => $respuestaDelete),JSON_UNESCAPED_UNICODE);
+        echo json_encode(array("respuesta" => $respuestaDelete), JSON_UNESCAPED_UNICODE);
     } elseif ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
         if (isset($_GET['id'])) {
             $id = intval($_GET['id']);
             $respuestaDelete = DAOPublicacion::borrarPublicacion($id);
             http_response_code($respuestaDelete > 0 ? 200 : 422);
-            echo json_encode(array("respuesta" => $respuestaDelete),JSON_UNESCAPED_UNICODE);
+            echo json_encode(array("respuesta" => $respuestaDelete), JSON_UNESCAPED_UNICODE);
             return;
         }
     }

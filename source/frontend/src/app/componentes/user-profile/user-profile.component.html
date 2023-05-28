@@ -1,36 +1,28 @@
-<div class="containerMain">
-  <div class="profile-menu d-flex flex-column align-items-center justify-content-around" >
-      <div class="avatar-holder">
-        <img class="avatarPic" src="./../../../assets/imgs/defaultPic.png">
-      </div>
-      <div class="usernameStyle">
-        <h4>{{usuario.usuario}}</h4>
-      </div>
-      <div class="ds-info">
-        <div class="d-flex flex-column align-items-center">
-          <h6 title="Number of posts">Posts <i class="pi pi-comments"></i></h6>
-          <p>{{getNumberPosts()}}</p>
+<div class="container profileBG">
+  <div class="d-flex flex-column align-items-center justify-content-center gap-2">
+    <div class="avatar-holder">
+      <img class="avatarPic" src="./../../../assets/imgs/defaultPic.png">
+    </div>
+    <div class="usernameStyle">
+      <h4>{{usuario.usuario}}</h4>
+    </div>
+    <div class="ds-info">
+      <div class="d-flex flex-column align-items-center gap-2">
+        <h6 title="Number of posts"><i class="pi pi-comments"></i> Posts: {{getNumberPosts()}}</h6>
+        <div>
+          <p style="max-width: 50%;">{{perfil.biografica}}</p>
         </div>
       </div>
-  </div>
-  <div class="profile-settings">
-    <div class="container">
-      <div style="width: fit-content;">
-        <div style="width: 100%;">
-        <p-tabMenu [model]="items" [activeItem]="activeItem"
-          (activeItemChange)="onActiveItemChange($event)"></p-tabMenu>
-        </div>
-        <div *ngIf="activeItem.label == 'Biografia'">
-          <div *ngIf="perfil.biografica != undefined"
-            class="d-flex flex-column justify-content-center align-items-center">
-            <p-scrollPanel class="p-3" [style]="{ width: '100%', height: '250px' }">
-              <textarea name="biografiaPerfil" id="biografiaPerfil" cols="50" rows="10" [(ngModel)]="perfil.biografica" readonly>
-              {{perfil.biografica}}
-            </textarea>
-            </p-scrollPanel>
+    </div>
+    <div class="container d-flex flex-column align-items-center justify-content-center">
+      <div>
+        <div class="d-flex justify-content-evenly gap-4 profileNavigator">
+          <div *ngFor="let item of items">
+            <button class="navItems" (click)="activeItem = item.label"><span class=" {{item.icon}}"></span>
+              {{item.label}}</button>
           </div>
         </div>
-        <div *ngIf="activeItem.label == 'Publicaciones'">
+        <div *ngIf="activeItem == 'Publicaciones'">
           <div *ngIf="listaPublicaciones.length != 0; then lista else emptyMessage">
           </div>
 
@@ -80,50 +72,50 @@
           </ng-template>
         </div>
 
-        <div *ngIf="activeItem.label == 'Gustados'" >
-          <div *ngIf="listaPublicaciones.length != 0; then gustados else empty">
+        <div *ngIf="activeItem == 'Gustados'">
+          <div *ngIf="listaGustados.length != 0; then gustados else empty">
           </div>
           <ng-template #gustados style="overflow: auto;">
             <p-scrollPanel [style]="{ width: '100%', height: '75vh' }" class="p-2">
               <div style="overflow: auto;">
-            <div class="post-card" *ngFor="let postGustados of listaGustados">
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="d-flex">
-                  <div class="avatar">
-                    <img class="avatar" src="./../../../assets/imgs/defaultPic.png" alt="">
+                <div class="post-card" *ngFor="let postGustados of listaGustados">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex">
+                      <div class="avatar">
+                        <img class="avatar" src="./../../../assets/imgs/defaultPic.png" alt="">
+                      </div>
+                      <div class="avatarName p-2">{{usuario.usuario}}</div>
+                    </div>
+                    <div>
+                      <div *ngIf="postGustados.id_usuario == usuario.id">
+                        <button class="pi pi-trash p-3 deleteButton" (click)="deletePost(postGustados.id)"></button>
+                      </div>
+                    </div>
                   </div>
-                  <div class="avatarName p-2">{{usuario.usuario}}</div>
-                </div>
-                <div>
-                  <div *ngIf="postGustados.id_usuario == usuario.id">
-                    <button class="pi pi-trash p-3 deleteButton" (click)="deletePost(postGustados.id)"></button>
-                  </div>
-                </div>
-              </div>
-              <p class="description">{{ postGustados.mensaje }}</p>
-              <span class="datetime">{{ postGustados.fecha }}</span>
-              <!--
+                  <p class="description">{{ postGustados.mensaje }}</p>
+                  <span class="datetime">{{ postGustados.fecha }}</span>
+                  <!--
         <div *ngIf="post.adjunto !== ''">
           <div class="image-preview"></div>
         </div>
         -->
-              <div class="comment-like">
-                <span>
-                  <div class="large-font text-center top-20 d-flex">
-                    <button class="like-button d-flex">
-                      <span class="pi pi-heart gap-1" style="color: aliceblue;">
-                        <div class="iconNumber">{{ postGustados.megusta }}</div>
-                      </span>
-                    </button>
+                  <div class="comment-like">
+                    <span>
+                      <div class="large-font text-center top-20 d-flex">
+                        <button class="like-button d-flex">
+                          <span class="pi pi-heart gap-1" style="color: aliceblue;">
+                            <div class="iconNumber">{{ postGustados.megusta }}</div>
+                          </span>
+                        </button>
+                      </div>
+                    </span>
+                    <span class="pi pi-comments gap-1" (click)="getCommentsByPostId(postGustados.id)"
+                      data-bs-toggle="modal" data-bs-target="#addComment">{{getNumberOfPosts(postGustados.id)}}</span>
                   </div>
-                </span>
-                <span class="pi pi-comments gap-1" (click)="getCommentsByPostId(postGustados.id)" data-bs-toggle="modal"
-                  data-bs-target="#addComment">{{getNumberOfPosts(postGustados.id)}}</span>
+                </div>
               </div>
-            </div>
-          </div>
-          </p-scrollPanel>
-        </ng-template>
+            </p-scrollPanel>
+          </ng-template>
           <ng-template #empty>
             <div class="d-flex justify-content-center align-items-center" style="color: aliceblue;">
               <p class="p-3">Aun no has interactuado con otras publicaciones.</p>
@@ -131,7 +123,7 @@
           </ng-template>
         </div>
 
-        <div *ngIf="activeItem.label == 'Canales'">
+        <div *ngIf="activeItem == 'Canales'">
           <div *ngIf="listaPlataforma.length == 0;else showLista">
             <div class="d-flex flex-column justify-content-center align-items-center" style="color: aliceblue;">
               <p class="p-3">No has añadido ningún canal, ¡Añadelo para que la comunidad sepa de tu contenido!</p>
@@ -140,27 +132,31 @@
             </div>
           </div>
           <ng-template #showLista>
-            <button data-bs-toggle="modal" data-bs-target="#addPlataforma" class="btn btn-secondary w-100">+ Añadir
-              Canal</button>
-            <div class="d-flex gap-2 p-3" style="max-width: fit-content;">
-              <p-scrollPanel [style]="{ width: '100%', height: '75vh' }" class="p-2">
+            <div class="p-3">
+              <button data-bs-toggle="modal" data-bs-target="#addPlataforma" class="btn btn-secondary w-100">+ Añadir
+                Canal</button>
+              <div class="d-flex gap-2 p-3" style="max-width: fit-content;">
                 <div *ngFor="let canal of listaPlataforma">
-                  <a href="{{canal.enlace}}" >
-                    <img  [src]="getImage(canal.nombre)" alt="" style="width: 50px;">
-                    <h2>{{canal.nombre}}</h2>
+                  <a href="{{canal.enlace}}" class="channelLink">
+                    <div class="cardChannel">
+                      <div class="cardChannel2 d-flex flex-column justify-content-center align-items-center">
+                        <img [src]="getImage(canal.nombre)" alt="" style="width: 50px;">
+                        <h2>{{canal.nombre}}</h2>
+                      </div>
+                    </div>
                   </a>
                 </div>
-              </p-scrollPanel>
+              </div>
             </div>
           </ng-template>
         </div>
 
-        <div *ngIf="activeItem.label == 'Amigos'">
+        <div *ngIf="activeItem == 'Amigos'">
           <div *ngIf="listaAmigos.length == 0;else showAmigos"
-          class="d-flex flex-column justify-content-center align-items-center" style="color: aliceblue;">
-            <p class="p-3">No has añadido a nadie a tu lista, ¡Busca en la comunidad para añadir a quien te caiga bien!</p>
-            <a routerLink="/community"
-              style="cursor: pointer; font-weight: bold;">Busca aquí</a>
+            class="d-flex flex-column justify-content-center align-items-center" style="color: aliceblue;">
+            <p class="p-3">No has añadido a nadie a tu lista, ¡Busca en la comunidad para añadir a quien te caiga bien!
+            </p>
+            <a routerLink="/community" style="cursor: pointer; font-weight: bold;">Busca aquí</a>
           </div>
           <ng-template #showAmigos>
             <div *ngFor="let amigo of getAmigoFromLista()">
@@ -207,7 +203,7 @@
         <div class="chat-input">
           <input [(ngModel)]="comentario.comentario" type="text" class="message-input"
             placeholder="Type your message here">
-          <button class="send-button" (click)="addComentario()">Send</button>
+          <button class="send-button" (click)="addComentario()" data-bs-dismiss="modal" aria-label="Close">Send</button>
         </div>
       </div>
     </div>

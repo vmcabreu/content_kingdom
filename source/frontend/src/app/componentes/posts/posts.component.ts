@@ -23,13 +23,13 @@ import { EtiquetasPublicacion } from 'src/app/model/etiqueta-publicacion.model';
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
-  newComentario :string;
+  newComentario: string;
   isClicked = false;
   newPublicacion: Publicacion = new Publicacion();
   publicaciones: Publicacion[] = [];
   topPublicaciones: Publicacion[] = [];
   listaVideojuegos: Videojuego[] = [];
-  listaGustados: Publicacion[]=[];
+  listaGustados: Publicacion[] = [];
   juegoSelected: Videojuego = new Videojuego();
   suscription: Subscription;
   usuario: Usuario = this.jwt.checkToken();
@@ -80,7 +80,7 @@ export class PostsComponent implements OnInit {
       for (const like of data) {
         if (like.id_usuario == this.usuario.id) {
           this.likesMap[like.id_publicacion] = true;
-        }else{
+        } else {
           this.likesMap[like.id_publicacion] = false;
         }
       }
@@ -94,7 +94,7 @@ export class PostsComponent implements OnInit {
   }
 
   getJuegoFromPost(id: number) {
-    let videojuego =this.listaVideojuegos.find(element => element.id === id);
+    let videojuego = this.listaVideojuegos.find(element => element.id === id);
     return videojuego.nombre
   }
 
@@ -102,13 +102,13 @@ export class PostsComponent implements OnInit {
     return this.likesMap[postId] || false;
   }
 
-  getPostGustados(){
-    this.postService.getPublicacionesMeGustaPorUsuario(this.usuario.id).subscribe((data: Publicacion[]) =>{
-      this.listaGustados=data;
+  getPostGustados() {
+    this.postService.getPublicacionesMeGustaPorUsuario(this.usuario.id).subscribe((data: Publicacion[]) => {
+      this.listaGustados = data;
       for (const item of this.publicaciones) {
         if (data.find((i) => i.id === item.id)) {
           this.likesMap[item.id] = true;
-        }else{
+        } else {
           this.likesMap[item.id] = false;
         }
       }
@@ -147,7 +147,7 @@ export class PostsComponent implements OnInit {
   getPublicaciones() {
     this.postService.getPublicaciones().subscribe((data: Publicacion[]) => {
       this.publicaciones = data;
-          this.getLikes();
+      this.getLikes();
     });
   }
 
@@ -160,7 +160,7 @@ export class PostsComponent implements OnInit {
 
   deletePost(postID: number) {
     this.postService.deletePublicacion(postID).subscribe(() => {
-      this.publicaciones=this.publicaciones.filter(obj => obj.id !== postID);
+      this.publicaciones = this.publicaciones.filter(obj => obj.id !== postID);
       Swal.fire({
         title: '¡Publicacion borrada con éxito!',
         icon: 'success',
@@ -211,11 +211,11 @@ export class PostsComponent implements OnInit {
     })
   }
 
-  getTagFormPost(id:number) {
-    let tagList: string[] =[]
+  getTagFormPost(id: number) {
+    let tagList: string[] = []
     this.tagsMap.forEach(element => {
       if (element.id_publicacion == id) {
-      tagList.push(this.etiquetas.find(tags => tags.id === element.id_etiqueta).nombre);
+        tagList.push(this.etiquetas.find(tags => tags.id === element.id_etiqueta).nombre);
       }
     });
     return tagList;
@@ -306,10 +306,10 @@ export class PostsComponent implements OnInit {
   }
 
   deleteComentario(postID: number) {
-    let id:number = 0;
+    let id: number = 0;
     for (let i = 0; i < this.postComentarios.length; i++) {
       if (this.postComentarios[i].id == postID) {
-        id=i
+        id = i
       }
     }
 
