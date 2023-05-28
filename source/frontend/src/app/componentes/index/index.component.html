@@ -1,10 +1,16 @@
-<div class="mainContainer container">
+<div *ngIf="this.usuario == null" class="">
+  <video autoplay [muted]="'muted'" loop id="myVideo">
+    <source src="./../../../assets/video/bg.mp4" type="video/mp4">
+  </video>
+  <div class=" d-flex flex-column justify-content-center align-items-center logoNoUser welcome">
+  <img src="./../../../assets/imgs/CKLogo.png" alt="" class="welcomeIcon" >
+  <h2>Welcome to Content Kingdom!</h2>
+</div>
+ </div>
+
+<div *ngIf="this.usuario != null" class="mainContainer container">
   <div class="content m-2">
-     <app-posts *ngIf="this.usuario != null"></app-posts>
-     <div *ngIf="this.usuario == null" class="d-flex flex-column justify-content-center align-items-center">
-     <img src="./../../../assets/imgs/CKLogo.png" alt="" style="width: 400px;">
-     <h2>¡Bienvenido a Content Kingdom!</h2>
-    </div>
+     <app-posts ></app-posts>
   </div>
   <div class="otherContent d-flex flex-column align-items-center justify-content-center gap-4 p-3">
     <div class="newUsers">

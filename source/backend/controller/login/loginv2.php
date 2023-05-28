@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (DAOUsuario::validarLogin($passwd, $user)) {
         $bdUser = DAOUsuario::loginGetUser($passwd, $user);
         header('Content-Type: application/json');
-        echo json_encode(array('token' => Token::generarTokenLog($bdUser)));
+        echo json_encode(array('token' => Token::generarTokenLog($bdUser)),JSON_UNESCAPED_UNICODE);
     } else {
         http_response_code(422);
     }

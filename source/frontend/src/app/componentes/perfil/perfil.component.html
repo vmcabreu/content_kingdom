@@ -1,26 +1,43 @@
-<div class="containerMain">
-  <div class="profile-menu d-flex flex-column align-items-center justify-content-around" >
-      <div class="avatar-holder">
-        <img class="avatarPic" src="./../../../assets/imgs/defaultPic.png">
-      </div>
-      <div class="usernameStyle">
-        <h4>{{usuario.usuario}}</h4>
-      </div>
-      <div class="ds-info">
-        <div class="d-flex flex-column align-items-center">
-          <h6 title="Number of posts">Posts <i class="pi pi-comments"></i></h6>
-          <p>{{getNumberPosts()}}</p>
+<div class="container profileBG">
+  <div class="d-flex flex-column align-items-center justify-content-center gap-2">
+    <span class="avatar-gradient">
+    </span>
+    <img class="avatarPic" src="./../../../assets/imgs/defaultPic.png">
+    <div class="usernameStyle">
+      <h4>{{usuario.usuario}}</h4>
+    </div>
+    <div class="ds-info">
+      <div class="d-flex flex-column align-items-center gap-2">
+        <h6 title="Number of posts"><i class="pi pi-comments"></i> Posts: {{getNumberPosts()}}</h6>
+        <button *ngIf="!editarPerfil" class="btn btn-primary" (click)="editarPerfil = true"><svg
+            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square"
+            viewBox="0 0 16 16">
+            <path
+              d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+            <path fill-rule="evenodd"
+              d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+          </svg></button>
+        <div>
+          <p *ngIf="!editarPerfil">{{perfil.biografica}}</p>
+          <div *ngIf="editarPerfil" class="d-flex flex-column align-items-center justify-content-center gap-3">
+            <textarea cols="30" rows="5" [(ngModel)]="perfil.biografica"></textarea>
+            <div class="d-flex justify-content-evenly gap-3">
+              <button class="btn btn-primary" (click)="updateBiografia()">Guardar</button>
+              <button class="btn btn-primary" (click)="editarPerfil = false">Cancelar</button>
+            </div>
+          </div>
         </div>
       </div>
-  </div>
-  <div class="profile-settings">
-    <div class="container">
-      <div style="width: fit-content;">
-        <div style="width: 100%;">
-        <p-tabMenu [model]="items" [activeItem]="activeItem"
-          (activeItemChange)="onActiveItemChange($event)"></p-tabMenu>
+    </div>
+    <div class="container d-flex flex-column align-items-center justify-content-center">
+      <div>
+        <div class="d-flex justify-content-evenly gap-4 profileNavigator">
+          <div *ngFor="let item of items">
+            <button class="navItems" (click)="activeItem = item.label"><span class=" {{item.icon}}"></span>
+              {{item.label}}</button>
+          </div>
         </div>
-        <div *ngIf="activeItem.label == 'Biografia'">
+        <div *ngIf="activeItem == 'Biografia'">
           <div *ngIf="perfil.biografica != undefined"
             class="d-flex flex-column justify-content-center align-items-center">
             <p-scrollPanel class="p-3" [style]="{ width: '100%', height: '250px' }">
@@ -33,7 +50,7 @@
             </div>
           </div>
         </div>
-        <div *ngIf="activeItem.label == 'Publicaciones'">
+        <div *ngIf="activeItem == 'Publicaciones'">
           <div *ngIf="listaPublicaciones.length != 0; then lista else emptyMessage">
           </div>
 
@@ -54,7 +71,10 @@
                   </div>
                 </div>
                 <p class="description">{{ post.mensaje }}</p>
-                <span class="datetime">{{ post.fecha }}</span>
+                <div class="d-flex gap-1 p-2 w-50">
+                  <p-chip *ngFor="let tag of getTagFormPost(post.id)" label="{{tag}}"></p-chip>
+                </div>
+                <span class="datetime">{{ post.fecha }} {{getJuegoFromPost(post.id_videojuego)}}</span>
                 <!--
           <div *ngIf="post.adjunto !== ''">
             <div class="image-preview"></div>
@@ -83,50 +103,54 @@
           </ng-template>
         </div>
 
-        <div *ngIf="activeItem.label == 'Gustados'" >
-          <div *ngIf="listaPublicaciones.length != 0; then gustados else empty">
+        <div *ngIf="activeItem == 'Gustados'">
+          <div *ngIf="listaGustados.length != 0; then gustados else empty">
           </div>
           <ng-template #gustados style="overflow: auto;">
             <p-scrollPanel [style]="{ width: '100%', height: '75vh' }" class="p-2">
               <div style="overflow: auto;">
-            <div class="post-card" *ngFor="let postGustados of listaGustados">
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="d-flex">
-                  <div class="avatar">
-                    <img class="avatar" src="./../../../assets/imgs/defaultPic.png" alt="">
+                <div class="post-card" *ngFor="let postGustados of listaGustados">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex">
+                      <div class="avatar">
+                        <img class="avatar" src="./../../../assets/imgs/defaultPic.png" alt="">
+                      </div>
+                      <div class="avatarName p-2">{{usuario.usuario}}</div>
+                    </div>
+                    <div>
+                      <div *ngIf="postGustados.id_usuario == usuario.id">
+                        <button class="pi pi-trash p-3 deleteButton" (click)="deletePost(postGustados.id)"></button>
+                      </div>
+                    </div>
                   </div>
-                  <div class="avatarName p-2">{{usuario.usuario}}</div>
-                </div>
-                <div>
-                  <div *ngIf="postGustados.id_usuario == usuario.id">
-                    <button class="pi pi-trash p-3 deleteButton" (click)="deletePost(postGustados.id)"></button>
+                  <p class="description">{{ postGustados.mensaje }}</p>
+                  <div class="d-flex gap-1 p-2 w-50">
+                    <p-chip *ngFor="let tag of getTagFormPost(postGustados.id)" label="{{tag}}"></p-chip>
                   </div>
-                </div>
-              </div>
-              <p class="description">{{ postGustados.mensaje }}</p>
-              <span class="datetime">{{ postGustados.fecha }}</span>
-              <!--
+                  <span class="datetime">{{ postGustados.fecha }}
+                    {{getJuegoFromPost(postGustados.id_videojuego)}}</span>
+                  <!--
         <div *ngIf="post.adjunto !== ''">
           <div class="image-preview"></div>
         </div>
         -->
-              <div class="comment-like">
-                <span>
-                  <div class="large-font text-center top-20 d-flex">
-                    <button class="like-button d-flex">
-                      <span class="pi pi-heart gap-1" style="color: aliceblue;">
-                        <div class="iconNumber">{{ postGustados.megusta }}</div>
-                      </span>
-                    </button>
+                  <div class="comment-like">
+                    <span>
+                      <div class="large-font text-center top-20 d-flex">
+                        <button class="like-button d-flex">
+                          <span class="pi pi-heart gap-1" style="color: aliceblue;">
+                            <div class="iconNumber">{{ postGustados.megusta }}</div>
+                          </span>
+                        </button>
+                      </div>
+                    </span>
+                    <span class="pi pi-comments gap-1" (click)="getCommentsByPostId(postGustados.id)"
+                      data-bs-toggle="modal" data-bs-target="#addComment">{{getNumberOfPosts(postGustados.id)}}</span>
                   </div>
-                </span>
-                <span class="pi pi-comments gap-1" (click)="getCommentsByPostId(postGustados.id)" data-bs-toggle="modal"
-                  data-bs-target="#addComment">{{getNumberOfPosts(postGustados.id)}}</span>
+                </div>
               </div>
-            </div>
-          </div>
-          </p-scrollPanel>
-        </ng-template>
+            </p-scrollPanel>
+          </ng-template>
           <ng-template #empty>
             <div class="d-flex justify-content-center align-items-center" style="color: aliceblue;">
               <p class="p-3">Aun no has interactuado con otras publicaciones.</p>
@@ -134,7 +158,7 @@
           </ng-template>
         </div>
 
-        <div *ngIf="activeItem.label == 'Canales'">
+        <div *ngIf="activeItem == 'Canales'">
           <div *ngIf="listaPlataforma.length == 0;else showLista">
             <div class="d-flex flex-column justify-content-center align-items-center" style="color: aliceblue;">
               <p class="p-3">No has añadido ningún canal, ¡Añadelo para que la comunidad sepa de tu contenido!</p>
@@ -143,27 +167,31 @@
             </div>
           </div>
           <ng-template #showLista>
-            <button data-bs-toggle="modal" data-bs-target="#addPlataforma" class="btn btn-secondary w-100">+ Añadir
-              Canal</button>
-            <div class="d-flex gap-2 p-3" style="max-width: fit-content;">
-              <p-scrollPanel [style]="{ width: '100%', height: '75vh' }" class="p-2">
+            <div class="p-3">
+              <button data-bs-toggle="modal" data-bs-target="#addPlataforma" class="btn btn-secondary w-100">+ Añadir
+                Canal</button>
+              <div class="d-flex gap-2 p-3" style="max-width: fit-content;">
                 <div *ngFor="let canal of listaPlataforma">
-                  <a href="{{canal.enlace}}" >
-                    <img  [src]="getImage(canal.nombre)" alt="" style="width: 50px;">
-                    <h2>{{canal.nombre}}</h2>
+                  <a href="{{canal.enlace}}" class="channelLink">
+                    <div class="cardChannel">
+                      <div class="cardChannel2 d-flex flex-column justify-content-center align-items-center">
+                        <img [src]="getImage(canal.nombre)" alt="" style="width: 50px;">
+                        <h2>{{canal.nombre}}</h2>
+                      </div>
+                    </div>
                   </a>
                 </div>
-              </p-scrollPanel>
+              </div>
             </div>
           </ng-template>
         </div>
 
-        <div *ngIf="activeItem.label == 'Amigos'">
+        <div *ngIf="activeItem == 'Amigos'">
           <div *ngIf="listaAmigos.length == 0;else showAmigos"
-          class="d-flex flex-column justify-content-center align-items-center" style="color: aliceblue;">
-            <p class="p-3">No has añadido a nadie a tu lista, ¡Busca en la comunidad para añadir a quien te caiga bien!</p>
-            <a routerLink="/community"
-              style="cursor: pointer; font-weight: bold;">Busca aquí</a>
+            class="d-flex flex-column justify-content-center align-items-center" style="color: aliceblue;">
+            <p class="p-3">No has añadido a nadie a tu lista, ¡Busca en la comunidad para añadir a quien te caiga bien!
+            </p>
+            <a routerLink="/community" style="cursor: pointer; font-weight: bold;">Busca aquí</a>
           </div>
           <ng-template #showAmigos>
             <div *ngFor="let amigo of getAmigoFromLista()">
@@ -210,7 +238,7 @@
         <div class="chat-input">
           <input [(ngModel)]="comentario.comentario" type="text" class="message-input"
             placeholder="Type your message here">
-          <button class="send-button" (click)="addComentario()">Send</button>
+          <button class="send-button" (click)="addComentario()" data-bs-dismiss="modal" aria-label="Close">Send</button>
         </div>
       </div>
     </div>

@@ -56,6 +56,12 @@ CREATE TABLE IF NOT EXISTS publicaciones (
   FOREIGN KEY (id_videojuego) REFERENCES videojuegos(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
+INSERT INTO publicaciones (id_usuario, id_videojuego, fecha, megusta, mensaje, adjunto, plataforma)
+VALUES
+  (5, 137, '2023-05-28', 5, 'Aunque la nostalgia sea mala el Ocarina es mejor que BOTW',  "",  ""),
+  (4, 40, '2023-05-28', 7, 'Tanto tiempo y seguimos sin Bloodborne para PC',  "",  "");
+
+
 CREATE TABLE IF NOT EXISTS comentarios (
   id INT auto_increment,
   id_publicacion INT NOT NULL,

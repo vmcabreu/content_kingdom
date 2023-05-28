@@ -91,7 +91,7 @@
           <div class="chat-input">
             <input [(ngModel)]="comentario.comentario" type="text" class="message-input"
               placeholder="Type your message here">
-            <button class="send-button" (click)="addComentario()">Send</button>
+            <button class="send-button" (click)="addComentario()" data-bs-dismiss="modal" aria-label="Close">Send</button>
           </div>
         </div>
       </div>

@@ -22,7 +22,7 @@
   left: 0;
   width: 300px;
   height: 80px;
-  background: crimson;
+  background: #0a2e63;
   animation: dsTop 1.5s;
 }
 
@@ -64,7 +64,7 @@
 
 .cardProfile .name a:hover {
   text-decoration: underline;
-  color: crimson;
+  color: #0a2e63;
 }
 
 .cardProfile .name h6 {
@@ -100,7 +100,7 @@
 
 .cardProfile .button a:hover {
   color: white;
-  background: crimson;
+  background: #0a2e63;
 }
 
 .cardProfile .ds-info {
@@ -123,7 +123,7 @@
 .cardProfile .ds-info .projects h6,
 .cardProfile .ds-info .posts h6 {
   text-transform: uppercase;
-  color: crimson;
+  color: #0a2e63;
 }
 
 .cardProfile .ds-info .pens p,
@@ -152,7 +152,7 @@
   margin-bottom: 5px;
   font-weight: 700;
   text-transform: uppercase;
-  color: crimson;
+  color: #0a2e63;
 }
 
 .cardProfile .ds-skill .skill h6 {
@@ -164,13 +164,13 @@
 }
 
 .cardProfile .ds-skill .skill .fab {
-  color: crimson;
+  color: #0a2e63;
   font-size: 14px;
 }
 
 .cardProfile .ds-skill .skill .bar {
   height: 5px;
-  background: crimson;
+  background: #0a2e63;
   text-align: right;
 }
 
@@ -279,5 +279,5 @@
 
 .following {
   color: white;
-  background: crimson;
+  background: #0a2e63;
 }

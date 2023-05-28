@@ -11,19 +11,20 @@ import { CommunityComponent } from './componentes/community/community.component'
 import { UserProfileComponent } from './componentes/user-profile/user-profile.component';
 import { ListPostsComponent } from './componentes/list-posts/list-posts.component';
 import { AccountComponent } from './componentes/account/account.component';
+import { AuthGuard } from './service/auth.guard';
 
 const routes: Routes = [
   {path: "", component: IndexComponent},
   {path: "login", component: LoginComponent},
-  {path: "usuario", component: UserComponent},
-  {path: "profile", component: PerfilComponent},
+  {path: "usuario", component: UserComponent,canActivate: [AuthGuard]},
+  {path: "profile", component: PerfilComponent,canActivate: [AuthGuard]},
   {path: "register", component: RegisterComponent},
-  {path: "games", component: GamesComponent},
-  {path: "community", component: CommunityComponent},
-  {path: "account", component: AccountComponent},
-  {path: "explore", component: ListPostsComponent},
-  {path: "profile/:id", component: UserProfileComponent},
-  {path: "games/:id", component: GamePostsComponent}
+  {path: "games", component: GamesComponent,canActivate: [AuthGuard]},
+  {path: "community", component: CommunityComponent,canActivate: [AuthGuard]},
+  {path: "account", component: AccountComponent,canActivate: [AuthGuard]},
+  {path: "explore", component: ListPostsComponent,canActivate: [AuthGuard]},
+  {path: "profile/:id", component: UserProfileComponent,canActivate: [AuthGuard]},
+  {path: "games/:id", component: GamePostsComponent,canActivate: [AuthGuard]}
 ];
 
 @NgModule({

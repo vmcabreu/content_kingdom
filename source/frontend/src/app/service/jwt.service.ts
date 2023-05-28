@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Usuario } from '../model/usuario.model';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -14,7 +15,7 @@ export class JwtService {
   get getRefresh$(){
     return this.refresh$;
   }
-  constructor() { }
+  constructor(private router:Router) { }
 
   decodeToken(token: string){
     return this.jwt.decodeToken(token);
@@ -23,7 +24,7 @@ export class JwtService {
   decodeUsuario(token: string){
     if (token) {
       let decoded = this.jwt.decodeToken(token);
-      return new Usuario(decoded.id,decoded.nombre,"",decoded.email);
+      return new Usuario(decoded.data.id,decoded.data.nombre,"",decoded.data.email);
     }
     return new Usuario();
   }
@@ -32,7 +33,11 @@ export class JwtService {
     let token = localStorage.getItem('token')
     if (token !== "" && token !== undefined) {
       return this.decodeUsuario(token);
+    }else{
+      if (this.router.url!="/" ) {
+        this.router.navigateByUrl("/login");
+      }
+      return null
     }
-    return null
   }
 }

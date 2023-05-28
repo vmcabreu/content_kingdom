@@ -4,17 +4,21 @@ import { post } from 'jquery';
 import { MenuItem } from 'primeng/api';
 import { AmigosUsuarios } from 'src/app/model/amigos.model';
 import { Comentario } from 'src/app/model/comentario.model';
+import { EtiquetasPublicacion } from 'src/app/model/etiqueta-publicacion.model';
 import { Etiqueta } from 'src/app/model/etiqueta.model';
 import { Perfil } from 'src/app/model/perfil.mode';
 import { Plataforma } from 'src/app/model/plataforma.model';
 import { Publicacion } from 'src/app/model/publicacion.model';
 import { Usuario } from 'src/app/model/usuario.model';
+import { Videojuego } from 'src/app/model/videojuego.model';
 import { AmigosService } from 'src/app/service/amigos.service';
+import { EtiquetaPublicacionService } from 'src/app/service/etiqueta-publicacion.service';
 import { JwtService } from 'src/app/service/jwt.service';
 import { PerfilService } from 'src/app/service/perfil.service';
 import { PlataformaService } from 'src/app/service/plataforma.service';
 import { PostService } from 'src/app/service/post.service';
 import { UsuarioService } from 'src/app/service/usuario.service';
+import { VideojuegoService } from 'src/app/service/videojuego.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -24,24 +28,27 @@ import Swal from 'sweetalert2';
 })
 export class PerfilComponent {
 
-  constructor(private perfilService: PerfilService, private postService: PostService, private jwt: JwtService, private userService: UsuarioService, private plataformasService: PlataformaService,private friendService: AmigosService,private router: Router) { }
+  constructor(private perfilService: PerfilService, private postService: PostService, private jwt: JwtService, private userService: UsuarioService, private plataformasService: PlataformaService, private friendService: AmigosService, private videojuegoService: VideojuegoService,private tagService: EtiquetaPublicacionService, private router: Router) { }
 
   usuario: Usuario;
   ruta: string[] = this.router.url.split("/")
   listaPublicaciones: Publicacion[] = [];
   listaGustados: Publicacion[] = [];
+  listaVideojuegos: Videojuego[] = [];
   biografia: string = "";
   perfil: Perfil = new Perfil;
+  editarPerfil: boolean = false;
   items: MenuItem[];
   comentario: Comentario = new Comentario;
   etiquetas: Etiqueta[] = [];
-  activeItem: MenuItem;
+  activeItem: String;
   commentsNumber: any[] = [];
   selectedPost: number;
   postComentarios: Comentario[] = [];
   listaUsuario: Usuario[] = [];
   listaAmigos: AmigosUsuarios[] = [];
   listaPlataforma: Plataforma[] = [];
+  tagsMap: EtiquetasPublicacion[] = [];
   newPlataforma: Plataforma = new Plataforma();
   plataformas: string[] = ["Twitch", "YouTube", "TikTok", "Instagram"];
   imgPlataformas: string[] = ["https://cdn-icons-png.flaticon.com/512/5968/5968819.png", "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/1024px-YouTube_full-color_icon_%282017%29.svg.png", "https://cdn4.iconfinder.com/data/icons/social-media-flat-7/64/Social-media_Tiktok-512.png", "https://cdn-icons-png.flaticon.com/512/174/174855.png"]
@@ -49,19 +56,22 @@ export class PerfilComponent {
 
   ngOnInit() {
     this.usuario = this.jwt.checkToken();
+    //   { label: 'Biografia', icon: 'pi pi-fw pi-user' },
     this.items = [
-      { label: 'Biografia', icon: 'pi pi-fw pi-user' },
       { label: 'Publicaciones', icon: 'pi pi-fw pi-comment' },
       { label: 'Gustados', icon: 'pi pi-fw pi-heart' },
       { label: 'Canales', icon: 'pi pi-fw pi-desktop' },
       { label: 'Amigos', icon: 'pi pi-fw pi-users' }
     ];
-    this.activeItem = this.items[0];
+    this.activeItem = this.items[0].label;
     this.getPublicacionesUsuario();
     this.getPerfil();
     this.getPlataformaByUsuarioId();
     this.getListaAmigos();
     this.getPostGustados();
+    this.getJuegos();
+    this.getEtiquetas();
+    this.getEtiquetasFromPost();
   }
 
   onActiveItemChange(event) {
@@ -70,10 +80,18 @@ export class PerfilComponent {
 
 
   activateLast() {
-    this.activeItem = this.items[this.items.length - 1];
+    this.activeItem = this.items[this.items.length - 1].label;
   }
 
-  updateBiografia(){
+
+
+  getJuegos() {
+    this.videojuegoService.getAllGames().subscribe((data: Videojuego[]) => {
+      this.listaVideojuegos = data;
+    });
+  }
+
+  updateBiografia() {
     this.perfilService.updatePerfil(this.perfil).subscribe(response => {
       if (response.status === 200) {
         Swal.fire({
@@ -83,12 +101,33 @@ export class PerfilComponent {
           background: '#151515',
           color: '#fff'
         }).then(() => {
+          this.editarPerfil = false;
           this.getPerfil();
         });
       }
     })
   }
 
+  getEtiquetasFromPost() {
+    this.tagService.getListTagPost().subscribe(
+      (data: EtiquetasPublicacion[]) => { this.tagsMap = data }
+    )
+  }
+
+  getTagFormPost(id: number) {
+    let tagList: string[] = []
+    this.tagsMap.forEach(element => {
+      if (element.id_publicacion == id) {
+        tagList.push(this.etiquetas.find(tags => tags.id === element.id_etiqueta).nombre);
+      }
+    });
+    return tagList;
+  }
+
+  getJuegoFromPost(id: number) {
+    let videojuego = this.listaVideojuegos.find(element => element.id === id);
+    return videojuego.nombre
+  }
 
   getPlataformaByUsuarioId() {
     this.plataformasService.getPlataformaFromUsuarios(this.usuario.id).subscribe((data: Plataforma[]) => {
@@ -128,19 +167,19 @@ export class PerfilComponent {
     return this.listaPublicaciones.length
   }
 
-  getPostGustados(){
-    this.postService.getPublicacionesMeGustaPorUsuario(this.usuario.id).subscribe((data: Publicacion[]) =>{
-      this.listaGustados=data;
+  getPostGustados() {
+    this.postService.getPublicacionesMeGustaPorUsuario(this.usuario.id).subscribe((data: Publicacion[]) => {
+      this.listaGustados = data;
     })
   }
 
   getListaAmigos() {
-    this.friendService.getAmigosFromUsuario(this.usuario.id).subscribe((data: AmigosUsuarios[])=>{
+    this.friendService.getAmigosFromUsuario(this.usuario.id).subscribe((data: AmigosUsuarios[]) => {
       this.listaAmigos = data;
     })
   };
 
-  getAmigoFromLista(){
+  getAmigoFromLista() {
     let lista: Usuario[] = []
     this.listaAmigos.forEach(element => {
       if (element.usuario_id == this.usuario.id) {
