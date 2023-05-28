@@ -189,6 +189,7 @@ export class PostsComponent implements OnInit {
         color: '#fff'
       }).then(() => {
         this.newPublicacion = new Publicacion();
+        this.tagsSelected=[];
         this.addEtiquetasForPost();
         this.refreshData();
       });
