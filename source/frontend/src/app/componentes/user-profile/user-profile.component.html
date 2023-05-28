@@ -131,8 +131,6 @@
           </div>
           <ng-template #showLista>
             <div class="p-3">
-              <button data-bs-toggle="modal" data-bs-target="#addPlataforma" class="btn btn-secondary w-100">+ Añadir
-                Canal</button>
               <div class="d-flex gap-2 p-3" style="max-width: fit-content;">
                 <div *ngFor="let canal of listaPlataforma">
                   <a href="{{canal.enlace}}" class="channelLink">
@@ -154,7 +152,6 @@
             class="d-flex flex-column justify-content-center align-items-center" style="color: aliceblue;">
             <p class="p-3">No ha añadido a nadie a su lista de amigos.
             </p>
-            <a routerLink="/community" style="cursor: pointer; font-weight: bold;">Busca aquí</a>
           </div>
           <ng-template #showAmigos>
             <div *ngFor="let amigo of getAmigoFromLista()">
