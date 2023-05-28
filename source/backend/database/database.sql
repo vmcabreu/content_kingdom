@@ -58,15 +58,8 @@ CREATE TABLE IF NOT EXISTS publicaciones (
 
 INSERT INTO publicaciones (id_usuario, id_videojuego, fecha, megusta, mensaje, adjunto, plataforma)
 VALUES
-  (1, NULL, '2023-05-28', 0, '¡Hola a todos! ¿Alguien está jugando algo interesante en estos días?', NULL, NULL),
-  (2, NULL, '2023-05-28', 0, '¡Hola, jugadores! ¿Qué opinan de los últimos lanzamientos de videojuegos?', NULL, NULL),
-  (3, NULL, '2023-05-28', 0, '¡Saludos a todos los aficionados a los videojuegos! ¿Cuál es su género favorito?', NULL, NULL),
-  (4, NULL, '2023-05-28', 0, '¡Hola, comunidad! ¿Alguien puede recomendar algún juego multijugador divertido?', NULL, NULL),
-  (5, NULL, '2023-05-28', 0, '¡Saludos, gamers! ¿Cuál es su personaje favorito en los videojuegos?', NULL, NULL),
-  (6, NULL, '2023-05-28', 0, '¡Hola a todos! Estoy buscando recomendaciones de juegos para PC. ¿Alguna sugerencia?', NULL, NULL),
-  (7, NULL, '2023-05-28', 0, '¡Saludos, amantes de Final Fantasy! ¿Cuál es su entrega favorita?', NULL, NULL),
-  (8, NULL, '2023-05-28', 0, '¡Hola, comunidad de jugadores! ¿Alguien quiere formar un equipo para jugar juntos?', NULL, NULL),
-  (9, NULL, '2023-05-28', 0, '¡Hola, gamers! ¿Alguien ha probado el nuevo juego de zombis?', NULL, NULL);
+  (5, 137, '2023-05-28', 5, 'Aunque la nostalgia sea mala el Ocarina es mejor que BOTW',  "",  ""),
+  (4, 40, '2023-05-28', 7, 'Tanto tiempo y seguimos sin Bloodborne para PC',  "",  "");
 
 
 CREATE TABLE IF NOT EXISTS comentarios (

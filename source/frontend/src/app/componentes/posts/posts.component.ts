@@ -276,6 +276,7 @@ export class PostsComponent implements OnInit {
   }
 
   getCommentsByPostId(id: number) {
+    this.postComentarios=[];
     this.selectedPost = id;
     this.comentario.id_publicacion = id;
     this.comentario.id_usuario = this.usuario.id;
@@ -299,6 +300,7 @@ export class PostsComponent implements OnInit {
         background: '#151515',
         color: '#fff'
       }).then(() => {
+        this.comentario.comentario = "";
         this.refreshDataAndComments();
         this.getCommentsByPostId(this.comentario.id_publicacion);
       });
